@@ -24,3 +24,11 @@ Route::get('/addCategory', function () {
 Route::get('/categorylist', function () {
     return view('Pos.categoryList');
 });
+
+Route::get('/createcustomer', function () {
+    return view('Pos.createcustomer');
+});
+
+Route::get('/customerlist', function () {
+    return view('Pos.customerlist');
+});
