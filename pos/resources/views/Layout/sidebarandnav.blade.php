@@ -65,7 +65,7 @@
                                 Category</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/categorylist"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Category
                                 List</a>
                         </li>
@@ -439,8 +439,8 @@
             </div>
         </div>
     </nav>
-    <div>
-        @@yield('body')
+    <div class="mt-20 mx-5">
+        @yield('body')
     </div>
 
 
