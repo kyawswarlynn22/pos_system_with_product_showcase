@@ -92,7 +92,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
 
         <div class="mt-3 rounded-lg shadow-lg p-5">
