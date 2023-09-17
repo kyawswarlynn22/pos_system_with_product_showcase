@@ -393,22 +393,18 @@
                 <button type="button"
                     class="text-white bg-yellow-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <div class="flex justify-center items-center">
-                        <p class="mx-1"> <svg width="24" height="24" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill="#000000"
-                                    d="M11 11V3H5c-1.1 0-2 .9-2 2v6h8zm2 0h8V5c0-1.1-.9-2-2-2h-6v8zm-2 2H3v6c0 1.1.9 2 2 2h6v-8zm2 0v8h6c1.1 0 2-.9 2-2v-6h-8z" />
-                            </svg></p>
+                        <p class="mx-1"> <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#ffffff" d="M11 11V3H5c-1.1 0-2 .9-2 2v6h8zm2 0h8V5c0-1.1-.9-2-2-2h-6v8zm-2 2H3v6c0 1.1.9 2 2 2h6v-8zm2 0v8h6c1.1 0 2-.9 2-2v-6h-8z"/>
+                        </svg></p>
                         <p>POS-Purchase</p>
                     </div>
                 </button>
                 <button type="button"
                     class="text-white ml-2 bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <div class="flex justify-center items-center">
-                        <p class="mx-1"> <svg width="24" height="24" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill="#000000"
-                                    d="M11 11V3H5c-1.1 0-2 .9-2 2v6h8zm2 0h8V5c0-1.1-.9-2-2-2h-6v8zm-2 2H3v6c0 1.1.9 2 2 2h6v-8zm2 0v8h6c1.1 0 2-.9 2-2v-6h-8z" />
-                            </svg></p>
+                        <p class="mx-1"> <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#ffffff" d="M11 11V3H5c-1.1 0-2 .9-2 2v6h8zm2 0h8V5c0-1.1-.9-2-2-2h-6v8zm-2 2H3v6c0 1.1.9 2 2 2h6v-8zm2 0v8h6c1.1 0 2-.9 2-2v-6h-8z"/>
+                        </svg></p>
                         <p>POS-Sale</p>
                     </div>
                 </button> <button data-collapse-toggle="navbar-sticky" type="button"
