@@ -124,13 +124,13 @@
                     </button>
                     <ul id="product" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="#"
+                            <a href="/addpurchase"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
                                 Purchase
                             </a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/purchaselist"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Purchase
                                 List
                             </a>
@@ -382,7 +382,7 @@
     <nav
         class=" bg-blue-700  dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="https://flowbite.com/" class="flex items-center">
+            <a href="/dashboard" class="flex items-center">
                 <img src="{{ asset('images/SKS Logo.png') }}" class="h-10 mr-3" alt="SKS Logo">
                 <span
                     class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">SKS.Solar</span>

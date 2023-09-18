@@ -32,3 +32,7 @@ Route::get('/createcustomer', function () {
 Route::get('/customerlist', function () {
     return view('Pos.customerlist');
 });
+
+Route::get('/addpurchase', function () {
+    return view('Pos.addpurchase');
+});
