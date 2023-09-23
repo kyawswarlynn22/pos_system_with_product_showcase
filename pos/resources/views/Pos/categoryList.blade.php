@@ -35,7 +35,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="#"
+                                <a href="/category//edit"
                                     class="font-medium float-right text-blue-600 dark:text-blue-500 hover:underline">
                                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <g fill="none" stroke="#3b82f6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -125,7 +125,7 @@
                             </td>
 
                             <td class="px-6 py-4 text-right">
-                                <a href="#"
+                                <a href="subcategory//edit"
                                     class="font-medium float-right text-blue-600 dark:text-blue-500 hover:underline">
                                     <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <g fill="none" stroke="#3b82f6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">

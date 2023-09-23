@@ -5,12 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
+    <link rel="icon" href="{{ asset('images/SKS Logo.png') }}" sizes="16x16" type="image/png">
+
     <script src="https://kit.fontawesome.com/31104486ca.js" crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
     <title>@yield('title')</title>
 </head>
 
 <body>
+    <link rel="icon" href="{{ asset('images/SKS Logo.png') }}" sizes="16x16" type="image/png">
     <!-- drawer component -->
     <aside id="drawer-navigation"
         class="fixed top-0 left-0 z-40 w-64 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
@@ -30,7 +33,7 @@
         <div class="py-4 overflow-y-auto">
             <ul class="space-y-2 font-medium">
                 <li>
-                    <a href="#"
+                    <a href="/"
                         class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                         <svg class="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -60,12 +63,12 @@
                     </button>
                     <ul id="dropdown-example" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="/addCategory"
+                            <a href="/category/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
                                 Category</a>
                         </li>
                         <li>
-                            <a href="/categorylist"
+                            <a href="/category"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Category
                                 List</a>
                         </li>
@@ -92,12 +95,12 @@
                     </button>
                     <ul id="customer" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="/createcustomer"
+                            <a href="/customer/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
                                 Customer</a>
                         </li>
                         <li>
-                            <a href="/customerlist"
+                            <a href="/customer"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Customer
                                 List</a>
                         </li>
@@ -124,13 +127,13 @@
                     </button>
                     <ul id="product" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="/addpurchase"
+                            <a href="/purchase/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
                                 Purchase
                             </a>
                         </li>
                         <li>
-                            <a href="/purchaselist"
+                            <a href="/purchase"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Purchase
                                 List
                             </a>

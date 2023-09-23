@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\SubcontrollerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,20 +21,25 @@ Route::get('/', function () {
     return view('dashboard');
 });
 
-Route::get('/addCategory', function () {
-    return view('Pos.addCategory');
+Route::resource('category', CategoryController::class);
+
+Route::resource('subcategory', SubcontrollerController::class);
+
+Route::resource('customer', CustomerController::class);
+
+Route::resource('purchase', PurchaseController::class);
+
+
+Route::get('/category//edit', function () {
+    return view('Pos.editCategory');
 });
 
-Route::get('/categorylist', function () {
-    return view('Pos.categoryList');
+Route::get('/subcategory//edit', function () {
+    return view('Pos.editSubcategory');
 });
 
-Route::get('/createcustomer', function () {
-    return view('Pos.createcustomer');
-});
-
-Route::get('/customerlist', function () {
-    return view('Pos.customerlist');
+Route::get('/customer//edit', function () {
+    return view('Pos.editCustomer');
 });
 
 Route::get('/addpurchase', function () {
