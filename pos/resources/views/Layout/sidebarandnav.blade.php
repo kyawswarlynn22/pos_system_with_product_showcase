@@ -109,7 +109,7 @@
                 <li>
                     <button type="button"
                         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                        aria-controls="product" data-collapse-toggle="product">
+                        aria-controls="purchase" data-collapse-toggle="purchase">
                         <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
                             <path fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
                                 d="M8.038 16.341h31.925a3.537 3.537 0 0 1 3.537 3.537v18.986a3.538 3.538 0 0 1-3.538 3.538H8.037A3.537 3.537 0 0 1 4.5 38.865V19.88a3.538 3.538 0 0 1 3.538-3.538Z" />
@@ -125,7 +125,7 @@
                                 stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <ul id="product" class="hidden py-2 space-y-2">
+                    <ul id="purchase" class="hidden py-2 space-y-2">
                         <li>
                             <a href="/purchase/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
@@ -158,12 +158,12 @@
                     </button>
                     <ul id="product" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="#"
+                            <a href="/product/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
                                 Product</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/product"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Product
                                 List</a>
                         </li>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubcontrollerController;
 use Illuminate\Support\Facades\Route;
@@ -29,6 +30,8 @@ Route::resource('customer', CustomerController::class);
 
 Route::resource('purchase', PurchaseController::class);
 
+Route::resource('product', ProductController::class);
+
 
 Route::get('/category//edit', function () {
     return view('Pos.editCategory');
@@ -42,6 +45,8 @@ Route::get('/customer//edit', function () {
     return view('Pos.editCustomer');
 });
 
-Route::get('/addpurchase', function () {
-    return view('Pos.addpurchase');
+Route::get('/purchase//edit', function () {
+    return view('Pos.editPurchase');
 });
+
+

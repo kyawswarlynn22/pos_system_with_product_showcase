@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Purchase;
 use Illuminate\Http\Request;
 
-class PurchaseController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('Pos.purchaseList');
+        //
     }
 
     /**
@@ -20,7 +19,7 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        return view('Pos.addpurchase');
+        return view('Pos.addProduct');
     }
 
     /**
@@ -34,7 +33,7 @@ class PurchaseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Purchase $purchase)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +41,7 @@ class PurchaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Purchase $purchase)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +49,7 @@ class PurchaseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Purchase $purchase)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +57,7 @@ class PurchaseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Purchase $purchase)
+    public function destroy(string $id)
     {
         //
     }
