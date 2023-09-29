@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\CashsaleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\SubcontrollerController;
@@ -32,6 +34,10 @@ Route::resource('purchase', PurchaseController::class);
 
 Route::resource('product', ProductController::class);
 
+Route::resource('cashsale',CashsaleController::class);
+
+Route::resource('depositsale', depositsaleController::class);
+
 
 Route::get('/category//edit', function () {
     return view('Pos.editCategory');
@@ -49,4 +55,24 @@ Route::get('/purchase//edit', function () {
     return view('Pos.editPurchase');
 });
 
+Route::get('/product//edit', function () {
+    return view('Pos.editProduct');
+});
 
+Route::get('/cashsale//edit', function () {
+    return view('Pos.editCashsale');
+});
+
+Route::get('/depositsale//edit', function () {
+    return view('Pos.depositDetail');
+});
+
+
+/* Details */
+Route::get('/product//detail', function () {
+    return view('Pos.productDetails');
+});
+
+Route::get('/cashsale//detail', function () {
+    return view('Pos.cashsaleDetails');
+});
