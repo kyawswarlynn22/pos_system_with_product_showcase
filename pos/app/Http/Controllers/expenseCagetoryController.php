@@ -27,7 +27,7 @@ class expenseCagetoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return view('Pos.addexpenseCategory');
     }
 
     /**
