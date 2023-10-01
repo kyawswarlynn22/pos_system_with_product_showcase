@@ -307,7 +307,7 @@
                 <li>
                     <button type="button"
                         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                        aria-controls="expense" data-collapse-toggle="expense">
+                        aria-controls="expense" data-collapse-toggle="admin">
                         <svg width="24" height="24" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
                             <path fill="#6b7280"
                                 d="M14.68 14.81a6.76 6.76 0 1 1 6.76-6.75a6.77 6.77 0 0 1-6.76 6.75Zm0-11.51a4.76 4.76 0 1 0 4.76 4.76a4.76 4.76 0 0 0-4.76-4.76Z"
@@ -329,14 +329,14 @@
                                 stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <ul id="expense" class="hidden py-2 space-y-2">
+                    <ul id="admin" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="#"
+                            <a href="/logoandname"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Update
                                 Logo and Name</a>
                         </li>
                         <li>
-                            <a href="#"
+                            <a href="/profileandpassword"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Update
                                 Profile</a>
                         </li>

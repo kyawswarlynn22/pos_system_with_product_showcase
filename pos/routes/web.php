@@ -7,11 +7,13 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
 use App\Http\Controllers\expenseCagetoryController;
+use App\Http\Controllers\LogoandNameController;
 use App\Http\Controllers\preordersaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\salereturnController;
 use App\Http\Controllers\SubcontrollerController;
+use App\Http\Controllers\UpdateprofileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,6 +54,10 @@ Route::resource('expenseCategory', expenseCagetoryController::class);
 Route::resource('expense', expense::class);
 
 Route::resource('account', AccountController::class);
+
+Route::resource('logoandname', LogoandNameController::class);
+
+Route::resource('profileandpassword', UpdateprofileController::class);
 
 
 Route::get('/category//edit', function () {
