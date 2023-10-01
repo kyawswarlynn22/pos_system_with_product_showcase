@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashsaleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
@@ -50,6 +51,8 @@ Route::resource('expenseCategory', expenseCagetoryController::class);
 
 Route::resource('expense', expense::class);
 
+Route::resource('account', AccountController::class);
+
 
 Route::get('/category//edit', function () {
     return view('Pos.editCategory');
@@ -73,7 +76,7 @@ Route::get('/product//edit', function () {
 
 Route::get('/cashsale//edit', function () {
     return view('Pos.editCashsale');
-});
+});                                           
 
 Route::get('/depositsale//edit', function () {
     return view('Pos.editDepositsale');
