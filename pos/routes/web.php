@@ -14,6 +14,7 @@ use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\salereturnController;
 use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -59,6 +60,8 @@ Route::resource('logoandname', LogoandNameController::class);
 
 Route::resource('profileandpassword', UpdateprofileController::class);
 
+Route::resource('user',userController::class);
+
 
 Route::get('/category//edit', function () {
     return view('Pos.editCategory');
@@ -94,6 +97,10 @@ Route::get('/preorder//edit', function () {
 
 Route::get('/salereturn//edit', function () {
     return view('Pos.editSalereturn');
+});
+
+Route::get('/user//edit', function () {
+    return view('Pos.editUser');
 });
 
 
