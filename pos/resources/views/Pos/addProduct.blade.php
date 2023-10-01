@@ -3,7 +3,6 @@
 @section('title', 'Add Product');
 
 @section('body')
-{{-- <script src="../../js/uploadPhoto.js" defer ></script> --}}
 
     <p class=" text-2xl">Add Product</p>
     <div class="mt-3 rounded-lg shadow-lg p-5">
