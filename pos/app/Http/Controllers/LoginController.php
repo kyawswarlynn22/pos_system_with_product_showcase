@@ -38,7 +38,7 @@ class LoginController extends Controller
         
         $data = $request->all();
         $check = $this->create($data);
-        return back();
+        return redirect('/user');
     }
 
 
