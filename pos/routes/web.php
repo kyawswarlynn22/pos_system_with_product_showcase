@@ -16,6 +16,7 @@ use App\Http\Controllers\salereturnController;
 use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
+use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,9 +39,14 @@ Route::get('/dashboard', function () {
 });
 
 Route::post('/signin', [LoginController::class, 'customLogin']);
-// Route::get('signup', [Login::class, 'signup']);
+
 Route::post('/registration', [LoginController::class, 'customeRegistration']);
 
+//Middlewar Group
+Route::middleware('loginCheck')->group(function(){
+
+Route::get('/signout', [LoginController::class, 'signOut']);
+    
 Route::resource('category', CategoryController::class);
 
 Route::resource('subcategory', SubcontrollerController::class);
@@ -132,4 +138,6 @@ Route::get('/preorder//detail', function () {
 
 Route::get('/salereturn//detail', function () {
     return view('Pos.salereturnDetail');
+});
+
 });

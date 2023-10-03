@@ -11,9 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class User extends Authenticatable 
+class User extends Authenticatable implements Auditable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    use \OwenIt\Auditing\Auditable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +27,7 @@ class User extends Authenticatable
         'email',
         'role',
         'password'
-        
+
     ];
 
     /**
@@ -47,4 +49,38 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $table = 'users';
+
+    public function userList()
+    {
+        return User::orderBy('id', 'desc')
+            ->where('del_flg', 0)
+            ->paginate(5);
+    }
+
+    public function userDetail($id)
+    {
+        return User::where('id', $id)->first();
+    }
+
+    public function userUpdate($request, $id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->update([
+                'name' => $request->username,
+                'role' => $request->role,
+            ]);
+        }
+    }
+
+    public function userDel($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->delete();
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class userController extends Controller
@@ -10,8 +11,12 @@ class userController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        return view('Pos.userList');
+    {   
+        $userListClass = new User();
+        $userList = $userListClass->userList();
+        return view('Pos.userList',[
+            'userList' => $userList
+        ]);
     }
 
     /**
@@ -43,22 +48,34 @@ class userController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $userEditClass = new User();
+        $userEdit = $userEditClass->userDetail($id);
+        if ($userEdit == null) {
+            return view('error.404');
+        }
+        return view('Pos.editUser',[
+            'userEdit' => $userEdit
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {   $validateData = $request->validate([
+        'username' => 'required',
+    ]);
+        $userUpdateClass = new User();
+        $userUpdate = $userUpdateClass->userUpdate($request,$id);
+        return redirect("/user");
     }
-
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $userDelClass = new User();
+        $userDel = $userDelClass->userDel($id);
+        return redirect('/user');
     }
 }
