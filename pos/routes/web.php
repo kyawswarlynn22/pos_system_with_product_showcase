@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
 use App\Http\Controllers\expenseCagetoryController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoandNameController;
 use App\Http\Controllers\preordersaleController;
 use App\Http\Controllers\ProductController;
@@ -29,8 +30,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('Pos.forgetPassword');
+    return view('Pos.login');
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
+Route::post('/signin', [LoginController::class, 'customLogin']);
+// Route::get('signup', [Login::class, 'signup']);
+Route::post('/registration', [LoginController::class, 'customeRegistration']);
 
 Route::resource('category', CategoryController::class);
 
@@ -42,13 +51,13 @@ Route::resource('purchase', PurchaseController::class);
 
 Route::resource('product', ProductController::class);
 
-Route::resource('cashsale',CashsaleController::class);
+Route::resource('cashsale', CashsaleController::class);
 
 Route::resource('depositsale', depositsaleController::class);
 
 Route::resource('preordersale', preordersaleController::class);
 
-Route::resource('salereturn',salereturnController::class);
+Route::resource('salereturn', salereturnController::class);
 
 Route::resource('expenseCategory', expenseCagetoryController::class);
 
@@ -60,7 +69,7 @@ Route::resource('logoandname', LogoandNameController::class);
 
 Route::resource('profileandpassword', UpdateprofileController::class);
 
-Route::resource('user',userController::class);
+Route::resource('user', userController::class);
 
 
 Route::get('/category//edit', function () {
@@ -85,7 +94,7 @@ Route::get('/product//edit', function () {
 
 Route::get('/cashsale//edit', function () {
     return view('Pos.editCashsale');
-});                                           
+});
 
 Route::get('/depositsale//edit', function () {
     return view('Pos.editDepositsale');
