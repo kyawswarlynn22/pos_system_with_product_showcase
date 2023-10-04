@@ -12,7 +12,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('Pos.categoryList');
+        $categoryListClass = new Category();
+        $categoryList = $categoryListClass->categoryList();
+        return view('Pos.categoryList', [
+            'categoryList' => $categoryList
+        ]);
     }
 
     /**
@@ -34,25 +38,37 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($id)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        return view('Pos.editCategory');
+        $categoryUpdateClass = new Category();
+        $categoryUpdate = $categoryUpdateClass->categoryDetail($id);
+        if ($categoryUpdate == null) {
+            return view('error.404');
+        }
+        return view('Pos.editCategory', [
+            'categoryDetail' => $categoryUpdate
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $validateData = $request->validate([
+            'categoryName' => 'required',
+            'description' => 'description',
+        ]);
+        $categoryUpdateClass = new Category();
+        $categoryUpdate = $categoryUpdateClass->categoryUpdate($request, $id);
+        return redirect('/category');
     }
 
     /**

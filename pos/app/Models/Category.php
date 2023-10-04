@@ -11,4 +11,31 @@ class Category extends Model implements Auditable
     use HasFactory;
 
     use \OwenIt\Auditing\Auditable;
+
+    protected $table = 'categories';
+
+    protected $fillable = ['c_name', 'description', 'del_flg'];
+
+    public function categoryList()
+    {
+        return Category::orderBy('id', 'desc')
+            ->where('del_flg', 0)
+            ->paginate(5);
+    }
+
+    public function categoryDetail($id)
+    {
+        return Category::where('id', $id)->first();
+    }
+
+    public function categoryUpdate($request, $id)
+    {
+        $category = Category::find($id);
+        if ($category) {
+            $category->update([
+                'c_name' => $request->categoryName,
+                'description' => $request->categoryDescription,
+            ]);
+        }
+    }
 }
