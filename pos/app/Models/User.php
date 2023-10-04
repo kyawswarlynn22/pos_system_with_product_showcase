@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class User extends Authenticatable implements Auditable
@@ -83,4 +84,34 @@ class User extends Authenticatable implements Auditable
             $user->delete();
         }
     }
+
+
+
+    public function usernameUpdate($email){
+        return User::where('email',$email)->first();
+    }
+
+    public function usernameChange($request,$id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            $user->update([
+                'name' => $request->name
+            ]);
+        }
+    }
+
+    public function passwordUpdate($request,$id)
+    {
+        $user =User::find($id);
+        if ($user) {
+           if (Hash::check($request->current,$user->password)) {
+            $user->update([
+                'password' => Hash::make($request->new),
+            ]);
+           }
+        };
+    }
+
+
 }

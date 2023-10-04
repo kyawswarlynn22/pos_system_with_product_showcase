@@ -9,6 +9,7 @@ use App\Http\Controllers\expense;
 use App\Http\Controllers\expenseCagetoryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoandNameController;
+use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\preordersaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
@@ -76,6 +77,8 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('profileandpassword', UpdateprofileController::class);
 
     Route::resource('user', userController::class);
+
+    Route::resource('password',PasswordController::class);
 
 
 

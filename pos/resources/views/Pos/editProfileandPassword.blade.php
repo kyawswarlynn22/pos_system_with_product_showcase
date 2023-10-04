@@ -5,31 +5,27 @@
 @section('body')
 <div class="px-5">
     <p class="text-xl font-semibold font-philosopher pb-5">Update Profile and Passwod</p>
-    <form action="../Controller/updateprofileController.php" method="post" enctype="multipart/form-data">
+    <form action="/profileandpassword/{{ $username->id }}" method="post" >
+        @csrf
+        @method('put')
         <section class=" border border-gray-400 rounded-lg shadow-lg p-3">
             <p class="font-semibold py-5">Update Profile</p>
             <div class=" w-[50%] mx-auto space-y-6">
-                <div class=" flex-col flex items-center justify-between">
-                    <div class=" w-20 shadow-xl border-2 border-blue-950">
-                        <label for="profile1">
-                            <img class="w-20" src="{{ asset('images/SKS Logo.png') }}" id="profileimg1" alt="">
-                        </label>
-                        <input type="file" class="hidden" id="profile1" accept=".png,.jpeg" name="profile1">
+                <div class=" flex items-center justify-between">
+                    <p class=" w-40">Email</p>
+                    <p>- </p>
+                    <div class="">
+                        <input type="text" name="email" readonly require value="{{ $username->email }}" class=" text-gray-400 border border-gray-400 rounded-md ml-3 shadow-md indent-2 px-2 py-1 outline-none w-80">
                     </div>
                 </div>
                 <div class=" flex items-center justify-between">
                     <p class=" w-40">Username</p>
                     <p>- </p>
                     <div class="">
-                        <input type="text" name="username" require value="" class=" border border-gray-400 rounded-md ml-3 shadow-md indent-2 px-2 py-1 outline-none w-80">
-                    </div>
-                </div>
-              
-                <div class=" flex items-center justify-between">
-                    <p class=" w-40">Phone</p>
-                    <p>-</p>
-                    <div class="">
-                        <input type="text" name="phone" require value="" class=" border border-gray-400 rounded-md  ml-3 shadow-md indent-2 px-2 py-1 outline-none w-80">
+                        <input type="text" name="name" require value="{{ $username->name }}" class=" border border-gray-400 rounded-md ml-3 shadow-md indent-2 px-2 py-1 outline-none w-80">
+                        @error('name')
+                        <p class=" text-red-500">{{ $message }}</p>
+                    @enderror
                     </div>
                 </div>
             </div>
@@ -45,7 +41,9 @@
                 <p class=" w-40">Current Password</p>
                 <p>-</p>
 
-                <form action="../Controller/passwordchangeContoller.php" method="post">
+                <form action="/password/{{ $username->id }}" method="post">
+                    @csrf
+                    @method('put')
                     <div class="">
                         <input type="password" value="" name="current" class=" border border-gray-400 rounded-md ml-3 shadow-md indent-2 px-2 py-1 outline-none w-80">
                     </div>
@@ -57,13 +55,7 @@
                     <input type="password" value="" name="new" class=" border border-gray-400 rounded-md ml-3 shadow-md indent-2 px-2 py-1 outline-none w-80">
                 </div>
             </div>
-            <div class=" flex items-center justify-between">
-                <p class=" w-40">Confirm Password</p>
-                <p>-</p>
-                <div class="">
-                    <input type="password" value="" name="confirm" class=" border border-gray-400 rounded-md ml-3 shadow-md indent-2 px-2 py-1 outline-none w-80">
-                </div>
-            </div>
+            
 
         </div>
         <div class=" justify-end flex pr-5 py-3">

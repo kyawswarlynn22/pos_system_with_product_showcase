@@ -4,34 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-$email = Session::get('email');
-
-class UpdateprofileController extends Controller 
+class PasswordController extends Controller
 {
-    
-    public function usernameUpdate()
-    {
-       
-    }
-        
-    
-
     /**
      * Display a listing of the resource.
      */
-
-
     public function index()
     {
-        $email = session('email');
-        $usernameUpdateClass = new User();
-        $usernameUpdate = $usernameUpdateClass->usernameUpdate($email);
-        return view('Pos.editProfileandPassword',[
-            'username' => $usernameUpdate
-        ]);
-       
+        //
     }
 
     /**
@@ -71,11 +52,13 @@ class UpdateprofileController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validateData = $request->validate([
-            'name' => 'required|unique:users'
+        $validateData =  $request->validate([
+            'current' =>'required',
+            'new' => 'required',
         ]);
-        $usernameChangeClass = new User();
-        $usernameClass = $usernameChangeClass->usernameChange($request,$id);
+
+        $passwordUpdateClass = new User();
+        $passwordUpdated = $passwordUpdateClass->passwordUpdate($request,$id);
         return redirect('/profileandpassword');
     }
 
