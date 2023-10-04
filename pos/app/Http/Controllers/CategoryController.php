@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class CategoryController extends Controller
 {
@@ -14,6 +15,7 @@ class CategoryController extends Controller
     {
         $categoryListClass = new Category();
         $categoryList = $categoryListClass->categoryList();
+        Session::put('categoryList', $categoryList);
         return view('Pos.categoryList', [
             'categoryList' => $categoryList
         ]);
@@ -24,7 +26,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Pos.addCategory');
+        $categoryListClass = new Category();
+        $categoryList = $categoryListClass->categoryallList();
+        Session::put('categoryList', $categoryList);
+        return view('Pos.addCategory', [
+            'categoryList' => $categoryList
+        ]);
     }
 
     /**
@@ -32,7 +39,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'categoryName' =>'required',
+            'categoryDescription' => 'required',
+        ]);
+        $categoryAddClass = new Category();
+        $categoryAdd = $categoryAddClass->categoryAdd($request);
+        return redirect('/category');
     }
 
     /**

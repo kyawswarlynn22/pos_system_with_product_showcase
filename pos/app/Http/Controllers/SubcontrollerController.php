@@ -34,7 +34,7 @@ class SubcontrollerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Subcontroller $subcontroller)
+    public function show()
     {
         //
     }
@@ -42,7 +42,7 @@ class SubcontrollerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Subcontroller $subcontroller)
+    public function edit()
     {
         //
     }
@@ -50,7 +50,7 @@ class SubcontrollerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Subcontroller $subcontroller)
+    public function update(Request $request,)
     {
         //
     }
@@ -58,7 +58,7 @@ class SubcontrollerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Subcontroller $subcontroller)
+    public function destroy()
     {
         //
     }

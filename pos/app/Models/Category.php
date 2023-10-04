@@ -23,6 +23,21 @@ class Category extends Model implements Auditable
             ->paginate(5);
     }
 
+    public function categoryallList()
+    {
+        return Category::orderBy('id', 'desc')
+            ->where('del_flg', 0)
+            ->get();
+    }
+
+    public function categoryAdd($request)
+    {
+        Category::create([
+            'c_name' => $request->categoryName,
+            'description' => $request->categoryDescription,
+        ]);
+    }
+
     public function categoryDetail($id)
     {
         return Category::where('id', $id)->first();

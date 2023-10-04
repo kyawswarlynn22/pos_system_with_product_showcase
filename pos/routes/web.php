@@ -34,110 +34,102 @@ Route::get('/', function () {
     return view('Pos.login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-});
-
 Route::post('/signin', [LoginController::class, 'customLogin']);
 
 Route::post('/registration', [LoginController::class, 'customeRegistration']);
 
 //Middlewar Group
-Route::middleware('loginCheck')->group(function(){
+Route::middleware('loginCheck')->group(function () {
 
-Route::get('/signout', [LoginController::class, 'signOut']);
-    
-Route::resource('category', CategoryController::class);
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 
-Route::resource('subcategory', SubcontrollerController::class);
+    Route::get('/signout', [LoginController::class, 'signOut']);
 
-Route::resource('customer', CustomerController::class);
+    Route::resource('category', CategoryController::class);
 
-Route::resource('purchase', PurchaseController::class);
+    Route::resource('subcategory', SubcontrollerController::class);
 
-Route::resource('product', ProductController::class);
+    Route::resource('customer', CustomerController::class);
 
-Route::resource('cashsale', CashsaleController::class);
+    Route::resource('purchase', PurchaseController::class);
 
-Route::resource('depositsale', depositsaleController::class);
+    Route::resource('product', ProductController::class);
 
-Route::resource('preordersale', preordersaleController::class);
+    Route::resource('cashsale', CashsaleController::class);
 
-Route::resource('salereturn', salereturnController::class);
+    Route::resource('depositsale', depositsaleController::class);
 
-Route::resource('expenseCategory', expenseCagetoryController::class);
+    Route::resource('preordersale', preordersaleController::class);
 
-Route::resource('expense', expense::class);
+    Route::resource('salereturn', salereturnController::class);
 
-Route::resource('account', AccountController::class);
+    Route::resource('expenseCategory', expenseCagetoryController::class);
 
-Route::resource('logoandname', LogoandNameController::class);
+    Route::resource('expense', expense::class);
 
-Route::resource('profileandpassword', UpdateprofileController::class);
+    Route::resource('account', AccountController::class);
 
-Route::resource('user', userController::class);
+    Route::resource('logoandname', LogoandNameController::class);
 
+    Route::resource('profileandpassword', UpdateprofileController::class);
 
-Route::get('/category//edit', function () {
-    return view('Pos.editCategory');
-});
-
-Route::get('/subcategory//edit', function () {
-    return view('Pos.editSubcategory');
-});
-
-Route::get('/customer//edit', function () {
-    return view('Pos.editCustomer');
-});
-
-Route::get('/purchase//edit', function () {
-    return view('Pos.editPurchase');
-});
-
-Route::get('/product//edit', function () {
-    return view('Pos.editProduct');
-});
-
-Route::get('/cashsale//edit', function () {
-    return view('Pos.editCashsale');
-});
-
-Route::get('/depositsale//edit', function () {
-    return view('Pos.editDepositsale');
-});
-
-Route::get('/preorder//edit', function () {
-    return view('Pos.editPreordersale');
-});
-
-Route::get('/salereturn//edit', function () {
-    return view('Pos.editSalereturn');
-});
-
-Route::get('/user//edit', function () {
-    return view('Pos.editUser');
-});
+    Route::resource('user', userController::class);
 
 
-/* Details */
-Route::get('/product//detail', function () {
-    return view('Pos.productDetail');
-});
 
-Route::get('/cashsale//detail', function () {
-    return view('Pos.cashsaleDetails');
-});
+    Route::get('/subcategory//edit', function () {
+        return view('Pos.editSubcategory');
+    });
 
-Route::get('/depositsale//detail', function () {
-    return view('Pos.depositsaleDetail');
-});
+    Route::get('/purchase//edit', function () {
+        return view('Pos.editPurchase');
+    });
 
-Route::get('/preorder//detail', function () {
-    return view('Pos.preordersaleDetail');
-});
+    Route::get('/product//edit', function () {
+        return view('Pos.editProduct');
+    });
 
-Route::get('/salereturn//detail', function () {
-    return view('Pos.salereturnDetail');
-});
+    Route::get('/cashsale//edit', function () {
+        return view('Pos.editCashsale');
+    });
 
+    Route::get('/depositsale//edit', function () {
+        return view('Pos.editDepositsale');
+    });
+
+    Route::get('/preorder//edit', function () {
+        return view('Pos.editPreordersale');
+    });
+
+    Route::get('/salereturn//edit', function () {
+        return view('Pos.editSalereturn');
+    });
+
+    Route::get('/user//edit', function () {
+        return view('Pos.editUser');
+    });
+
+
+    /* Details */
+    Route::get('/product//detail', function () {
+        return view('Pos.productDetail');
+    });
+
+    Route::get('/cashsale//detail', function () {
+        return view('Pos.cashsaleDetails');
+    });
+
+    Route::get('/depositsale//detail', function () {
+        return view('Pos.depositsaleDetail');
+    });
+
+    Route::get('/preorder//detail', function () {
+        return view('Pos.preordersaleDetail');
+    });
+
+    Route::get('/salereturn//detail', function () {
+        return view('Pos.salereturnDetail');
+    });
 });
