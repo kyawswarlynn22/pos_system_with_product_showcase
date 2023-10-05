@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
 use App\Http\Controllers\expenseCagetoryController;
+use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoandNameController;
 use App\Http\Controllers\PasswordController;
@@ -38,6 +39,14 @@ Route::get('/', function () {
 Route::post('/signin', [LoginController::class, 'customLogin']);
 
 Route::post('/registration', [LoginController::class, 'customeRegistration']);
+
+Route::get('/forget_password',[ForgetPasswordController::class,'showForgetPassword']);
+
+Route::post('/forget_password',[ForgetPasswordController::class,'submitForgetPassword']);
+
+Route::post('/new_password',[ForgetPasswordController::class,'newPassword']);
+
+Route::get('/reset_password/{token}',[ForgetPasswordController::class,'showResetPassword'])->name('password.reset');;
 
 //Middlewar Group
 Route::middleware('loginCheck')->group(function () {

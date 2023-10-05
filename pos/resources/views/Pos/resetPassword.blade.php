@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/31104486ca.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
-    <title>Forget Password</title>
+    <title>Reset Password</title>
 </head>
 
 <body>
@@ -21,30 +21,41 @@
                 <div class="mb-8 flex flex-col  items-center">
                     <img src="{{ asset('images/SKS Logo.png') }}" class="mb-5" width="200" alt=""
                         srcset="" />
-                    <p class=" text-xl font-semibold">Forget Password?</p>
-                    <span class="text-black">Enter the email address assoiated with your account <br>
-                        and we will send a link to reset your password.
-                    </span>
+                    <p class=" text-xl font-semibold">New Password</p>
+
                 </div>
-                <form action="/forget_password" method="post">
+                <form action="/new_password" method="post">
                     @csrf
                     <div class="mb-4 text-lg justify-center flex">
                         <input
                             class=" rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                            type="email" name="email" placeholder="Enter your email" />
-                            @error('email')
-                    <p class=" text-red-500">{{ $message }}</p>
-                @enderror
+                            type="password" name="password"  />
+                        @error('password')
+                            <p class=" text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
-                   
-                    
+                    <div class="mb-4 text-lg justify-center flex">
+                        @php
+                           $useremail = session()->get('useremail')
+                        @endphp
+                        <input value=""
+                            class=" rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                            type="password" name="password_confirmation"  />
+                        @error('password')
+                            <p class=" text-red-500">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <input type="text" name="token" hidden value="{{ $token }}">
+                    <input type="text" name="email" hidden value="{{ $useremail }}">
+
                     <div class="mt-8 flex  justify-center text-lg text-black">
                         <button type="submit"
-                            class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Send reset link</button>
+                            class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Send
+                            reset link</button>
 
                     </div>
                 </form>
-               
+
                 @if (session('success'))
                     <div class="alert alert-success flex justify-center mt-5">
                         {{ session('success') }}

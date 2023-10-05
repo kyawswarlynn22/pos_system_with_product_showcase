@@ -42,7 +42,7 @@
 
                     </div>
                 </form>
-                <a class=" flex justify-center mt-5" href="/signup">Singup</a>
+                <a class=" flex justify-center mt-5 underline text-red-500 " href="/forget_password">Forget Password?</a>
                 @if (session('success'))
                     <div class="alert alert-success flex justify-center mt-5">
                         {{ session('success') }}
