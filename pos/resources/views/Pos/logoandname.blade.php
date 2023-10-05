@@ -16,7 +16,7 @@
                             <p>-</p>
                             <div class="flex w-[600px] h-[156px] border-gray-400 items-center justify-center">
                                 <label for="logo">
-                                    <img class="w-28 h-28" src="{{ asset('images/SKS Logo.png') }}" id="logorec"
+                                    <img class="w-28 h-28" src=" {{ $logoandname->logo }}" id="logorec"
                                         alt="">
                                 </label>
                                 <input type="file" class=" hidden" id="logo" accept=".png,.jpeg,.gif"
@@ -26,7 +26,7 @@
                         <div class="flex justify-evenly items-center py-5">
                             <p class=" w-40">Bussiness Name</p>
                             <p>-</p>
-                            <input type="text" name="business" value="SKS.Solar"
+                            <input type="text" name="business" value="{{ $logoandname->business_name }}"
                                 class="flex w-[600px] h-[45px] rounded-lg border shadow-lg border-gray-400 items-center justify-center outline-none indent-2"
                                 value="">
                         </div>

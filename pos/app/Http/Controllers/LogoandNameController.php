@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogoandName;
 use Illuminate\Http\Request;
 
 class LogoandNameController extends Controller
@@ -11,7 +12,11 @@ class LogoandNameController extends Controller
      */
     public function index()
     {
-        return view('Pos.logoandname');
+        $logoAndNameDataClass = new LogoandName();
+        $logoAndNameData = $logoAndNameDataClass->logoAndNameData();
+        return view('Pos.logoandname',[
+            'logoandname' => $logoAndNameData
+        ]);
     }
 
     /**
