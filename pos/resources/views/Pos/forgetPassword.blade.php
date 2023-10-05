@@ -32,24 +32,19 @@
                         <input
                             class=" rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                             type="email" name="email" placeholder="Enter your email" />
-                            @error('email')
-                    <p class=" text-red-500">{{ $message }}</p>
-                @enderror
+                        @error('email')
+                            <p class=" text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
-                   
-                    
+
+
                     <div class="mt-8 flex  justify-center text-lg text-black">
                         <button type="submit"
-                            class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Send reset link</button>
+                            class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Send
+                            reset link</button>
 
                     </div>
                 </form>
-               
-                @if (session('success'))
-                    <div class="alert alert-success flex justify-center mt-5">
-                        {{ session('success') }}
-                    </div>
-                @endif
 
                 @if (session('success'))
                     <script>

@@ -46,7 +46,7 @@ class ForgetPasswordController extends Controller
         $newUpdatePasswordClass = new ForgetPassword();
         $newUpdatePassword   = $newUpdatePasswordClass->newPasswordUpdate($request);
         session()->flush();
-        return redirect('/');
+       
         
        
     }

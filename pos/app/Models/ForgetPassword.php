@@ -48,23 +48,23 @@ class ForgetPassword extends Model implements Auditable
             'mail' => $request->email,
             'token' => $request->token
         ]);
-
+       
         if (!$password) {
-            return back()->withInput()->with('error', 'Invalid token!');
+            return redirect('/forget_password')->withSuccess('Invalid Reset Link. Try Again!');
         }
-
+        
         $user = DB::table('users')->where('email', $request->email)
             ->update(['password' => Hash::make($request->password)]);
 
             if (!$user) {
-                return back()->withInput()->with('error', 'Invalid token!');
+                return redirect('/forget_password')->withSuccess('Invalid Reset Link. Try Again!');
             } 
-
+            
         $delete = ForgetPassword::where('mail',$request->email);
         if ($delete) {
             $delete->delete();
         }
 
-
+        return redirect('/');
     }
 }
