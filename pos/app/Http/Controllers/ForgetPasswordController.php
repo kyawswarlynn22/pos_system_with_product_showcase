@@ -30,7 +30,8 @@ class ForgetPasswordController extends Controller
             $message->subject('Reset Password');
         });
         $request->session()->put('useremail', $request->email);
-        return back();
+        return back()->withSuccess('Reset link sent succefully to your mail!');
+
     }
 
     public function showResetPassword($token)
@@ -46,7 +47,7 @@ class ForgetPasswordController extends Controller
         $newUpdatePasswordClass = new ForgetPassword();
         $newUpdatePassword   = $newUpdatePasswordClass->newPasswordUpdate($request);
         session()->flush();
-       
+        return redirect('/');
         
        
     }
