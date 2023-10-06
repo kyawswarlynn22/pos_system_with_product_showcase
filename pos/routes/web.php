@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashsaleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
 use App\Http\Controllers\expenseCagetoryController;
@@ -51,9 +52,9 @@ Route::get('/reset_password/{token}',[ForgetPasswordController::class,'showReset
 //Middlewar Group
 Route::middleware('loginCheck')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+   
+
+    Route::resource('/dashboard',DashboardController::class);
 
     Route::get('/signout', [LoginController::class, 'signOut']);
 

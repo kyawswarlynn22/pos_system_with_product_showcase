@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class DashboardController extends Controller
 {
@@ -11,7 +13,11 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        $auditsClass = new ActivityLog();
+        $audits = $auditsClass->getMetadata();
+        return view('dashboard',compact('audits')
+           
+        );
     }
 
     /**
