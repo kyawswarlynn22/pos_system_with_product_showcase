@@ -50,14 +50,17 @@ class ForgetPassword extends Model implements Auditable
         ]);
        
         if (!$password) {
-            return redirect('/forget_password')->withSuccess('Invalid Reset Link. Try Again!');
+            dd("good");
+            return redirect()->intended('/forget_password')->withSuccess('Invalid Reset Link. Try Again!');
         }
         
         $user = DB::table('users')->where('email', $request->email)
             ->update(['password' => Hash::make($request->password)]);
 
             if (!$user) {
-                return redirect('/forget_password')->withSuccess('Invalid Reset Link. Try Again!');
+                
+                echo '<script>alert("Invalid Reset Link.Back and Send Reset Link Again!");</script>';
+                
             } 
             
         $delete = ForgetPassword::where('mail',$request->email);
@@ -65,6 +68,6 @@ class ForgetPassword extends Model implements Auditable
             $delete->delete();
         }
 
-        return redirect('/');
+       
     }
 }

@@ -50,12 +50,11 @@
 
                     <div class="mt-8 flex  justify-center text-lg text-black">
                         <button type="submit"
-                            class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Send
-                            reset link</button>
+                            class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Confrim</button>
 
                     </div>
                 </form>
-
+                <a class=" flex justify-center mt-5 underline text-red-500 " href="/forget_password">Send Reset Password Again</a>
                 @if (session('success'))
                     <div class="alert alert-success flex justify-center mt-5">
                         {{ session('success') }}
