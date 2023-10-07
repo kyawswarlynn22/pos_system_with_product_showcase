@@ -111,7 +111,10 @@
         <div class="p-5">
             <ul>
                 @forelse ($audits as $audit)
-                    <li>
+               
+                <div>On {{ $audit->created_at }} user id is {{ $audit->user_id }} is 
+                    {{ $audit->event }} old value {{ $audit->old_values }} to {{ $audit->new_values }}</div>
+                    {{-- <li>
                         @lang('article.updated.metadata', $audit->getMetadata())
 
                         @foreach ($audit->getModified() as $attribute => $modified)
@@ -119,7 +122,7 @@
                                 <li>@lang('article.' . $audit->event . '.modified.' . $attribute, $modified)</li>
                             </ul>
                         @endforeach
-                    </li>
+                    </li> --}}
                 @empty
                     <p>@lang('article.unavailable_audits')</p>
                 @endforelse
