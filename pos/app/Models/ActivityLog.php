@@ -11,8 +11,15 @@ class ActivityLog extends Model
 
     protected $table = 'audits';
 
+    public function user()
+    {
+        return $this->belongsTo('User::class');
+    }
+
     public function getMetadata()
     {
-       return $audits = ActivityLog::orderBy('id','desc')->get();
+       return $audits = ActivityLog::select('users.name','auditable_type','event','old_values','new_values','audits.created_at')
+       ->join('users','audits.user_id','users.id')
+       ->paginate(5);
     }
 }

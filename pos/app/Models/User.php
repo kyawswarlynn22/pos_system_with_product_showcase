@@ -113,5 +113,9 @@ class User extends Authenticatable implements Auditable
         };
     }
 
+    public function audit()
+    {
+        return $this->hasOne(ActivityLog::class);
+    }
 
 }
