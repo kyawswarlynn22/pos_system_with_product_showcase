@@ -43,14 +43,18 @@ class SubCategory extends Model implements Auditable
 
     public function editsubCatgory($id)
     {
-        return SubCategory::where('id',$id)->first();
+        return SubCategory::where('id', $id)->first();
     }
 
-    public function updateCategory($id)
+    public function updatesubCategory($request, $id)
     {
         $updateSubcategory = SubCategory::find($id);
         if ($updateSubcategory) {
-            $updateSubcategory->update([]);
+            $updateSubcategory->update([
+                'sub_c_name' => $request->subcategoryName,
+                'category_id' => $request->mainCategory_id,
+                'description' => $request->sub_description,
+            ]);
         }
     }
 }

@@ -14,7 +14,6 @@ class SubcontrollerController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -30,7 +29,7 @@ class SubcontrollerController extends Controller
      */
     public function store(Request $request)
     {
-    
+
         $subCatgeoryAddClass = new SubCategory();
         $subCatgeoryAdd = $subCatgeoryAddClass->addSubcategory($request);
         return back();
@@ -49,22 +48,24 @@ class SubcontrollerController extends Controller
      */
     public function edit($id)
     {
-       $editSubcategoryClass = new SubCategory();
-       $editSubcategory = $editSubcategoryClass->editsubCatgory($id);
-       $categoryListClass = new Category();
-       $categoryList = $categoryListClass->categoryallList();
-       return view('Pos.editSubcategory',[
-        'subCategory' => $editSubcategory,
-        'categoryallList' => $categoryList,
-       ]);
+        $editSubcategoryClass = new SubCategory();
+        $editSubcategory = $editSubcategoryClass->editsubCatgory($id);
+        $categoryListClass = new Category();
+        $categoryList = $categoryListClass->categoryallList();
+        return view('Pos.editSubcategory', [
+            'subCategory' => $editSubcategory,
+            'categoryallList' => $categoryList,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,)
+    public function update(Request $request, $id)
     {
-        //
+        $updateSubCategoryClass = new SubCategory();
+        $updateSubCategory  = $updateSubCategoryClass->updatesubCategory($request, $id);
+        return redirect('/category');
     }
 
     /**

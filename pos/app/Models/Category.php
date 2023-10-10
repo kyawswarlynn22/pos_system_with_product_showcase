@@ -16,13 +16,13 @@ class Category extends Model implements Auditable
 
     protected $fillable = ['c_name', 'description', 'del_flg'];
 
-   
+
 
     public function categoryList()
     {
-        return Category::orderBy('id','desc')
-        ->where('del_flg',0)
-        ->paginate(5);
+        return Category::orderBy('id', 'desc')
+            ->where('del_flg', 0)
+            ->paginate(5);
     }
 
     public function categoryallList()
