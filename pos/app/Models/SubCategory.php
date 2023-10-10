@@ -41,6 +41,11 @@ class SubCategory extends Model implements Auditable
             ->paginate(5);
     }
 
+    public function subCategoryAllList()
+    {
+        return SubCategory::all();
+    }
+
     public function editsubCatgory($id)
     {
         return SubCategory::where('id', $id)->first();

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -11,7 +14,16 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('Pos.productList');
+        $categoryListClass = new Category();
+        $categoryList = $categoryListClass->categoryallList();
+
+        $subcategoryListClass = new SubCategory();
+        $subcategoryList = $subcategoryListClass->subCategoryAllList();
+        dd($categoryList, $subcategoryList);
+        return view('Pos.productList', [
+            'categorylist' => $categoryList,
+            'subcategorylist' => $subcategoryList,
+        ]);
     }
 
     /**
@@ -19,7 +31,16 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('Pos.addProduct');
+        $categoryListClass = new Category();
+        $categoryList = $categoryListClass->categoryallList();
+
+        $subcategoryListClass = new SubCategory();
+        $subcategoryList = $subcategoryListClass->subCategoryAllList();
+
+        return view('Pos.addProduct', [
+            'categorylist' => $categoryList,
+            'subcategorylist' => $subcategoryList,
+        ]);
     }
 
     /**
@@ -27,7 +48,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $path = $request->file('photo1')->storePublicly('public/images');
+        dd("https://kyawswar.s3.ap-southeast-1.amazonaws.com/",$path);
+       
     }
 
     /**
