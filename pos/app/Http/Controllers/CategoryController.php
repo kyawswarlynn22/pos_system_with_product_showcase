@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -16,8 +17,13 @@ class CategoryController extends Controller
         $categoryListClass = new Category();
         $categoryList = $categoryListClass->categoryList();
         Session::put('categoryList', $categoryList);
+
+        $subCategoryListClass = new SubCategory();
+        $subCategoryList = $subCategoryListClass->subCategoryList();
+
         return view('Pos.categoryList', [
-            'categoryList' => $categoryList
+            'categoryList' => $categoryList,
+            'subCategoryList' => $subCategoryList
         ]);
     }
 
@@ -40,7 +46,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'categoryName' =>'required',
+            'categoryName' => 'required',
             'categoryDescription' => 'required',
         ]);
         $categoryAddClass = new Category();

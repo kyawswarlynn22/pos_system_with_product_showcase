@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\SubCategory;
 use App\Models\Subcontroller;
 use Illuminate\Http\Request;
 
@@ -12,7 +14,7 @@ class SubcontrollerController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -28,7 +30,10 @@ class SubcontrollerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $subCatgeoryAddClass = new SubCategory();
+        $subCatgeoryAdd = $subCatgeoryAddClass->addSubcategory($request);
+        return back();
     }
 
     /**
@@ -42,9 +47,16 @@ class SubcontrollerController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit($id)
     {
-        //
+       $editSubcategoryClass = new SubCategory();
+       $editSubcategory = $editSubcategoryClass->editsubCatgory($id);
+       $categoryListClass = new Category();
+       $categoryList = $categoryListClass->categoryallList();
+       return view('Pos.editSubcategory',[
+        'subCategory' => $editSubcategory,
+        'categoryallList' => $categoryList,
+       ]);
     }
 
     /**

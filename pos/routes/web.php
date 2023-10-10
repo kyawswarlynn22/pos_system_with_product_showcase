@@ -91,11 +91,6 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('password',PasswordController::class);
 
 
-
-    Route::get('/subcategory//edit', function () {
-        return view('Pos.editSubcategory');
-    });
-
     Route::get('/purchase//edit', function () {
         return view('Pos.editPurchase');
     });

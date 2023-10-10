@@ -112,7 +112,7 @@
             <ul>
                 @forelse ($audits as $audit)
                
-                <div>On {{ $audit->created_at }} user id is {{ $audit->user_id }} is 
+                <div>On {{ $audit->created_at }} {{ $audit->name }} is 
                     {{ $audit->event }} old value {{ $audit->old_values }} to {{ $audit->new_values }}</div>
                     {{-- <li>
                         @lang('article.updated.metadata', $audit->getMetadata())

@@ -15,9 +15,9 @@ class DashboardController extends Controller
     {
         $auditsClass = new ActivityLog();
         $audits = $auditsClass->getMetadata();
-        dd($audits);
-        return view('dashboard',compact('audits')
-             
+        return view(
+            'dashboard',
+            ['audits' => $audits]
         );
     }
 
