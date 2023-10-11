@@ -17,8 +17,9 @@ class ProductController extends Controller
     {
         $productAllDataClass = new Product();
         $productAllData = $productAllDataClass->productAllData();
-        return view('Pos.productList',[
-            'productData' => $productAllData ] );
+        return view('Pos.productList', [
+            'productData' => $productAllData
+        ]);
     }
 
     /**
@@ -95,8 +96,8 @@ class ProductController extends Controller
     {
         $productDetailClass = new Product();
         $productDetail = $productDetailClass->productDetails($id);
-        return view('Pos.productDetails',[
-            'productDetail' => $productDetail ,
+        return view('Pos.productDetails', [
+            'productDetail' => $productDetail,
         ]);
     }
 
@@ -105,7 +106,19 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $productDetailClass = new Product();
+        $productDetail = $productDetailClass->productEdit($id);
+
+        $categoryListClass = new Category();
+        $categoryList = $categoryListClass->categoryallList();
+
+        $subcategoryListClass = new SubCategory();
+        $subcategoryList = $subcategoryListClass->subCategoryAllList();
+        return view('Pos.editProduct', [
+            'productDetail' => $productDetail,
+            'categorylist' => $categoryList,
+            'subcategorylist' => $subcategoryList,
+        ]);
     }
 
     /**
@@ -113,7 +126,60 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validateData = $request->validate([
+            'p_code' => 'required',
+            'product_name' => 'required',
+            'price' => 'required',
+            'quantity' => 'required',
+            'description' => 'required',
+        ]);
+
+        $extension = "https://kyawswar.s3.ap-southeast-1.amazonaws.com/";
+        $pathOne = $pathTwo = $pathThree = $pathFour = null;
+
+        if ($request->hasFile('photo1')) {
+            $path_one = $request->file('photo1')->storePublicly('public/images');
+            $pathOne = $extension . $path_one;
+        } else {
+            $pathOne = $request->one;
+        }
+        if ($request->hasFile('photo2')) {
+            $path_two = $request->file('photo2')->storePublicly('public/images');
+            $pathTwo = $extension . $path_two;
+        } else {
+            $pathTwo = $request->two;
+        }
+        if ($request->hasFile('photo3')) {
+            $path_three = $request->file('photo3')->storePublicly('public/images');
+            $pathThree = $extension . $path_three;
+        } else {
+            $pathThree = $request->three;
+        }
+        if ($request->hasFile('photo4')) {
+            $path_four = $request->file('photo4')->storePublicly('public/images');
+            $pathFour = $extension . $path_four;
+        } else {
+            $pathFour = $request->four;
+        }
+
+        $productdetail = Product::find($id);
+        if ($productdetail) {
+            $productdetail->update([
+                $productdetail->product_name = $request->product_name,
+                $productdetail->p_code = $request->p_code,
+                $productdetail->categories_id = $request->category,
+                $productdetail->sub_categories_id = $request->subcategory,
+                $productdetail->p_one = $pathOne,
+                $productdetail->p_two = $pathTwo,
+                $productdetail->p_three = $pathThree,
+                $productdetail->p_four = $pathFour,
+                $productdetail->price = $request->price,
+                $productdetail->quantity = $request->quantity,
+                $productdetail->description = $request->description,
+            ]);
+        }
+
+        return redirect('/product')->withSuccess('Added Product Succefully');
     }
 
     /**
@@ -121,6 +187,8 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $productdetail = Product::find($id);
+        $productdetail->delete();
+        return redirect('/product')->withSuccess('Product Delete  Succefully');
     }
 }

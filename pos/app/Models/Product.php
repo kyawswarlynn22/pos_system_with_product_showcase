@@ -23,18 +23,25 @@ class Product extends Model implements Auditable
         'p_two', 'p_three', 'p_four' ,'price', 'quantity', 'products.description')
         ->join('categories','categories_id', 'categories.id')
         ->join('sub_categories','sub_categories_id','sub_categories.id')
-        ->where('stock_confrim',0)
+        ->where('stock_confrim',1)
         ->orderBy('products.id', 'desc')
         ->paginate(5);
     }
 
     public function productDetails($id)
     {
-        return Product::select('products.id','categories.c_name','sub_categories.sub_c_name','product_name','p_code', 'p_one',
+        return Product::select('products.id','sub_categories.id','categories.id','categories.c_name','sub_categories.sub_c_name','product_name','p_code', 'p_one',
         'p_two', 'p_three', 'p_four' ,'price', 'quantity', 'products.description')
         ->join('categories','categories_id', 'categories.id')
         ->join('sub_categories','sub_categories_id','sub_categories.id')
         ->where('products.id',$id)
         ->first();
     }
+
+    public function productEdit($id)
+    {
+        return Product::where('id',$id)->first();
+    }
+
+    
 }

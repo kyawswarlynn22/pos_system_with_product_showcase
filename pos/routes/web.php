@@ -95,10 +95,6 @@ Route::middleware('loginCheck')->group(function () {
         return view('Pos.editPurchase');
     });
 
-    Route::get('/product//edit', function () {
-        return view('Pos.editProduct');
-    });
-
     Route::get('/cashsale//edit', function () {
         return view('Pos.editCashsale');
     });
