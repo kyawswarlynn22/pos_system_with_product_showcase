@@ -121,9 +121,6 @@ Route::middleware('loginCheck')->group(function () {
 
 
     /* Details */
-    Route::get('/product//detail', function () {
-        return view('Pos.productDetail');
-    });
 
     Route::get('/cashsale//detail', function () {
         return view('Pos.cashsaleDetails');
