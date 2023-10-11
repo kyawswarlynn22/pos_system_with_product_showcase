@@ -12,6 +12,7 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoandNameController;
 use App\Http\Controllers\PasswordController;
+use App\Http\Controllers\PendingController;
 use App\Http\Controllers\preordersaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
@@ -90,6 +91,7 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('password',PasswordController::class);
 
+    Route::resource('productpending',PendingController::class);
 
     Route::get('/purchase//edit', function () {
         return view('Pos.editPurchase');
