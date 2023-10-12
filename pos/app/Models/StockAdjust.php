@@ -14,7 +14,7 @@ class StockAdjust extends Model implements Auditable
 
     protected $table = 'stock_adjustment';
 
-    protected $fillable = ['product_id', 'stock'];
+    protected $fillable = ['product_id', 'stock','adjusted'];
 
     public function addAdjustment($request)
     {

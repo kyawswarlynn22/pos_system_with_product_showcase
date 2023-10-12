@@ -51,6 +51,8 @@
                             {{ $product->stock }}
                         </td>
                         <form action="/productpending/{{ $product->product_id }}" method="post">
+                            <input type="text" name="stock" value="{{ $product->stock }}" hidden>
+                            <input type="text" name="p_id" value="{{ $product->id }}" hidden>
                             <td class=" flex justify-center  space-x-2 text-white items-baseline ">
                                 @csrf
                                 @method('put')
@@ -67,7 +69,7 @@
                         </td>
                     </tr>
                 @empty
-                    <span class=" text-red-500 font-bold">No Product Data</span>
+                    <div class=" text-center relative top-20 text-red-500 font-bold">No Product Data</div>
                 @endforelse
 
 

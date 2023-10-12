@@ -103,8 +103,23 @@ class Product extends Model implements Auditable
         return back();
     }
 
-    public function updateStockCount()
+    public function updateStockCount($request, $id)
     {
-        
+
+        $adjust = Product::find($id);
+        $newStockCount = $adjust->quantity + $request->stock;
+
+        if ($adjust) {
+            $adjust->update([
+                'quantity' => $newStockCount,
+            ]);
+        }
+
+        $adjustnone = StockAdjust::find($request->p_id);
+        if ($adjustnone) {
+            $adjustnone->update([
+                'adjusted' => 1,
+            ]);
+        }
     }
 }

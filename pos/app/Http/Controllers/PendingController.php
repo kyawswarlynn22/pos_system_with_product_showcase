@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\StockAdjust;
 use Illuminate\Http\Request;
 
 class PendingController extends Controller
@@ -57,8 +58,9 @@ class PendingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd("kyaw Swar Lynn");
-        
+        $stockAdjustClass = new Product();
+        $stockAdjust = $stockAdjustClass->updateStockCount($request, $id);
+        return back();
     }
 
     /**
