@@ -16,7 +16,7 @@ class StockAdjustController extends Controller
         $productGetDataClass = new StockAdjust();
         $productGetData    = $productGetDataClass->pendingList();
 
-        return view('Pos.productPending',[
+        return view('Pos.productPending', [
             'productData' => $productGetData
         ]);
     }
@@ -28,7 +28,7 @@ class StockAdjustController extends Controller
     {
         $productGetDataClass = new Product();
         $productGetData    = $productGetDataClass->productData();
-        return view('Pos.stockAdjust',[
+        return view('Pos.stockAdjust', [
             'productData' => $productGetData
         ]);
     }
@@ -61,7 +61,7 @@ class StockAdjustController extends Controller
 
         $productGetDataClass = new Product();
         $productGetData    = $productGetDataClass->productData();
-        return view('Pos.editAdjustment',[
+        return view('Pos.editAdjustment', [
             'EditAdjust' => $editAdjust,
             'productData' => $productGetData,
         ]);
@@ -73,7 +73,7 @@ class StockAdjustController extends Controller
     public function update(Request $request, string $id)
     {
         $updateAdjustClass = new StockAdjust();
-        $updateAdjust = $updateAdjustClass->updateAdjust($request,$id);
+        $updateAdjust = $updateAdjustClass->updateAdjust($request, $id);
         return redirect('/stockadjustment');
     }
 
@@ -84,6 +84,4 @@ class StockAdjustController extends Controller
     {
         //
     }
-
-    
 }

@@ -17,6 +17,7 @@ class PurchaseDetailsFactory extends Factory
     public function definition(): array
     {
         return [
+            'purchase_id' => $this->faker->numberBetween(1,10),
             'product_id' => $this->faker->numberBetween(1,10),
             'product_quantity' => $this->faker->numberBetween(10,100),
             'price_per_unit' => $this->faker->numberBetween(100,500),

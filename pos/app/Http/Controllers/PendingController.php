@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
-use App\Models\StockAdjust;
 use Illuminate\Http\Request;
 
 class PendingController extends Controller

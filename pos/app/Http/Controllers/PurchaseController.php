@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Purchase;
+use App\Models\PurchaseDetails;
 use Illuminate\Http\Request;
 
 class PurchaseController extends Controller
@@ -12,7 +14,11 @@ class PurchaseController extends Controller
      */
     public function index()
     {
-        return view('Pos.purchaseList');
+        $getPurchaseDataClass = new Purchase();
+        $getPurchaseData = $getPurchaseDataClass->getPurchaseData();
+        return view('Pos.purchaseList',[
+            'purchaseData' => $getPurchaseData,
+        ]);
     }
 
     /**
@@ -20,7 +26,11 @@ class PurchaseController extends Controller
      */
     public function create()
     {
-        return view('Pos.addpurchase');
+        $getProductClass = new Purchase();
+        $getProduct = $getProductClass->getProduct();
+        return view('Pos.addpurchase',[
+            'products' => $getProduct,
+        ]);
     }
 
     /**
@@ -28,15 +38,24 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Purchase $purchase)
+    public function show($id)
     {
-        //
+        $purchasedProductsClass = new PurchaseDetails();
+        $purchasedProducts = $purchasedProductsClass->getPurchaseDetail($id);
+
+        $purchaseDetailClass = new Purchase();
+        $purchaseDetail = $purchaseDetailClass->getPurchaseDetail($id);
+
+        return view('Pos.purchaseDetails',[
+            'purchaseDetail' => $purchasedProducts,
+            'puchaseDetail' => $purchaseDetail,
+        ]);
     }
 
     /**
