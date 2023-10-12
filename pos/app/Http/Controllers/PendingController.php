@@ -13,7 +13,7 @@ class PendingController extends Controller
     public function index()
     {
         $productAllDataClass = new Product();
-        $productAllData = $productAllDataClass->productPending();
+        $productAllData = $productAllDataClass->productAllData();
         return view('Pos.productPending', [
             'productData' => $productAllData
         ]);
@@ -57,6 +57,7 @@ class PendingController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        dd("kyaw Swar Lynn");
     }
 
     /**

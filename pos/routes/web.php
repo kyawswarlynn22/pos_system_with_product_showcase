@@ -17,6 +17,7 @@ use App\Http\Controllers\preordersaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\salereturnController;
+use App\Http\Controllers\StockAdjustController;
 use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
@@ -92,6 +93,8 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('password',PasswordController::class);
 
     Route::resource('productpending',PendingController::class);
+
+    Route::resource('stockadjustment',StockAdjustController::class);
 
     Route::get('/purchase//edit', function () {
         return view('Pos.editPurchase');

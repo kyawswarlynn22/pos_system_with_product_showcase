@@ -37,12 +37,11 @@ class Product extends Model implements Auditable
         )
             ->join('categories', 'categories_id', 'categories.id')
             ->join('sub_categories', 'sub_categories_id', 'sub_categories.id')
-            ->where('stock_confrim', 1)
             ->orderBy('products.id', 'desc')
             ->paginate(5);
     }
 
-    public function productPending()
+    public function productData()
     {
         return $product = Product::select(
             'products.id',
@@ -60,9 +59,8 @@ class Product extends Model implements Auditable
         )
             ->join('categories', 'categories_id', 'categories.id')
             ->join('sub_categories', 'sub_categories_id', 'sub_categories.id')
-            ->where('stock_confrim', 0)
             ->orderBy('products.id', 'desc')
-            ->paginate(5);
+            ->get();
     }
 
     public function productDetails($id)
@@ -103,5 +101,10 @@ class Product extends Model implements Auditable
             ]);
         }
         return back();
+    }
+
+    public function updateStockCount()
+    {
+        
     }
 }

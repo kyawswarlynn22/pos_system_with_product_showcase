@@ -48,20 +48,22 @@
                         </th>
 
                         <td class="px-6 text-center py-4">
-                            {{ $product->quantity }}
+                            {{ $product->stock }}
                         </td>
-                        <form action="/productpending/{{ $product->id }}" method="get">
-                        <td class=" flex justify-center  space-x-2 text-white items-baseline ">
+                        <form action="/productpending/{{ $product->product_id }}" method="post">
+                            <td class=" flex justify-center  space-x-2 text-white items-baseline ">
                                 @csrf
+                                @method('put')
                                 <button type="submit" class="px-5 rounded-md py-1 bg-blue-500">
                                     Accept
                                 </button>
-                            </form>
-                            <a href="/product/{{ $product->id }}/edit" <button href="/product/{{ $product->id }}"
-                                class="px-5 rounded-md py-1 bg-blue-500">
-                                Edit
-                                </button>
-                            </a>
+                        </form>
+                        <a href="/stockadjustment/{{ $product->id }}/edit" <button
+                            class="px-5 rounded-md py-1 bg-blue-500">
+                            Edit
+                            </button>
+                        </a>
+
                         </td>
                     </tr>
                 @empty
