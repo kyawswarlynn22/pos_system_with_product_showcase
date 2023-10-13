@@ -51,7 +51,7 @@ Route::post('/new_password',[ForgetPasswordController::class,'newPassword']);
 
 Route::get('/reset_password/{token}',[ForgetPasswordController::class,'showResetPassword'])->name('password.reset');;
 
-Route::get('/getPrice/{id}', [PurchaseController::class,'getPrice'] );
+Route::get('/getPrice/{id}', 'PurchaseController@getPrice');
 
 //Middlewar Group
 Route::middleware('loginCheck')->group(function () {

@@ -84,11 +84,16 @@ class PurchaseController extends Controller
         //
     }
 
-    public function getPrice()
+
+
+    public function getPrice(Request $request, $id)
     {
-        dd('Vole');
-         $getPrice = $_GET['id'];
-        $price  = DB::table('purchases')->where('id', $getPrice)->get();
-        return response()->json($price);
+        $price = DB::table('purchases')->where('id', $id)->first(); // Use first() to get a single record
+
+        if ($price) {
+            return response()->json($price);
+        } else {
+            return response()->json(['error' => 'Not found'], 404); // Return a 404 response if the record is not found
+        }
     }
 }
