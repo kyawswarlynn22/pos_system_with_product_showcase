@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\PurchaseDetails;
+use AWS\CRT\HTTP\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -16,7 +18,7 @@ class PurchaseController extends Controller
     {
         $getPurchaseDataClass = new Purchase();
         $getPurchaseData = $getPurchaseDataClass->getPurchaseData();
-        return view('Pos.purchaseList',[
+        return view('Pos.purchaseList', [
             'purchaseData' => $getPurchaseData,
         ]);
     }
@@ -28,7 +30,7 @@ class PurchaseController extends Controller
     {
         $getProductClass = new Purchase();
         $getProduct = $getProductClass->getProduct();
-        return view('Pos.addpurchase',[
+        return view('Pos.addpurchase', [
             'products' => $getProduct,
         ]);
     }
@@ -38,7 +40,7 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        
+        dd($request);
     }
 
     /**
@@ -52,7 +54,7 @@ class PurchaseController extends Controller
         $purchaseDetailClass = new Purchase();
         $purchaseDetail = $purchaseDetailClass->getPurchaseDetail($id);
 
-        return view('Pos.purchaseDetails',[
+        return view('Pos.purchaseDetails', [
             'purchaseDetail' => $purchasedProducts,
             'puchaseDetail' => $purchaseDetail,
         ]);
@@ -80,5 +82,13 @@ class PurchaseController extends Controller
     public function destroy(Purchase $purchase)
     {
         //
+    }
+
+    public function getPrice()
+    {
+        dd('Vole');
+         $getPrice = $_GET['id'];
+        $price  = DB::table('purchases')->where('id', $getPrice)->get();
+        return response()->json($price);
     }
 }

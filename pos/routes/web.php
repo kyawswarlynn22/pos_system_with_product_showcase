@@ -51,6 +51,8 @@ Route::post('/new_password',[ForgetPasswordController::class,'newPassword']);
 
 Route::get('/reset_password/{token}',[ForgetPasswordController::class,'showResetPassword'])->name('password.reset');;
 
+Route::get('/getPrice/{id}', [PurchaseController::class,'getPrice'] );
+
 //Middlewar Group
 Route::middleware('loginCheck')->group(function () {
 
@@ -95,6 +97,9 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('productpending',PendingController::class);
 
     Route::resource('stockadjustment',StockAdjustController::class);
+
+   
+
 
     Route::get('/purchase//edit', function () {
         return view('Pos.editPurchase');
