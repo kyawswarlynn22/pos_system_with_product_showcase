@@ -43,22 +43,23 @@ Route::post('/signin', [LoginController::class, 'customLogin']);
 
 Route::post('/registration', [LoginController::class, 'customeRegistration']);
 
-Route::get('/forget_password',[ForgetPasswordController::class,'showForgetPassword']);
+Route::get('/forget_password', [ForgetPasswordController::class, 'showForgetPassword']);
 
-Route::post('/forget_password',[ForgetPasswordController::class,'submitForgetPassword']);
+Route::post('/forget_password', [ForgetPasswordController::class, 'submitForgetPassword']);
 
-Route::post('/new_password',[ForgetPasswordController::class,'newPassword']);
+Route::post('/new_password', [ForgetPasswordController::class, 'newPassword']);
 
-Route::get('/reset_password/{token}',[ForgetPasswordController::class,'showResetPassword'])->name('password.reset');;
+Route::get('/reset_password/{token}', [ForgetPasswordController::class, 'showResetPassword'])->name('password.reset');;
 
-Route::get('/getPrice/{id}', 'PurchaseController@getPrice');
+
+
 
 //Middlewar Group
 Route::middleware('loginCheck')->group(function () {
 
-   
+    Route::get('/get-product-details/{id}', 'App\Http\Controllers\PurchaseController@getProductDetails');
 
-    Route::resource('/dashboard',DashboardController::class);
+    Route::resource('/dashboard', DashboardController::class);
 
     Route::get('/signout', [LoginController::class, 'signOut']);
 
@@ -92,13 +93,13 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('user', userController::class);
 
-    Route::resource('password',PasswordController::class);
+    Route::resource('password', PasswordController::class);
 
-    Route::resource('productpending',PendingController::class);
+    Route::resource('productpending', PendingController::class);
 
-    Route::resource('stockadjustment',StockAdjustController::class);
+    Route::resource('stockadjustment', StockAdjustController::class);
 
-   
+
 
 
     Route::get('/purchase//edit', function () {

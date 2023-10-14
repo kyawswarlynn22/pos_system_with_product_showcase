@@ -84,11 +84,9 @@ class PurchaseController extends Controller
         //
     }
 
-
-
-    public function getPrice(Request $request, $id)
+    public function getProductDetails(Request $request, $id)
     {
-        $price = DB::table('purchases')->where('id', $id)->first(); // Use first() to get a single record
+        $price = DB::table('products')->where('id', $id)->first(); // Use first() to get a single record
 
         if ($price) {
             return response()->json($price);
