@@ -30,8 +30,11 @@ class PurchaseController extends Controller
     {
         $getProductClass = new Purchase();
         $getProduct = $getProductClass->getProduct();
+        $getLastId = $getProductClass->getlastId();
+
         return view('Pos.addpurchase', [
             'products' => $getProduct,
+            'lastId' => $getLastId,
         ]);
     }
 
@@ -40,7 +43,12 @@ class PurchaseController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $purchaseStoreClass = new Purchase();
+        $purchaseStore = $purchaseStoreClass->storePurchaseData($request);
+        $getLastId = $purchaseStoreClass->getlastId();
+        $stockUpdateClass = new PurchaseDetails();
+        $stockUpdate = $stockUpdateClass->updateSotckCount($getLastId);
+        return back();
     }
 
     /**
@@ -63,17 +71,38 @@ class PurchaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Purchase $purchase)
+    public function edit($id)
     {
-        //
+        $editPurchaseClass = new PurchaseDetails();
+        $editPurchase = $editPurchaseClass->getPurchaseDetail($id);
+        $getProductClass = new Purchase();
+        $getProduct = $getProductClass->getProduct();
+        $grandtotal = $getProductClass->getPurchaseDetail($id);
+
+        return view('Pos.editPurchase', [
+            'products' => $getProduct,
+            'PurchaseDetails' => $editPurchase,
+            'lastId' => $id,
+            'grand_total' => $grandtotal,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Purchase $purchase)
+    public function update(Request $request, $id)
     {
-        //
+        $updatePurchasedDetailClass = new Purchase();
+        $updatePurchasedDetail = $updatePurchasedDetailClass->updatePurchaseDetail($request, $id);
+        $getPurchaseData = $updatePurchasedDetailClass->getPurchaseData();
+        $stockUpdateClass = new PurchaseDetails();
+        $stockUpdate = $stockUpdateClass->updateSotckCount($id);
+        return view(
+            'Pos.purchaseList',
+            [
+                'purchaseData' => $getPurchaseData,
+            ]
+        );
     }
 
     /**

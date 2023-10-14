@@ -6,6 +6,14 @@
     <form action="/purchase" method="post">
         @csrf
         <div class="mt-3 rounded-lg shadow-lg p-5">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6 ">
+                    <span id="day"></span> : <span id="year"></span>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                    <span>Invoice: {{ $lastId +1 }}</span>
+                </div>
+            </div>
             <div class="flex w-full justify-around items-center space-x-3 p-5">
                 <div class="mb-6 w-full">
                     <label for="country" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier
@@ -16,14 +24,7 @@
                         <option value="1">China</option>
                     </select>
                 </div>
-                <div class="mb-6 w-full ">
-                    <label for="purchasedate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Puchase
-                        Date
-                    </label>
-                    <input type="date" name="purchasedate" id="purchasedate"
-                        class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Category Name" required>
-                </div>
+                
 
                 <div class="mb-6 w-full">
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipping
@@ -76,6 +77,9 @@
                     <tbody id="new">
                     </tbody>
                 </table>
+                <div class="flex justify-end">
+                    <button id="delBut" type="button" class=" bg-red-500 px-2 py-1 rounded-md my-5">Delete Row</button>
+                </div>
 
                 <div class="mt-5 float-right">
                     <span class=" font-semibold text-lg">Grand Total : </span>
@@ -91,96 +95,8 @@
             </div>
     </form>
 
+    <script src="{{ asset('js/calculation.js') }}" defer></script>
 
-    <script>
-        $(document).ready(function() {
-            var items = document.getElementById("itemQuantity");
-            document.getElementById("add").disabled = true;
-            var selectElement = document.getElementById("productselect");
-
-            selectElement.addEventListener('change', function() {
-                document.getElementById("add").disabled = false;
-            })
-            items.addEventListener('keyup', function() {
-                var itemQuantity = items.value;
-                if (itemQuantity < 1 || itemQuantity > 100) {
-                    items.value = "";
-                }
-            })
-
-            $('.get-details').click(function() {
-                var button = $(this);
-                var selectElement = document.getElementById("productselect");
-                var selectedValue = selectElement.value;
-                var items = document.getElementById("itemQuantity");
-                var itemQuantity = items.value;
-
-                $.ajax({
-                    url: '/get-product-details/' + selectedValue,
-                    type: 'GET',
-                    success: function(data) {
-                        if (data.error) {
-                            namePlaceholder.text('Error: ' + data.error);
-                            pricePlaceholder.text('');
-                        } else {
-                            var table =
-                                '<tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">' +
-                                '<td class="px-6 py-4">' +
-                                '<input type="text" readonly id="productinput" class="outline-none border-gray-300 border-transparent rounded-md product_select" value="' +
-                                data.product_name + '">' +
-                                '</td>' +
-                                '<td class="px-6 py-3">' +
-                                '<input  type="number" readonly  name="" class="outline-none border-transparent rounded-lg iprice" value="' +
-                                data.price + '" />' +
-                                '</td>' +
-                                '<td>' +
-                                '<input type="number" readonly name="quantities[]" class="outline-none border-transparent border-gray-300 rounded-lg iquantity" value="' +
-                                itemQuantity + '" />' +
-                                '</td>' +
-                                '<td>' +
-                                '<input type="text" name="" readonly class="outline-none w-full text-right float-right border-transparent rounded-lg itotal" value="' +
-                                +'" />' +
-                                '</td>' +
-                                '<td class="px-6 py-4">' +
-                                '<input type="text" readonly name="productsid[]" hidden id="productinput" class="outline-none border-gray-300 border-transparent rounded-md product_select" value="' +
-                                selectedValue + '">' +
-                                '</td>' +
-                                '</tr>';
-
-                            $('#new').append(table);
-                            var iprice = document.getElementsByClassName("iprice");
-                            var itotal = document.getElementsByClassName("itotal")
-                            var iquantity = document.getElementsByClassName("iquantity");
-
-                            for (let i = 0; i < iprice.length; i++) {
-                                const numberOnly = (iprice[i].value * iquantity[i].value)
-                                    .toString(); // Convert the result to a string
-
-                                const number = parseFloat(numberOnly.replace(/[^0-9]/g, ""));
-                                const formattedNumber = number.toLocaleString();
-                                itotal[i].value = formattedNumber;
-
-                                // gt = gt + (iprice[i].value) * (iquantity[i].value);
-                            }
-
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            });
-        });
-    </script>
-    <script>
-        // var gtotal = document.getElementById("gtotal");
-
-
-        function subTotal() {
-
-        }
-        subTotal();
-    </script>
 
 
 @endsection

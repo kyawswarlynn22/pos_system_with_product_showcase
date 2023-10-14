@@ -6,7 +6,7 @@
         Purchase Details</p>
     <div class="mt-3 rounded-lg shadow-lg p-5">
         <div class=" border-b "></div>
-        <div class="flex w-80 p-5 justify-between">
+        <div class="flex w-96 p-5 justify-between">
             <div class="flex flex-col">
                 <span>Purchase Country</span>
                 <span>Purchase Date</span>
@@ -25,7 +25,7 @@
                         China
                     @endif
                 </span>
-                <span>{{ $puchaseDetail->p_date }}</span>
+                <span>{{ $puchaseDetail->created_at }}</span>
                 <span>
                     @if ($puchaseDetail->ship_status == 0)
                         <p class=" text-red-500 font-semibold">Pending</p>

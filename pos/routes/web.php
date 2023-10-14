@@ -102,9 +102,7 @@ Route::middleware('loginCheck')->group(function () {
 
 
 
-    Route::get('/purchase//edit', function () {
-        return view('Pos.editPurchase');
-    });
+  
 
     Route::get('/cashsale//edit', function () {
         return view('Pos.editCashsale');
