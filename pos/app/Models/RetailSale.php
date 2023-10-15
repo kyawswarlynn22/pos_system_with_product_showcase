@@ -106,7 +106,5 @@ class RetailSale extends Model implements Auditable
                 $cashsaleDetails->save();
             }
         }
-
-
     }
 }

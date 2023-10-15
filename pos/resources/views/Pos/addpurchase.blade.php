@@ -95,7 +95,7 @@
                 </span>
             </div>
     </form>
-
+    <input type="hidden" id="discount">
     <script src="{{ asset('js/calculation.js') }}" defer></script>
 
 

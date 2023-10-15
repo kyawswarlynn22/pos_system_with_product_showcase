@@ -203,8 +203,8 @@
                         Country</label>
                     <select name="country" id="country"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option @if ($grand_total->sup_country == 0) selected @endif value="0" >Myanmar</option>
-                        <option @if ($grand_total->sup_country == 1) selected @endif value="1" >China</option>
+                        <option @if ($grand_total->sup_country == 0) selected @endif value="0">Myanmar</option>
+                        <option @if ($grand_total->sup_country == 1) selected @endif value="1">China</option>
                     </select>
                 </div>
 
@@ -214,8 +214,8 @@
                         Status</label>
                     <select name="status" id="status"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option @if ($grand_total->ship_status == 0) selected  @endif value="0" >Pending</option>
-                        <option @if ($grand_total->ship_status == 1) selected  @endif value="1" >Received</option>
+                        <option @if ($grand_total->ship_status == 0) selected @endif value="0">Pending</option>
+                        <option @if ($grand_total->ship_status == 1) selected @endif value="1">Received</option>
                     </select>
                 </div>
 
@@ -299,8 +299,8 @@
 
                 <div class="mt-5 float-right">
                     <span class=" font-semibold text-lg">Grand Total : </span>
-                    <input type="number" required class=" rounded-lg" value="{{ $grand_total->grand_total }}" name="grandtotal"
-                        id="">
+                    <input type="number" required class=" rounded-lg" value="{{ $grand_total->grand_total }}"
+                        name="grandtotal" id="">
                 </div>
                 <div class="mt-20 mb-5 flex flex-col">
                 </div>
@@ -311,7 +311,8 @@
                 </span>
             </div>
     </form>
-
+    <input type="hidden" id="discount">
+    <input type="hidden" id="gtotal">
     <script src="{{ asset('js/calculation.js') }}" defer></script>
 
 

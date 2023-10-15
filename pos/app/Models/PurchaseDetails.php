@@ -49,4 +49,29 @@ class PurchaseDetails extends Model  implements Auditable
       }
     }
   }
+
+  public function deleteupdateSotckCount($id)
+  {
+    $purchaseDetails = PurchaseDetails::join('purchases', 'purchase_id', '=', 'purchases.id')
+      ->join('products', 'product_id', '=', 'products.id')
+      ->where('purchase_id', $id)
+      ->where('ship_status', 1)
+      ->select('products.id', DB::raw('SUM(product_quantity) as total_product_quantity'))
+      ->groupBy('products.id')
+      ->get();
+
+    foreach ($purchaseDetails as $purchaseDetail) {
+      $productId = $purchaseDetail->id;
+
+      $totalProductQuantity = $purchaseDetail->total_product_quantity;
+
+      // Find the corresponding product
+      $product = Product::find($productId);
+      // Update the 'products.quantity' column
+      if ($product) {
+        $product->quantity -= $totalProductQuantity;
+        $product->save();
+      }
+    }
+  }
 }

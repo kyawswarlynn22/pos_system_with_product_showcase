@@ -9,7 +9,7 @@
         <div class="mt-3 rounded-lg shadow-lg p-5">
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 ">
-                     <span> {{ $CashsaleData->pur_date }} </span>
+                    <span> {{ $CashsaleData->pur_date }} </span>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                     <span>Invoice No: {{ $CashsaleData->id }}</span>
@@ -17,12 +17,13 @@
             </div>
             <div class="flex w-full justify-around items-center space-x-3 p-5">
                 <div class="mb-6 w-full">
-                    <label for="customer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Supplier
-                        Country</label>
+                    <label for="customer" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Customer Name
+                    </label>
                     <select name="customer" id="customer"
                         class="bg-gray-50 border w-1/2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @forelse ($customerList as $item)
-                            <option value="{{ $item->id }}" @if ($item->id == $CashsaleData->customers_id ) selected @endif >{{ $item->cus_name }}</option>
+                            <option value="{{ $item->id }}" @if ($item->id == $CashsaleData->customers_id) selected @endif>
+                                {{ $item->cus_name }}</option>
                         @empty
                             <option value="">No Customer</option>
                         @endforelse
@@ -68,37 +69,37 @@
                     </thead>
                     <tbody id="new">
                         @forelse ($CashsaleDetailData as $item)
-                        <tr
-                            class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <td class="px-6 py-4">
-                                <input type="text" readonly
-                                    class="outline-none border-gray-300 border-transparent rounded-md product_select"
-                                    value="{{ $item->product_name }}">
-                            </td>
-                            <td class="px-6 py-3">
-                                <input type="number" readonly name="price[]"
-                                    class="outline-none border-transparent rounded-lg iprice"
-                                    value="{{ $item->p_price }}">
-                            </td>
-                            <td>
-                                <input type="number" readonly name="quantities[]"
-                                    class="outline-none border-transparent border-gray-300 rounded-lg iquantity"
-                                    value="{{ $item->p_quantity }}">
-                            </td>
-                            <td>
-                                <input type="text" readonly
-                                    class="outline-none w-full text-right float-right border-transparent rounded-lg itotal"
-                                    value="">
-                            </td>
-                            <td class="px-6 py-4">
-                                <input type="text" readonly name="productsid[]" hidden
-                                    class="outline-none border-gray-300 border-transparent rounded-md product_select"
-                                    value="{{ $item->product_id }}">
-                            </td>
-                        </tr>
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="px-6 py-4">
+                                    <input type="text" readonly
+                                        class="outline-none border-gray-300 border-transparent rounded-md product_select"
+                                        value="{{ $item->product_name }}">
+                                </td>
+                                <td class="px-6 py-3">
+                                    <input type="number" readonly name="price[]"
+                                        class="outline-none border-transparent rounded-lg iprice"
+                                        value="{{ $item->p_price }}">
+                                </td>
+                                <td>
+                                    <input type="number" readonly name="quantities[]"
+                                        class="outline-none border-transparent border-gray-300 rounded-lg iquantity"
+                                        value="{{ $item->p_quantity }}">
+                                </td>
+                                <td>
+                                    <input type="text" readonly
+                                        class="outline-none w-full text-right float-right border-transparent rounded-lg itotal"
+                                        value="">
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="text" readonly name="productsid[]" hidden
+                                        class="outline-none border-gray-300 border-transparent rounded-md product_select"
+                                        value="{{ $item->product_id }}">
+                                </td>
+                            </tr>
 
-                    @empty
-                    @endforelse
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 <div class="flex justify-end">

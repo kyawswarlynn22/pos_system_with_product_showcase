@@ -14,7 +14,7 @@ class Purchase extends Model  implements Auditable
 
     protected $table = 'purchases';
 
-    protected $fillable = ['sup_country', 'p_date','grand_total', 'ship_status', 'del_flg'];
+    protected $fillable = ['sup_country', 'p_date', 'grand_total', 'ship_status', 'del_flg'];
 
     public function getPurchaseData()
     {
@@ -66,16 +66,19 @@ class Purchase extends Model  implements Auditable
 
     public function updatePurchaseDetail($request, $id)
     {
-      
+
         $updatePurchase = Purchase::find($id);
         if ($updatePurchase) {
             $updatePurchase->update([
                 'sup_country' => $request->country,
                 'ship_status' => $request->status,
                 'grand_total' => $request->grandtotal,
-                'del_flg'=> 0,
+                'del_flg' => 0,
             ]);
         }
+
+        $updateProductSockCountClass = new PurchaseDetails();
+        $updateProductSockCount = $updateProductSockCountClass->deleteupdateSotckCount($id);
 
         $delPurchaseDeatail = PurchaseDetails::where('purchase_id', $id);
         $delPurchaseDeatail->delete();
