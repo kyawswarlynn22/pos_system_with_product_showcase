@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RetailSale;
+use App\Models\RetailSaleDetails;
 use Illuminate\Http\Request;
 
 class CashsaleController extends Controller
@@ -11,7 +13,12 @@ class CashsaleController extends Controller
      */
     public function index()
     {
-        return view('Pos.cashsaleList');
+        $getCashSaleDataClass = new RetailSale();
+        $getCashSaleData = $getCashSaleDataClass->getCashSaleData();
+        
+        return view('Pos.cashsaleList',[
+            'CashSaleData' => $getCashSaleData,
+        ]);
     }
 
     /**
@@ -35,7 +42,17 @@ class CashsaleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $getDetailsClass = new RetailSaleDetails();
+        $getDetails = $getDetailsClass->getCashsaleDetail($id);
+        
+        $getCashDetailsClass = new RetailSale();
+        $getCashDetails = $getCashDetailsClass->getCashSaleDetails($id);
+    
+        return view('Pos.cashsaleDetails',[
+            'CashDetails' => $getDetails,
+            'ProductDetails' => $getCashDetails,
+            'InvoiceNo' => $id,
+        ]);
     }
 
     /**
