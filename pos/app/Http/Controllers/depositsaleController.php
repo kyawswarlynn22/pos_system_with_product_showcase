@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
+use App\Models\RetailSale;
 use Illuminate\Http\Request;
 
 class depositsaleController extends Controller
@@ -19,7 +21,15 @@ class depositsaleController extends Controller
      */
     public function create()
     {
-        return view('Pos.addDepositsale');
+        $lastidClass = new RetailSale();
+        $customerList = $lastidClass->getCustomer();
+        $getProductClass = new Purchase();
+        $getProduct = $getProductClass->getProduct();
+        return view('Pos.addDepositsale',[
+            'customerList' => $customerList,
+            'products' => $getProduct,
+            'lastId' => 1,
+        ]);
     }
 
     /**

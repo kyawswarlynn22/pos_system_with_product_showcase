@@ -38,7 +38,7 @@ class Product extends Model implements Auditable
             ->join('categories', 'categories_id', 'categories.id')
             ->join('sub_categories', 'sub_categories_id', 'sub_categories.id')
             ->orderBy('products.id', 'desc')
-            ->paginate(5);
+            ->paginate(10);
     }
 
     public function productData()

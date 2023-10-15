@@ -29,7 +29,7 @@ class StockAdjust extends Model implements Auditable
         return StockAdjust::select('stock', 'products.product_name', 'stock_adjustment.id', 'product_id')
             ->join('products', 'product_id', 'products.id')
             ->where('adjusted', 0)
-            ->paginate(5);
+            ->paginate(10);
     }
 
     public function editAdjust($id)

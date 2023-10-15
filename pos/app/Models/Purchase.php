@@ -18,7 +18,7 @@ class Purchase extends Model  implements Auditable
 
     public function getPurchaseData()
     {
-        return $purchases = Purchase::orderBy('id', 'desc')->paginate(5);
+        return $purchases = Purchase::orderBy('id', 'desc')->paginate(10);
     }
 
     public function getPurchaseDetail($id)
