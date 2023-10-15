@@ -66,7 +66,7 @@
                                 <path fill="none" d="M0 0h36v36H0z" />
                             </svg>
                            </a>
-                            <a href="/purchase//edit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                            <a href="/cashsale/{{ $item->id }}/edit" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                 <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <g fill="none" stroke="#3b82f6" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2">

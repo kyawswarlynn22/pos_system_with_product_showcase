@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class RetailSaleDetails extends Model implements Auditable
@@ -20,7 +21,55 @@ class RetailSaleDetails extends Model implements Auditable
     {
         return  $cashSaleDetils = RetailSaleDetails::join('products', 'products.id', 'retail_sale_details.products_id')
             ->where('retail_sale_details.retail_sales_id', $id)
-            ->select('products.product_name', 'p_quantity','p_price')
+            ->select('products.product_name', 'p_quantity', 'p_price')
             ->get();
+    }
+
+    public function updateSotckCount($id)
+    {
+        $cashSaleDetils = RetailSaleDetails::join('retail_sales', 'retail_sales_id', '=', 'retail_sales.id')
+            ->join('products', 'products_id', '=', 'products.id')
+            ->where('retail_sales_id', $id)
+            ->select('products.id', DB::raw('SUM(p_quantity) as total_product_quantity'))
+            ->groupBy('products.id')
+            ->get();
+
+        foreach ($cashSaleDetils as $cashsaleDetails) {
+            $productId = $cashsaleDetails->id;
+
+            $totalProductQuantity = $cashsaleDetails->total_product_quantity;
+
+            // Find the corresponding product
+            $product = Product::find($productId);
+            // Update the 'products.quantity' column
+            if ($product) {
+                $product->quantity -= $totalProductQuantity;
+                $product->save();
+            }
+        }
+    }
+
+    public function delUpdateSotck($id)
+    {
+        $cashSaleDetils = RetailSaleDetails::join('retail_sales', 'retail_sales_id', '=', 'retail_sales.id')
+            ->join('products', 'products_id', '=', 'products.id')
+            ->where('retail_sales_id', $id)
+            ->select('products.id', DB::raw('SUM(p_quantity) as total_product_quantity'))
+            ->groupBy('products.id')
+            ->get();
+
+        foreach ($cashSaleDetils as $cashsaleDetails) {
+            $productId = $cashsaleDetails->id;
+
+            $totalProductQuantity = $cashsaleDetails->total_product_quantity;
+
+            // Find the corresponding product
+            $product = Product::find($productId);
+            // Update the 'products.quantity' column
+            if ($product) {
+                $product->quantity += $totalProductQuantity;
+                $product->save();
+            }
+        }
     }
 }

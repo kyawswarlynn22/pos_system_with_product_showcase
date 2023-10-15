@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
 use App\Models\RetailSale;
 use App\Models\RetailSaleDetails;
 use Illuminate\Http\Request;
@@ -15,8 +16,8 @@ class CashsaleController extends Controller
     {
         $getCashSaleDataClass = new RetailSale();
         $getCashSaleData = $getCashSaleDataClass->getCashSaleData();
-        
-        return view('Pos.cashsaleList',[
+
+        return view('Pos.cashsaleList', [
             'CashSaleData' => $getCashSaleData,
         ]);
     }
@@ -26,7 +27,16 @@ class CashsaleController extends Controller
      */
     public function create()
     {
-        return view('Pos.addCashSale');
+        $lastidClass = new RetailSale();
+        $lastid = $lastidClass->lastId();
+        $customerList = $lastidClass->getCustomer();
+        $getProductClass = new Purchase();
+        $getProduct = $getProductClass->getProduct();
+        return view('Pos.addCashSale', [
+            'lastId' => $lastid,
+            'customerList' => $customerList,
+            'products' => $getProduct,
+        ]);
     }
 
     /**
@@ -34,7 +44,13 @@ class CashsaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cashsaleStoreClass = new RetailSale();
+        $cashsaleStore = $cashsaleStoreClass->storeCashsaleData($request);
+        $getlastId = $cashsaleStoreClass->lastId();
+
+        $cashsaleDetailsClass = new RetailSaleDetails();
+        $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($getlastId);
+        return back();
     }
 
     /**
@@ -44,11 +60,11 @@ class CashsaleController extends Controller
     {
         $getDetailsClass = new RetailSaleDetails();
         $getDetails = $getDetailsClass->getCashsaleDetail($id);
-        
+
         $getCashDetailsClass = new RetailSale();
         $getCashDetails = $getCashDetailsClass->getCashSaleDetails($id);
-    
-        return view('Pos.cashsaleDetails',[
+
+        return view('Pos.cashsaleDetails', [
             'CashDetails' => $getDetails,
             'ProductDetails' => $getCashDetails,
             'InvoiceNo' => $id,
@@ -60,7 +76,21 @@ class CashsaleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $cashsaleDataClass = new RetailSale();
+        $cashsaleDetailsDataClass = new RetailSaleDetails();
+        $getProductClass = new Purchase();
+        $cashsaleData = $cashsaleDataClass->cashsaleData($id);
+        $cashsaleDetailsData = $cashsaleDetailsDataClass->getCashsaleDetail($id);
+      
+        $getProduct = $getProductClass->getProduct();
+        $customerList = $cashsaleDataClass->getCustomer();
+
+        return view('Pos.editCashsale', [
+            'CashsaleData' => $cashsaleData,
+            'CashsaleDetailData' => $cashsaleDetailsData,
+            'customerList' => $customerList,
+            'products' => $getProduct,
+        ]);
     }
 
     /**
@@ -68,7 +98,13 @@ class CashsaleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       
+        $updateCashsaleDetailsClass = new RetailSale();
+        $updateCashsaleDetails = $updateCashsaleDetailsClass->updateCashsaleDetail($request,$id);
+        $cashsaleDetailsClass = new RetailSaleDetails();
+        $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($id);
+
+        return redirect('/cashsale');
     }
 
     /**

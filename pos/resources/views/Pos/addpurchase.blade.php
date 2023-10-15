@@ -84,6 +84,7 @@
                 <div class="mt-5 float-right">
                     <span class=" font-semibold text-lg">Grand Total : </span>
                     <input type="number" required class="rounded-lg" name="grandtotal" id="">
+                    <input type="hidden" id="gtotal">
                 </div>
                 <div class="mt-20 mb-5 flex flex-col">
                 </div>

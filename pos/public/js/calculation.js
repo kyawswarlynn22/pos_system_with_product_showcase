@@ -3,6 +3,9 @@ $(document).ready(function () {
         var iprice = document.getElementsByClassName("iprice");
         var itotal = document.getElementsByClassName("itotal");
         var iquantity = document.getElementsByClassName("iquantity");
+        var gtotal = document.getElementById("gtotal");
+        var discount = document.getElementById("discount");
+        var gt = 0;
 
         for (let i = 0; i < iprice.length; i++) {
             const numberOnly = (
@@ -12,11 +15,23 @@ $(document).ready(function () {
             const number = parseFloat(numberOnly.replace(/[^0-9]/g, ""));
             const formattedNumber = number.toLocaleString();
             itotal[i].value = formattedNumber;
+            gt = gt + iprice[i].value * iquantity[i].value;
         }
 
-        // gt = gt + (iprice[i].value) * (iquantity[i].value);
+        gtotal.value = gt;
+        discount.addEventListener("input", function () {
+            gtotal.value = gt - discount.value;
+        });
     }
     subTotal();
+    document
+        .getElementById("discount")
+        .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent the Enter key's default behavior
+                // You can add additional logic here, like handling the form data
+            }
+        });
     var date = Date.now();
 
     var currentdate = new Date();
