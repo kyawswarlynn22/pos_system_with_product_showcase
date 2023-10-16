@@ -27,9 +27,11 @@ $(document).ready(function () {
             gtotal.value = gt - discount.value;
             credit.value = gtotal.value - deposit.value;
         });
+
         deposit.addEventListener("input", function () {
             credit.value = gtotal.value - deposit.value;
         });
+        credit.value = gtotal.value - deposit.value;
     }
     subTotal();
     document
@@ -64,7 +66,7 @@ $(document).ready(function () {
                 // You can add additional logic here, like handling the form data
             }
         });
-        document
+    document
         .getElementById("itemQuantity")
         .addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
@@ -170,7 +172,7 @@ $(document).ready(function () {
     });
     document.getElementById("delBut").addEventListener("click", function () {
         removeLastRow();
-
+        subTotal();
         function removeLastRow() {
             var table = document.getElementById("new");
             var rowCount = table.rows.length;

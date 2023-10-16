@@ -99,7 +99,7 @@ class depositsaleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-     
+
         $updateDepositSaleClass = new DepositSale();
         $updateDepositSale = $updateDepositSaleClass->updateDepositSaleDetail($request, $id);
 
