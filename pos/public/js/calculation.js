@@ -5,7 +5,11 @@ $(document).ready(function () {
         var iquantity = document.getElementsByClassName("iquantity");
         var gtotal = document.getElementById("gtotal");
         var discount = document.getElementById("discount");
+        var deposit = document.getElementById("deposit");
+        var credit = document.getElementById("credit");
         var gt = 0;
+        var depo = 0;
+        var cred = 0;
 
         for (let i = 0; i < iprice.length; i++) {
             const numberOnly = (
@@ -21,11 +25,39 @@ $(document).ready(function () {
         gtotal.value = gt;
         discount.addEventListener("input", function () {
             gtotal.value = gt - discount.value;
+            credit.value = gtotal.value - deposit.value;
+        });
+        deposit.addEventListener("input", function () {
+            credit.value = gtotal.value - deposit.value;
         });
     }
     subTotal();
     document
         .getElementById("discount")
+        .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent the Enter key's default behavior
+                // You can add additional logic here, like handling the form data
+            }
+        });
+    document
+        .getElementById("gtotal")
+        .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent the Enter key's default behavior
+                // You can add additional logic here, like handling the form data
+            }
+        });
+    document
+        .getElementById("credit")
+        .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent the Enter key's default behavior
+                // You can add additional logic here, like handling the form data
+            }
+        });
+    document
+        .getElementById("deposit")
         .addEventListener("keydown", function (event) {
             if (event.key === "Enter") {
                 event.preventDefault(); // Prevent the Enter key's default behavior

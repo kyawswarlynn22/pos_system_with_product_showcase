@@ -31,10 +31,12 @@ class depositsaleController extends Controller
         $customerList = $lastidClass->getCustomer();
         $getProductClass = new Purchase();
         $getProduct = $getProductClass->getProduct();
+        $lastIdClass = new DepositSale();
+        $lastId = $lastIdClass->getlastId();
         return view('Pos.addDepositsale',[
             'customerList' => $customerList,
             'products' => $getProduct,
-            'lastId' => 1,
+            'lastId' => $lastId,
         ]);
     }
 
@@ -43,7 +45,12 @@ class depositsaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeDepositSaleClass = new DepositSale();
+        $storeDepositSale = $storeDepositSaleClass->storeDepositSale($request);
+        $getlastId = $storeDepositSaleClass->getlastId();
+        $updateStockCountClass = new DepositSaleDetails();
+        $updateStockCount = $updateStockCountClass->updateSotckCount($getlastId);
+        return back();
     }
 
     /**
@@ -51,7 +58,6 @@ class depositsaleController extends Controller
      */
     public function show(string $id)
     {
-
         $getDepositSaleDetailClass = new DepositSale();
         $getDepositSaleProductDetailsClass = new DepositSaleDetails();
         $getDepositSaleDetail = $getDepositSaleDetailClass->getDepositDetail($id);
@@ -61,7 +67,6 @@ class depositsaleController extends Controller
             'DepositSaleProducts' => $getDepositSaleProductDetails,
             'InvoiceNo' => $id 
         ]);
-       
     }
 
     /**

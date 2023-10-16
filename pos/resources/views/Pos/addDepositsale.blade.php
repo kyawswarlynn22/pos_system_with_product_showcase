@@ -1,9 +1,9 @@
 @extends('layout.sidebarandnav')
 
-@section('title', 'Add Purchase');
+@section('title', 'Add Deposit Sale');
 @section('body')
-    <p class=" text-2xl">Add Purchase</p>
-    <form action="/purchase" method="post">
+    <p class=" text-2xl">Add Deposit Sale</p>
+    <form action="/depositsale" method="post">
         @csrf
         <div class="mt-3 rounded-lg shadow-lg p-5">
             <div class="row">
@@ -89,7 +89,7 @@
                 <div class=" flex  flex-col justify-end items-end">
                     <div class="flex mt-5 space-x-3  ">
                         <span class=" font-semibold text-lg">Discount : </span>
-                        <input value="" type="number" class=" rounded-lg" name="discount" id="discount">
+                        <input value="0" type="number" class=" rounded-lg" name="discount" id="discount">
                     </div>
                     <div class="flex mt-5 space-x-3 ">
                         <span class=" font-semibold text-lg">Grand Total : </span>
@@ -97,11 +97,13 @@
                     </div>
                     <div class="flex mt-5 space-x-3  ">
                         <span class=" font-semibold text-lg">Deposit Paid : </span>
-                        <input type="number" class=" rounded-lg" name="discount" id="">
+                        <input type="number" name="deposit" value="0" class=" rounded-lg" name="discount"
+                            id="deposit">
                     </div>
                     <div class="flex mt-5 space-x-3 ">
                         <span class=" font-semibold text-lg">Credit Balance : </span>
-                        <input readonly type="number" class=" rounded-lg" name="grandtotal" id="">
+                        <input readonly type="number" value="0" name="credit" class=" rounded-lg" name="grandtotal"
+                            id="credit">
                     </div>
                 </div>
 

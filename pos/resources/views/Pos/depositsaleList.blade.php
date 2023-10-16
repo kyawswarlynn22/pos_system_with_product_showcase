@@ -31,6 +31,12 @@
                         Date
                     </th>
                     <th scope="col" class="px-6 text-center  py-3">
+                        Deposit
+                    </th>
+                    <th scope="col" class="px-6 text-center  py-3">
+                       Credit
+                    </th>
+                    <th scope="col" class="px-6 text-center  py-3">
                         Grand Total
                     </th>
                     <th scope="col" class="px-6 text-center  py-3 ">
@@ -45,7 +51,6 @@
                 @forelse ($DepositsaleData as $item)
                     <tr
                         class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
                         <th scope="row"
                             class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             {{ $item->cus_name }}
@@ -54,10 +59,20 @@
                             {{ $item->pur_date }}
                         </td>
                         <td class="px-6 text-center  py-4">
+                            {{ $item->deposit }}
+                        </td>
+                        <td class="px-6 text-center  py-4">
+                            {{ $item->credit }}
+                        </td>
+                        <td class="px-6 text-center  py-4">
                             {{ $item->grand_total }}
                         </td>
                         <td class="px-6 text-center py-4">
-                            <p class=" text-green-500 font-semibold">Paid</p>
+                            @if ($item->paid == 0)
+                                <p class=" text-red-500 font-semibold">Undelivered</p>
+                            @else
+                                <p class=" text-green-500 font-semibold">Delivered</p>
+                            @endif
                         </td>
                         <td class="px-6 py-4 flex justify-center space-x-2 ">
                             <a href="/depositsale/{{ $item->id }}">
@@ -89,6 +104,7 @@
                             </a>
                         </td>
                     </tr>
+                   
                 @empty
                     <span class=" text-red-500 font-bold">Not Deposit Sale</span>
                 @endforelse
