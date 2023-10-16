@@ -66,8 +66,6 @@ class Purchase extends Model  implements Auditable
 
     public function updatePurchaseDetail($request, $id)
     {
-
-
         $updateProductSockCountClass = new PurchaseDetails();
         $recornot = Purchase::select('ship_status')->where('id', $id)->first();
         if ($recornot->ship_status == 1) {

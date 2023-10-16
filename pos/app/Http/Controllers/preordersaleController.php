@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PreorderDetails;
+use App\Models\PreorderSale;
+use App\Models\Purchase;
+use App\Models\RetailSale;
 use Illuminate\Http\Request;
 
 class preordersaleController extends Controller
@@ -11,7 +15,11 @@ class preordersaleController extends Controller
      */
     public function index()
     {
-        return view('Pos.preordersaleList');
+        $preorderSaleListClass = new PreorderSale();
+        $preorderSaleList = $preorderSaleListClass->getPreorderSaleList();
+        return view('Pos.preordersaleList',[
+            'PreorderList' => $preorderSaleList,
+        ]);
     }
 
     /**
@@ -19,7 +27,17 @@ class preordersaleController extends Controller
      */
     public function create()
     {
-        return view('Pos.addpreordersale');
+        $lastidClass = new PreorderSale();
+        $customer = new RetailSale();
+        $lastid = $lastidClass->lastId();
+        $customerList = $customer->getCustomer();
+        $getProductClass = new Purchase();
+        $getProduct = $getProductClass->getProduct();
+        return view('Pos.addpreordersale',[
+            'lastId' => $lastid,
+            'customerList' => $customerList,
+            'products' => $getProduct,
+        ]);
     }
 
     /**
@@ -35,7 +53,18 @@ class preordersaleController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $getPreorderSaleDetailClass = new PreorderSale();
+        $getPreorderSaleDetail = $getPreorderSaleDetailClass->getPreorderSaleDetail($id);
+
+        $preorderProductDetailsClass = new PreorderDetails();
+        $getProductDetails = $preorderProductDetailsClass->getProductDetails($id);
+
+     
+        return view('Pos.preordersaleDetail',[
+            'CashDetails' => $getPreorderSaleDetail,
+            'ProductDetails' => $getProductDetails,
+            'InvoiceNo' => $id,
+        ]);
     }
 
     /**

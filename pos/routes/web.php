@@ -99,9 +99,7 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('stockadjustment', StockAdjustController::class);
 
-    Route::get('/preorder//edit', function () {
-        return view('Pos.editPreordersale');
-    });
+
 
     Route::get('/salereturn//edit', function () {
         return view('Pos.editSalereturn');
@@ -116,13 +114,7 @@ Route::middleware('loginCheck')->group(function () {
 
 
 
-    Route::get('/depositsale//detail', function () {
-        return view('Pos.depositsaleDetail');
-    });
 
-    Route::get('/preorder//detail', function () {
-        return view('Pos.preordersaleDetail');
-    });
 
     Route::get('/salereturn//detail', function () {
         return view('Pos.salereturnDetail');

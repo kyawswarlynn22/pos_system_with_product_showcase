@@ -95,6 +95,8 @@
                     <button type="button" class=" bg-gray-400 rounded-lg font-medium px-5 py-2">Cancel</button>
                 </span>
             </div>
+            <input type="hidden" id="credit">
+            <input type="hidden" id="deposit">
     </form>
 
     <script src="{{ asset('js/calculation.js') }}" defer></script>
