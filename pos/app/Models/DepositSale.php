@@ -20,9 +20,9 @@ class DepositSale extends Model  implements Auditable
     {
         return $depositSale = DepositSale::join('customers', 'customers.id', 'deposit_sales.customers_id')
             ->join('deposit_sale_details', 'deposit_sales_id', 'deposit_sales.id')
-            ->select('customers.cus_name', 'pur_date', 'paid','deposit','credit', 'grand_total', 'deposit_sales.id')
+            ->select('customers.cus_name', 'pur_date', 'paid', 'deposit', 'credit', 'grand_total', 'deposit_sales.id')
             ->where('deposit_sales.del_flg', 0)
-            ->groupBy('customers.cus_name', 'pur_date', 'paid','deposit','credit', 'grand_total', 'deposit_sales.id')
+            ->groupBy('customers.cus_name', 'pur_date', 'paid', 'deposit', 'credit', 'grand_total', 'deposit_sales.id')
             ->orderBy('deposit_sales.id', 'desc')
             ->paginate(8);
     }
@@ -67,6 +67,48 @@ class DepositSale extends Model  implements Auditable
                 $depositsaleDetails->quantity = $quantity[$product];
                 $depositsaleDetails->price = $price[$product];
                 $depositsaleDetails->save();
+            }
+        }
+    }
+
+    public function getDepositSale($id)
+    {
+        return DepositSale::where('id', $id)->first();
+    }
+
+    public function updateDepositSaleDetail($request, $id)
+    {
+        $updateDepositSale = DepositSale::find($id);
+        if ($updateDepositSale) {
+            $updateDepositSale->update([
+                'customers_id' => $request->customer,
+                'discount' => $request->discount,
+                'grand_total' => $request->grandtotal,
+                'deposit' => $request->deposit,
+                'credit' => $request->credit,
+                'paid' => $request->status,
+                'remark' => $request->remark,
+            ]);
+        }
+
+        $updateProductStockclass = new DepositSaleDetails();
+        $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
+
+        $delCashsaleDetail = DepositSaleDetails::where('deposit_sales_id', $id);
+        $delCashsaleDetail->delete();
+
+        $products = $request->input('productsid', []);
+        $quantity = $request->input('quantities', []);
+        $price = $request->input('price', []);
+
+        for ($product = 0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                $depositSaleDetails = new DepositSaleDetails();
+                $depositSaleDetails->deposit_sales_id  = $id;
+                $depositSaleDetails->products_id   = $products[$product];
+                $depositSaleDetails->quantity = $quantity[$product];
+                $depositSaleDetails->price = $price[$product];
+                $depositSaleDetails->save();
             }
         }
     }

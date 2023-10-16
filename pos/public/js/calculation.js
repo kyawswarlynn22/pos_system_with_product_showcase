@@ -64,6 +64,14 @@ $(document).ready(function () {
                 // You can add additional logic here, like handling the form data
             }
         });
+        document
+        .getElementById("itemQuantity")
+        .addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault(); // Prevent the Enter key's default behavior
+                // You can add additional logic here, like handling the form data
+            }
+        });
     var date = Date.now();
 
     var currentdate = new Date();

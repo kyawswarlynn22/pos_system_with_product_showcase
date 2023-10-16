@@ -3,15 +3,17 @@
 @section('title', 'Edit Deposit Sale');
 @section('body')
     <p class=" text-2xl">Edit Deposit Sale</p>
-    <form action="/purchase" method="post">
+    <form action="/depositsale/{{ $DepositSaleDetails->id }}" method="post">
         @csrf
+        @method('put')
         <div class="mt-3 rounded-lg shadow-lg p-5">
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 ">
-                    <span id="day"></span> : <span id="year"></span>
+                    <span id="day">Purchase Date</span> : <span
+                        id="year">{{ $DepositSaleDetails->pur_date }}</span>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                    <span>Invoice: {{ $lastId + 1 }}</span>
+                    <span>Invoice: {{ $DepositSaleDetails->id }}</span>
                 </div>
             </div>
             <div class="flex w-full justify-around items-center space-x-3 p-5">
@@ -21,12 +23,11 @@
                     <select name="customer" id="customer"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                         @forelse ($customerList as $item)
-                            <option value="{{ $item->id }}">{{ $item->cus_name }}</option>
+                            <option value="{{ $item->id }}" @if ($item->id == $DepositSaleDetails->customers_id) selected @endif>
+                                {{ $item->cus_name }}</option>
                         @empty
                             <option value="">No Customer</option>
                         @endforelse
-
-
                     </select>
                 </div>
 
@@ -36,11 +37,10 @@
                     </label>
                     <select name="status" id="status"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option value="0">No</option>
-                        <option value="1">Yes</option>
+                        <option @if ($DepositSaleDetails->paid == 0) selected @endif value="0">No</option>
+                        <option @if ($DepositSaleDetails->paid == 1) selected @endif value="1">Yes</option>
                     </select>
                 </div>
-
             </div>
             <div class="flex space-x-3 p-5 w-8/12 justify-items-center items-center">
                 <div class="mb-6 w-full">
@@ -60,7 +60,7 @@
                     <label for="purchasedate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Puchase
                         Quantity
                     </label>
-                    <input type="number" min="0" value="1" name="purchasedate" id="itemQuantity"
+                    <input type="number" min="0" value="1" id="itemQuantity"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Category Name" required>
                 </div>
@@ -80,6 +80,38 @@
                         </tr>
                     </thead>
                     <tbody id="new">
+                        @forelse ($DetailsaleProducts as $item)
+                            <tr
+                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                <td class="px-6 py-4">
+                                    <input type="text" readonly
+                                        class="outline-none border-gray-300 border-transparent rounded-md product_select"
+                                        value="{{ $item->product_name }}">
+                                </td>
+                                <td class="px-6 py-3">
+                                    <input type="number" readonly name="price[]"
+                                        class="outline-none border-transparent rounded-lg iprice"
+                                        value="{{ $item->price }}">
+                                </td>
+                                <td>
+                                    <input type="number" readonly name="quantities[]"
+                                        class="outline-none border-transparent border-gray-300 rounded-lg iquantity"
+                                        value="{{ $item->quantity }}">
+                                </td>
+                                <td>
+                                    <input type="text" readonly
+                                        class="outline-none w-full text-right float-right border-transparent rounded-lg itotal"
+                                        value="">
+                                </td>
+                                <td class="px-6 py-4">
+                                    <input type="text" readonly name="productsid[]" hidden
+                                        class="outline-none border-gray-300 border-transparent rounded-md product_select"
+                                        value="{{ $item->product_id }}">
+                                </td>
+                            </tr>
+
+                        @empty
+                        @endforelse
                     </tbody>
                 </table>
                 <div class="flex justify-end">
@@ -89,7 +121,8 @@
                 <div class=" flex  flex-col justify-end items-end">
                     <div class="flex mt-5 space-x-3  ">
                         <span class=" font-semibold text-lg">Discount : </span>
-                        <input value="" type="number" class=" rounded-lg" name="discount" id="discount">
+                        <input value="{{ $DepositSaleDetails->discount }}" type="number" class=" rounded-lg"
+                            name="discount" id="discount">
                     </div>
                     <div class="flex mt-5 space-x-3 ">
                         <span class=" font-semibold text-lg">Grand Total : </span>
@@ -97,17 +130,19 @@
                     </div>
                     <div class="flex mt-5 space-x-3  ">
                         <span class=" font-semibold text-lg">Deposit Paid : </span>
-                        <input type="number" class=" rounded-lg" name="discount" id="">
+                        <input type="number" class=" rounded-lg" value="{{ $DepositSaleDetails->deposit }}"
+                            name="deposit" id="deposit">
                     </div>
                     <div class="flex mt-5 space-x-3 ">
                         <span class=" font-semibold text-lg">Credit Balance : </span>
-                        <input readonly type="number" class=" rounded-lg" name="grandtotal" id="">
+                        <input readonly type="number" value="{{ $DepositSaleDetails->credit }}" class=" rounded-lg"
+                            name="credit" id="credit">
                     </div>
                 </div>
 
                 <div class="mt-15 mb-5 flex flex-col">
                     <label for="description">Remarks</label>
-                    <textarea name="remark" id="" cols="100" rows="2"></textarea>
+                    <textarea name="remark" id="" cols="100" rows="2">{{ $DepositSaleDetails->remark }}</textarea>
                 </div>
                 <span class="mt-5 ml-[83%]">
                     <button type="submit"

@@ -17,7 +17,7 @@ class depositsaleController extends Controller
     {
         $depositSaleDataClass = new DepositSale();
         $depositSaleData = $depositSaleDataClass->getDepositsaleData();
-        return view('Pos.depositsaleList',[
+        return view('Pos.depositsaleList', [
             'DepositsaleData' => $depositSaleData
         ]);
     }
@@ -33,7 +33,7 @@ class depositsaleController extends Controller
         $getProduct = $getProductClass->getProduct();
         $lastIdClass = new DepositSale();
         $lastId = $lastIdClass->getlastId();
-        return view('Pos.addDepositsale',[
+        return view('Pos.addDepositsale', [
             'customerList' => $customerList,
             'products' => $getProduct,
             'lastId' => $lastId,
@@ -62,10 +62,10 @@ class depositsaleController extends Controller
         $getDepositSaleProductDetailsClass = new DepositSaleDetails();
         $getDepositSaleDetail = $getDepositSaleDetailClass->getDepositDetail($id);
         $getDepositSaleProductDetails = $getDepositSaleProductDetailsClass->getDepositsaleDetail($id);
-        return view('Pos.depositsaleDetail',[
+        return view('Pos.depositsaleDetail', [
             'DepositSaleDetail' => $getDepositSaleDetail,
             'DepositSaleProducts' => $getDepositSaleProductDetails,
-            'InvoiceNo' => $id 
+            'InvoiceNo' => $id
         ]);
     }
 
@@ -74,7 +74,24 @@ class depositsaleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $lastidClass = new RetailSale();
+        $customerList = $lastidClass->getCustomer();
+
+        $getDepositSaleDetailsClass = new DepositSale();
+        $getDepositSaleDetails = $getDepositSaleDetailsClass->getDepositSale($id);
+
+        $getProductDetailsclass = new DepositSaleDetails();
+        $getDepositSaleDetail = $getProductDetailsclass->getDepositSlaeDetail($id);
+
+        $getProductClass = new Purchase();
+        $getProduct = $getProductClass->getProduct();
+        // dd($customerList,$getDepositSaleDetails,$getDepositSaleDetail,$getProduct);
+        return view('Pos.editDepositsale', [
+            'customerList' => $customerList,
+            'DepositSaleDetails' => $getDepositSaleDetails,
+            'DetailsaleProducts' => $getDepositSaleDetail,
+            'products' => $getProduct,
+        ]);
     }
 
     /**
@@ -82,7 +99,14 @@ class depositsaleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+     
+        $updateDepositSaleClass = new DepositSale();
+        $updateDepositSale = $updateDepositSaleClass->updateDepositSaleDetail($request, $id);
+
+        $updateStockCountClass = new DepositSaleDetails();
+        $updateDepositSale = $updateStockCountClass->updateSotckCount($id);
+
+        return redirect('/depositsale');
     }
 
     /**
