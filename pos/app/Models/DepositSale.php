@@ -76,8 +76,18 @@ class DepositSale extends Model  implements Auditable
         return DepositSale::where('id', $id)->first();
     }
 
+    public function getsendornot($id)
+    {
+        return DepositSale::select('paid')->where('id', $id)->first();
+    }
+
     public function updateDepositSaleDetail($request, $id)
     {
+        $updateProductStockclass = new DepositSaleDetails();
+        $getsend = DepositSale::select('paid')->where('id', $id)->first();
+        if ($getsend->paid == 0) {
+            $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
+        }
         $updateDepositSale = DepositSale::find($id);
         if ($updateDepositSale) {
             $updateDepositSale->update([
@@ -91,8 +101,7 @@ class DepositSale extends Model  implements Auditable
             ]);
         }
 
-        $updateProductStockclass = new DepositSaleDetails();
-        $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
+
 
         $delCashsaleDetail = DepositSaleDetails::where('deposit_sales_id', $id);
         $delCashsaleDetail->delete();

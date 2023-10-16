@@ -106,7 +106,7 @@
                                 <td class="px-6 py-4">
                                     <input type="text" readonly name="productsid[]" hidden
                                         class="outline-none border-gray-300 border-transparent rounded-md product_select"
-                                        value="{{ $item->product_id }}">
+                                        value="{{ $item->id }}">
                                 </td>
                             </tr>
 

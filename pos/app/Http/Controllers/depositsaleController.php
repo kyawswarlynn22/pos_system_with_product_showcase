@@ -85,7 +85,7 @@ class depositsaleController extends Controller
 
         $getProductClass = new Purchase();
         $getProduct = $getProductClass->getProduct();
-        // dd($customerList,$getDepositSaleDetails,$getDepositSaleDetail,$getProduct);
+
         return view('Pos.editDepositsale', [
             'customerList' => $customerList,
             'DepositSaleDetails' => $getDepositSaleDetails,
@@ -101,9 +101,13 @@ class depositsaleController extends Controller
     {
 
         $updateDepositSaleClass = new DepositSale();
-        $updateDepositSale = $updateDepositSaleClass->updateDepositSaleDetail($request, $id);
-
         $updateStockCountClass = new DepositSaleDetails();
+        $getsendornot = $updateDepositSaleClass->getsendornot($id);
+
+        if ($getsendornot->paid == 1 && $request->status == 0) {
+            $updateStock = $updateStockCountClass->delUpdateSotck($id);
+        }
+        $updateDepositSale = $updateDepositSaleClass->updateDepositSaleDetail($request, $id);
         $updateDepositSale = $updateStockCountClass->updateSotckCount($id);
 
         return redirect('/depositsale');

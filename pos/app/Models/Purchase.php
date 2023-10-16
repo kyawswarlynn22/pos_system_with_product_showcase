@@ -67,6 +67,12 @@ class Purchase extends Model  implements Auditable
     public function updatePurchaseDetail($request, $id)
     {
 
+
+        $updateProductSockCountClass = new PurchaseDetails();
+        $recornot = Purchase::select('ship_status')->where('id', $id)->first();
+        if ($recornot->ship_status == 1) {
+            $updateProductSockCount = $updateProductSockCountClass->deleteupdateSotckCount($id);
+        }
         $updatePurchase = Purchase::find($id);
         if ($updatePurchase) {
             $updatePurchase->update([
@@ -76,9 +82,6 @@ class Purchase extends Model  implements Auditable
                 'del_flg' => 0,
             ]);
         }
-
-        $updateProductSockCountClass = new PurchaseDetails();
-        $updateProductSockCount = $updateProductSockCountClass->deleteupdateSotckCount($id);
 
         $delPurchaseDeatail = PurchaseDetails::where('purchase_id', $id);
         $delPurchaseDeatail->delete();

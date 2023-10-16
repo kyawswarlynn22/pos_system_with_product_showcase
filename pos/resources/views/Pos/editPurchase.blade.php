@@ -303,6 +303,8 @@
                         name="grandtotal" id="">
                 </div>
                 <div class="mt-20 mb-5 flex flex-col">
+                    <input type="hidden" id="credit">
+                    <input type="hidden" id="deposit">
                 </div>
                 <span class="mt-5 ml-[83%]">
                     <button type="submit"

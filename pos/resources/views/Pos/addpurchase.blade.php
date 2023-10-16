@@ -85,6 +85,8 @@
                     <span class=" font-semibold text-lg">Grand Total : </span>
                     <input type="number" required class="rounded-lg" name="grandtotal" id="">
                     <input type="hidden" id="gtotal">
+                    <input type="hidden" id="credit">
+                    <input type="hidden" id="deposit">
                 </div>
                 <div class="mt-20 mb-5 flex flex-col">
                 </div>
