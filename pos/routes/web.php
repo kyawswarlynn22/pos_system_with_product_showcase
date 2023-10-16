@@ -99,10 +99,6 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('stockadjustment', StockAdjustController::class);
 
-    Route::get('/depositsale//edit', function () {
-        return view('Pos.editDepositsale');
-    });
-
     Route::get('/preorder//edit', function () {
         return view('Pos.editPreordersale');
     });

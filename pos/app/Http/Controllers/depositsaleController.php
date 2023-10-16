@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DepositSale;
+use App\Models\DepositSaleDetails;
 use App\Models\Purchase;
 use App\Models\RetailSale;
 use Illuminate\Http\Request;
@@ -13,7 +15,11 @@ class depositsaleController extends Controller
      */
     public function index()
     {
-        return view('Pos.depositsaleList');
+        $depositSaleDataClass = new DepositSale();
+        $depositSaleData = $depositSaleDataClass->getDepositsaleData();
+        return view('Pos.depositsaleList',[
+            'DepositsaleData' => $depositSaleData
+        ]);
     }
 
     /**
@@ -45,7 +51,17 @@ class depositsaleController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        $getDepositSaleDetailClass = new DepositSale();
+        $getDepositSaleProductDetailsClass = new DepositSaleDetails();
+        $getDepositSaleDetail = $getDepositSaleDetailClass->getDepositDetail($id);
+        $getDepositSaleProductDetails = $getDepositSaleProductDetailsClass->getDepositsaleDetail($id);
+        return view('Pos.depositsaleDetail',[
+            'DepositSaleDetail' => $getDepositSaleDetail,
+            'DepositSaleProducts' => $getDepositSaleProductDetails,
+            'InvoiceNo' => $id 
+        ]);
+       
     }
 
     /**
