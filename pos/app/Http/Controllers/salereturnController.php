@@ -45,6 +45,17 @@ class salereturnController extends Controller
      */
     public function store(Request $request)
     {
+
+
+        $storeSalereturnClass = new SaleReturn();
+        $storeSalereturn = $storeSalereturnClass->storeSaleReturnData($request);
+
+        $getLastId = $storeSalereturnClass->getlastId();
+
+        $updateStockClass = new SaleReturnDetails();
+        $updateStock = $updateStockClass->updateSotckCount($getLastId);
+
+        return redirect('/salereturn');
     }
 
     /**
@@ -95,7 +106,10 @@ class salereturnController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $updateSalereturnClass = new SaleReturn();
+        $updateSalereturn = $updateSalereturnClass->updateSalereturn($request, $id);
+        return redirect('/salereturn');
     }
 
     /**

@@ -20,9 +20,11 @@ $(document).ready(function () {
             const formattedNumber = number.toLocaleString();
             itotal[i].value = formattedNumber;
             gt = gt + iprice[i].value * iquantity[i].value;
+            console.log(gt);
+            gtotal.value = gt - discount.value;
         }
 
-        gtotal.value = gt;
+       
         discount.addEventListener("input", function () {
             gtotal.value = gt - discount.value;
             credit.value = gtotal.value - deposit.value;

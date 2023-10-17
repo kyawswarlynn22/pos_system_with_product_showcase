@@ -108,7 +108,10 @@ class depositsaleController extends Controller
             $updateStock = $updateStockCountClass->delUpdateSotck($id);
         }
         $updateDepositSale = $updateDepositSaleClass->updateDepositSaleDetail($request, $id);
-        $updateDepositSale = $updateStockCountClass->updateSotckCount($id);
+        if ($getsendornot->paid == 1 && $request->status == 1) {
+        } else {
+            $updateDepositSale = $updateStockCountClass->updateSotckCount($id);
+        }
 
         return redirect('/depositsale');
     }

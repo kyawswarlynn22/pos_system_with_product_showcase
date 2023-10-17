@@ -42,4 +42,44 @@ class SaleReturn extends Model  implements Auditable
             ->select('return_date', 'discount', 'grand_total','sale_returns.id as return_id', 'remark', 'customers.*')
             ->first();
     }
+
+    public function storeSaleReturnData($request)
+    {
+        $cashsale = new SaleReturn();
+        $cashsale->customers_id  = $request->customer;
+        $cashsale->discount = $request->discount;
+        $cashsale->grand_total = $request->grandtotal;
+        $cashsale->remark = $request->remark;
+        $cashsale->save();
+
+        $lastId = SaleReturn::max('id');
+
+        $products = $request->input('productsid', []);
+        $quantity = $request->input('quantities', []);
+        $price = $request->input('price', []);
+
+        for ($product = 0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                $cashsaleDetails = new SaleReturnDetails();
+                $cashsaleDetails->sale_returns_id  = $lastId;
+                $cashsaleDetails->products_id  = $products[$product];
+                $cashsaleDetails->quantity = $quantity[$product];
+                $cashsaleDetails->price = $price[$product];
+                $cashsaleDetails->save();
+            }
+        }
+    }
+
+    public function updateSalereturn($request,$id)
+    {
+        $updateSalereturn = SaleReturn::find($id);
+        if ($updateSalereturn) {
+            $updateSalereturn->update([
+                'customers_id' => $request->customer,
+                'discount' => $request->discount,
+                'grand_total' => $request->grandtotal,
+                'remark' => $request->remark,
+            ]);
+        }
+    }
 }

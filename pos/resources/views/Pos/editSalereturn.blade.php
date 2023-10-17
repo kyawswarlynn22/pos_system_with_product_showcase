@@ -3,12 +3,12 @@
 @section('title', 'Edit Sale Return');
 @section('body')
     <p class=" text-2xl">Edit Sale Return</p>
-    <form action="/preordersale/{{ $SaleReturn->return_id }}" method="post">
+    <form action="/salereturn/{{ $SaleReturn->return_id }}" method="post">
         @csrf
         @method('put')
         <div class="mt-3 rounded-lg shadow-lg p-5">
             <div class="row">
-               
+
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
                     <span>Invoice No: {{ $SaleReturn->return_id }}</span>
                 </div>
@@ -28,7 +28,7 @@
                     </select>
                 </div>
             </div>
-            <div class="flex space-x-3 p-5 w-8/12 justify-items-center items-center">
+            <div class="flex hidden space-x-3 p-5 w-8/12 justify-items-center items-center">
                 <div class="mb-6 w-full">
                     <label for="product" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product
                         Name</label>
@@ -102,7 +102,7 @@
                         @endforelse
                     </tbody>
                 </table>
-                <div class="flex justify-end">
+                <div class="flex hidden justify-end">
                     <button id="delBut" type="button" class=" bg-red-500 px-2 py-1 rounded-md my-5">Delete
                         Row</button>
                 </div>
@@ -114,7 +114,7 @@
                 <div class="mt-5 flex items-center justify-end  ">
                     <span class=" font-semibold text-lg">Grand Total(Ks) : </span>
                     <input type="number" readonly class="rounded-lg font-semibold text-lg w-28 border-transparent"
-                        name="grandtotal" value="{{ $SaleReturn->grand_total }}" id="gtotal">
+                        name="grandtotal" value="" id="gtotal">
                 </div>
                 <div class=" mt-28 mb-5 flex flex-col">
                     <label for="description">Remarks</label>
