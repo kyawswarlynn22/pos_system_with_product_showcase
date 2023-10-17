@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Purchase;
+use App\Models\RetailSale;
+use App\Models\SaleReturn;
+use App\Models\SaleReturnDetails;
 use Illuminate\Http\Request;
 
 class salereturnController extends Controller
@@ -11,7 +15,11 @@ class salereturnController extends Controller
      */
     public function index()
     {
-        return view('Pos.salereturnList');
+        $saleReturnListClass = new SaleReturn();
+        $saleReturnList = $saleReturnListClass->getSaleReturnList();
+        return view('Pos.salereturnList', [
+            'SaleReturnList' => $saleReturnList,
+        ]);
     }
 
     /**
@@ -19,7 +27,17 @@ class salereturnController extends Controller
      */
     public function create()
     {
-        return view('Pos.addSalereturn');
+        $lastIdClass = new SaleReturn();
+        $lastId = $lastIdClass->getlastId();
+        $getProductClass = new Purchase();
+        $getProduct = $getProductClass->getProduct();
+        $getCustomerClass = new RetailSale();
+        $getCustomer = $getCustomerClass->getCustomer();
+        return view('Pos.addSalereturn', [
+            'lastId' => $lastId,
+            'products' => $getProduct,
+            'customerList' => $getCustomer,
+        ]);
     }
 
     /**
@@ -27,7 +45,6 @@ class salereturnController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -35,7 +52,18 @@ class salereturnController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        $getSaleReturnClass = new SaleReturn();
+        $getSaleReturn = $getSaleReturnClass->getSaleReturn($id);
+
+        $getSaleReturnDetailsClass = new SaleReturnDetails();
+        $getSaleReturnDetails = $getSaleReturnDetailsClass->getSaleReturnDetails($id);
+
+        return view('Pos.salereturnDetail', [
+            'SaleReturn' => $getSaleReturn,
+            'SaleReturnDetail' => $getSaleReturnDetails,
+            'InvoiceNo' => $id,
+        ]);
     }
 
     /**
@@ -43,7 +71,23 @@ class salereturnController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $getSaleReturnClass = new SaleReturn();
+        $getProductClass = new Purchase();
+        $getCustomerClass = new RetailSale();
+        $getSaleReturn = $getSaleReturnClass->getSaleReturn($id);
+
+        $getSaleReturnDetailsClass = new SaleReturnDetails();
+        $getSaleReturnDetails = $getSaleReturnDetailsClass->getSaleReturnDetails($id);
+
+        $getProduct = $getProductClass->getProduct();
+        $customerList = $getCustomerClass->getCustomer();
+
+        return view('Pos.editSalereturn', [
+            'SaleReturn' => $getSaleReturn,
+            'SaleReturnDetail' => $getSaleReturnDetails,
+            'customerList' => $customerList,
+            'products' => $getProduct,
+        ]);
     }
 
     /**
