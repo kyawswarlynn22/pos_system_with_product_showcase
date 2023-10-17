@@ -44,6 +44,14 @@ class RetailSale extends Model implements Auditable
 
     public function storeCashsaleData($request)
     {
+        if ($request->has('preorder_id')) {
+            $preorder =   PreorderSale::find($request->preorder_id);
+            if ($preorder) {
+                $preorder->update([
+                    'del_flg' => 1,
+                ]);
+            }
+        }
         $cashsale = new RetailSale();
         $cashsale->customers_id = $request->customer;
         $cashsale->discount = $request->discount;

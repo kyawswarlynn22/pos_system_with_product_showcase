@@ -50,7 +50,8 @@ class CashsaleController extends Controller
 
         $cashsaleDetailsClass = new RetailSaleDetails();
         $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($getlastId);
-        return back();
+        
+        return redirect('/cashsale');
     }
 
     /**

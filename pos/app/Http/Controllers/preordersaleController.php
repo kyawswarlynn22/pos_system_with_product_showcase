@@ -17,7 +17,7 @@ class preordersaleController extends Controller
     {
         $preorderSaleListClass = new PreorderSale();
         $preorderSaleList = $preorderSaleListClass->getPreorderSaleList();
-        return view('Pos.preordersaleList',[
+        return view('Pos.preordersaleList', [
             'PreorderList' => $preorderSaleList,
         ]);
     }
@@ -33,7 +33,7 @@ class preordersaleController extends Controller
         $customerList = $customer->getCustomer();
         $getProductClass = new Purchase();
         $getProduct = $getProductClass->getProduct();
-        return view('Pos.addpreordersale',[
+        return view('Pos.addpreordersale', [
             'lastId' => $lastid,
             'customerList' => $customerList,
             'products' => $getProduct,
@@ -45,7 +45,13 @@ class preordersaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validateData = $request->validate([
+            'productsid' => 'required',
+        ]);
+
+        $storePreorderSaleClass = new PreorderSale();
+        $storePreorderSlae = $storePreorderSaleClass->storePreorderSale($request);
+        return redirect('/preordersale');
     }
 
     /**
@@ -59,8 +65,7 @@ class preordersaleController extends Controller
         $preorderProductDetailsClass = new PreorderDetails();
         $getProductDetails = $preorderProductDetailsClass->getProductDetails($id);
 
-     
-        return view('Pos.preordersaleDetail',[
+        return view('Pos.preordersaleDetail', [
             'CashDetails' => $getPreorderSaleDetail,
             'ProductDetails' => $getProductDetails,
             'InvoiceNo' => $id,
@@ -72,7 +77,22 @@ class preordersaleController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $preordersaleDataClass = new PreorderSale();
+        $getCustomerClass = new RetailSale();
+        $preordersaleDetailsDataClass = new PreorderDetails();
+        $getProductClass = new Purchase();
+        $preorderData = $preordersaleDataClass->preorderData($id);
+        $preorderDetails = $preordersaleDetailsDataClass->getProductDetails($id);
+
+        $getProduct = $getProductClass->getProduct();
+        $customerList = $getCustomerClass->getCustomer();
+
+        return view('Pos.editPreordersale', [
+            'PreorderSale' => $preorderData,
+            'PreorderSaleDetails' => $preorderDetails,
+            'customerList' => $customerList,
+            'products' => $getProduct,
+        ]);
     }
 
     /**
@@ -80,7 +100,14 @@ class preordersaleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $validateData = $request->validate([
+            'productsid' => 'required',
+        ]);
+
+        $updatePreorderDetailsClass = new PreorderSale();
+        $updatePreorderDetails = $updatePreorderDetailsClass->updatePreorderSale($request,$id);
+        return redirect('/preordersale');
     }
 
     /**

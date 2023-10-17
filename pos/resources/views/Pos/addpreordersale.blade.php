@@ -4,7 +4,7 @@
 @section('body')
     <p class=" text-2xl">Add Preorder Sale Invoice</p>
 
-    <form action="/cashsale" method="post">
+    <form action="/preordersale" method="post">
         @csrf
         <div class="mt-3 rounded-lg shadow-lg p-5">
             <div class="row">
@@ -69,7 +69,9 @@
                         </tr>
                     </thead>
                     <tbody id="new">
-
+                        @error('productsid')
+                        <p class=" text-red-500">{{ $message }}</p>
+                    @enderror
                     </tbody>
                 </table>
                 <div class="flex justify-end">
