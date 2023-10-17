@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
+use App\Models\LogoandName;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
@@ -15,6 +16,7 @@ class DashboardController extends Controller
     {
         $auditsClass = new ActivityLog();
         $audits = $auditsClass->getMetadata();
+       
         return view(
             'dashboard',
             ['audits' => $audits]

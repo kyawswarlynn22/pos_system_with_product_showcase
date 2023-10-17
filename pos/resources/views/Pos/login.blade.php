@@ -19,9 +19,8 @@
         <div class="rounded-xl bg-gray-400 mr-10  bg-opacity-50 px-5 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
             <div class="text-white">
                 <div class="mb-8 flex flex-col  items-center">
-                    <img src="{{ asset('images/SKS Logo.png') }}" class="mb-5" width="200" alt=""
-                        srcset="" />
-
+                    <img src="{{ $logoandname->logo }}" class="mb-5" width="200" alt="" srcset="" />
+                    <span class=" text-4xl font-bold my-5">{{ $logoandname->business_name }}</span>
                     <span class="text-gray-300">Enter Login Details</span>
                 </div>
                 <form action="/signin" method="post">
@@ -42,7 +41,8 @@
 
                     </div>
                 </form>
-                <a class=" flex justify-center mt-5 underline text-red-500 " href="/forget_password">Forget Password?</a>
+                <a class=" flex justify-center mt-5 underline text-red-500 " href="/forget_password">Forget
+                    Password?</a>
                 @if (session('success'))
                     <div class="alert alert-success flex justify-center mt-5">
                         {{ session('success') }}

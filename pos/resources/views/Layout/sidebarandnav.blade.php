@@ -411,18 +411,19 @@
             </ul>
         </div>
     </aside>
-
+    @php
+        $logo = session()->get('logo');
+        $business_name = session()->get('business_name');
+    @endphp
     <nav
         class=" bg-blue-700  dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="/dashboard" class="flex items-center">
-                <img src="{{ asset('images/SKS Logo.png') }}" class="h-10 mr-3" alt="SKS Logo">
+                <img src="{{ $logo }}" class="h-10 mr-3" alt="SKS Logo">
                 <span
-                    class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">SKS.Solar</span>
+                    class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">{{ $business_name }}</span>
             </a>
             <div class="flex md:order-2">
-
-
                 <a href="/purchase/create">
                     <button type="button"
                         class="text-white bg-yellow-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">

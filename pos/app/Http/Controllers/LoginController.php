@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LogoandName;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -86,5 +87,13 @@ class LoginController extends Controller
 
 
         return redirect("/")->withSuccess('Worng Email or username');
+    }
+
+    public function logoandname(){
+        $logoAndNameDataClass = new LogoandName();
+        $logoAndNameData = $logoAndNameDataClass->logoAndNameData();
+        return view('Pos.login',[
+            'logoandname' => $logoAndNameData
+        ]);
     }
 }

@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\LogoandName;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Session\Session;
 
 class LogoandNameController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         $logoAndNameDataClass = new LogoandName();
         $logoAndNameData = $logoAndNameDataClass->logoAndNameData();
-        return view('Pos.logoandname',[
+
+        session()->put('logo', 'ksl');
+        session()->put('business_name', $logoAndNameData->business_name);
+        return view('Pos.logoandname', [
             'logoandname' => $logoAndNameData
         ]);
     }
@@ -56,7 +61,21 @@ class LogoandNameController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $logoandname = LogoandName::find($id);
+        if ($logoandname) {
+            $extension = "https://kyawswar.s3.ap-southeast-1.amazonaws.com/";
+            $logoandname->update([
+                'business_name' => $request->business,
+            ]);
+            if ($request->hasFile('logo')) {
+                $logo = $request->file('logo')->storePublicly('public/images');
+                $business_logo = $extension . $logo;
+                $logoandname->update([
+                    'logo' => $business_logo,
+                ]);
+            }
+        }
+        return back();
     }
 
     /**

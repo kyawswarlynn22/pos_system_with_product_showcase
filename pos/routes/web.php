@@ -35,9 +35,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('Pos.login');
-});
+Route::get('/', [LoginController::class, 'logoandName']);
 
 Route::post('/signin', [LoginController::class, 'customLogin']);
 
