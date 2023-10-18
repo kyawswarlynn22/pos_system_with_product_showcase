@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
-    
+
     public function index()
     {
         return view('Pos.accounting');
@@ -24,10 +24,11 @@ class LoginController extends Controller
 
     public function customeRegistration(Request $request)
     {
-        
+
         $request->session()->put("email", $request->email);
+
         $request->validate([
-            'username' => ['required','min:4','max:20'],
+            'username' => ['required', 'min:4', 'max:20'],
             'email' => 'required|email|unique:users',
             'role' => 'required',
             'password' => [
@@ -36,7 +37,7 @@ class LoginController extends Controller
                 'min:8'
             ],
         ]);
-        
+
         $data = $request->all();
         $check = $this->create($data);
         return redirect('/user');
@@ -53,7 +54,7 @@ class LoginController extends Controller
         ]);
     }
 
- 
+
     public function signOut()
     {
         Session::flush();
@@ -77,7 +78,7 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
             $userRole = $user->role;
-            Session::put('userRole',$userRole);
+            Session::put('userRole', $userRole);
             $request->session()->put("email", $request->email);
 
             return redirect('/dashboard')
@@ -89,10 +90,16 @@ class LoginController extends Controller
         return redirect("/")->withSuccess('Worng Email or username');
     }
 
-    public function logoandname(){
+    public function logoandname()
+    {
         $logoAndNameDataClass = new LogoandName();
         $logoAndNameData = $logoAndNameDataClass->logoAndNameData();
-        return view('Pos.login',[
+
+        session([
+            'logo' => $logoAndNameData->logo,
+            'business_name' => $logoAndNameData->business_name,
+        ]);
+        return view('Pos.login', [
             'logoandname' => $logoAndNameData
         ]);
     }

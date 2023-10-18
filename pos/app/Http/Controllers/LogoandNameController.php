@@ -17,12 +17,11 @@ class LogoandNameController extends Controller
         $logoAndNameDataClass = new LogoandName();
         $logoAndNameData = $logoAndNameDataClass->logoAndNameData();
 
-        session()->put('logo', 'ksl');
-        session()->put('business_name', $logoAndNameData->business_name);
         return view('Pos.logoandname', [
-            'logoandname' => $logoAndNameData
+            'logoandname' => $logoAndNameData,
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
