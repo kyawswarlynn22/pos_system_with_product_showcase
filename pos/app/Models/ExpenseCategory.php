@@ -46,4 +46,9 @@ class ExpenseCategory extends Model implements Auditable
             ]);
         }
     }
+
+    public function expenseCategoryallList()
+    {
+        return ExpenseCategory::all();
+    }
 }

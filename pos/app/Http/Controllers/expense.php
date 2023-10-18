@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense as ModelsExpense;
+use App\Models\ExpenseCategory;
+use App\Models\ExpenseModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
 
 class expense extends Controller
 {
@@ -11,7 +16,11 @@ class expense extends Controller
      */
     public function index()
     {
-        return view('Pos.expenseList');
+        $getExpenseAllListClass = new ExpenseModel();
+        $getExpenseAllList = $getExpenseAllListClass->getExpenseList();
+        return view('Pos.expenseList', [
+            'expenseList' => $getExpenseAllList
+        ]);
     }
 
     /**
@@ -19,7 +28,11 @@ class expense extends Controller
      */
     public function create()
     {
-        return view('Pos.addExpense');
+        $getAllExpenseCategoryClass  = new ExpenseCategory();
+        $getAllExpenseCategory = $getAllExpenseCategoryClass->expenseCategoryallList();
+        return view('Pos.addExpense', [
+            'expeseCategory' => $getAllExpenseCategory,
+        ]);
     }
 
     /**
@@ -27,7 +40,9 @@ class expense extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeExpenseClass = new ExpenseModel();
+        $storeExpense = $storeExpenseClass->storeExpensedata($request);
+        return back();
     }
 
     /**
@@ -43,7 +58,14 @@ class expense extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $getAllExpenseCategoryClass  = new ExpenseCategory();
+        $getAllExpenseCategory = $getAllExpenseCategoryClass->expenseCategoryallList();
+        $getExpenseDetailClass = new ExpenseModel();
+        $getExpenseDetail = $getExpenseDetailClass->getExpenseDetail($id);
+        return view('Pos.editExpense', [
+            'ExpenseDetail' => $getExpenseDetail,
+            'expeseCategory' => $getAllExpenseCategory,
+        ]);
     }
 
     /**
@@ -51,7 +73,9 @@ class expense extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $updateExpenseClass = new ExpenseModel();
+       $updateExpense = $updateExpenseClass->updateExpense($request,$id);
+       return redirect('/expense');
     }
 
     /**
