@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExpenseCategory;
 use Illuminate\Http\Request;
 
 class expenseCagetoryController extends Controller
@@ -11,7 +12,6 @@ class expenseCagetoryController extends Controller
      */
     public function index()
     {
-        return view('Pos.addexpenseCategory');
     }
 
     /**
@@ -19,7 +19,11 @@ class expenseCagetoryController extends Controller
      */
     public function create()
     {
-        return view('Pos.addexpenseCategory');
+        $getExpenseCategoryListClass = new ExpenseCategory();
+        $getExpenseCategoryList = $getExpenseCategoryListClass->getExpenseList();
+        return view('Pos.addexpenseCategory', [
+            'ExpenseCategoryList' => $getExpenseCategoryList,
+        ]);
     }
 
     /**
@@ -27,7 +31,9 @@ class expenseCagetoryController extends Controller
      */
     public function store(Request $request)
     {
-        return view('Pos.addexpenseCategory');
+        $addCategoryClass = new ExpenseCategory();
+        $addCategory = $addCategoryClass->expenseCategoryAdd($request);
+        return redirect('/expenseCategory');
     }
 
     /**
@@ -43,7 +49,11 @@ class expenseCagetoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $getExpenseCategoryDetailsClass = new ExpenseCategory();
+        $getExpenseCategoryDetails = $getExpenseCategoryDetailsClass->expenseCategoryDetail($id);
+        return view('Pos.editExpenseCategory',[
+            'CategoryDetails' => $getExpenseCategoryDetails,
+        ]);
     }
 
     /**
@@ -51,7 +61,9 @@ class expenseCagetoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $updateExpenseClass = new ExpenseCategory();
+        $updateExpense = $updateExpenseClass->expenseCategoryUpdate($request,$id);
+        return redirect('/expenseCategory/create');
     }
 
     /**
