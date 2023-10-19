@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accounting;
+use App\Models\DepositSale;
+use App\Models\ExpenseModel;
+use App\Models\Income;
+use App\Models\Purchase;
+use App\Models\RetailSale;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -18,7 +23,7 @@ class AccountController extends Controller
         $totalPurchase = $AccountingClass->purchase();
         $totalCash = $AccountingClass->cash();
         $totalDeposit = $AccountingClass->deposit();
-        return view('Pos.accounting',[
+        return view('Pos.accounting', [
             'expense' => $totalExpense,
             'income' => $totalIncome,
             'purchase' => $totalPurchase,
@@ -30,9 +35,8 @@ class AccountController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($request)
     {
-        //
     }
 
     /**
@@ -40,7 +44,28 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $startDate = $request->start_date;
+        $endDate = $request->end_date;
+        $expenses = ExpenseModel::whereBetween('created_at', [$startDate, $endDate])
+            ->sum('amount');
+        $purchase = Purchase::whereBetween('created_at', [$startDate, $endDate])
+            ->sum('grand_total');
+        $income = Income::whereBetween('created_at', [$startDate, $endDate])
+            ->sum('amount');
+        $cash = RetailSale::whereBetween('created_at', [$startDate, $endDate])
+            ->sum('grand_total');
+        $deposit = DepositSale::whereBetween('created_at', [$startDate, $endDate])
+            ->sum('pre_deposit');
+
+            return view('Pos.accountdate', [
+                'start_date' => $request->start_date,
+                'end_date' => $request->end_date,
+                'expense' => $expenses,
+                'income' => $income,
+                'purchase' => $purchase,
+                'cash' => $cash,
+                'deposit' => $deposit,
+            ]);
     }
 
     /**

@@ -41,4 +41,6 @@ class Accounting extends Model
         $currentDate = Carbon::now()->format('Y-m-d');
         return $totalExpense = DepositSale::where('created_at', $currentDate)->sum('pre_deposit');
     }
+
+    
 }

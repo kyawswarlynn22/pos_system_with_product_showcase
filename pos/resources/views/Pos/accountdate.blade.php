@@ -3,16 +3,11 @@
 @section('title', 'Cash Sale');
 @section('body')
     <p class=" text-2xl">Cash In Hand</p>
-
-    <form action="/account" method="post">
-        @csrf
-        <div class=" flex items-center space-x-2 mt-5">
-            <p>Start Date</p>
-            <input name="start_date" type="date">
-            <p>End Date</p>
-            <input name="end_date" type="date">
-            <button type="submit" class=" rounded-lg bg-yellow-400 px-3 py-1">Submit</button>
-    </form>
+    <div class=" flex items-center space-x-2 mt-5">
+        <p class=" font-bold">Start Date -</p>
+        <input name="start_date" readonly class=" border-transparent" value="{{ $start_date }}" type="text">
+        <p class=" font-bold">End Date</p>
+        <input name="end_date" readonly class=" border-transparent" value="{{ $end_date }}" type="text">
     </div>
     <table class="w-full mt-5 text-sm text-left text-gray-500 rounded-lg dark:text-gray-400">
         <thead class="text-xs text-white uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
