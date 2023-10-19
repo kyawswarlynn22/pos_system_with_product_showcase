@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
+use PHPUnit\Framework\Attributes\RunClassInSeparateProcess;
 
 class ExpenseModel extends Model implements Auditable
 {
@@ -71,5 +72,13 @@ class ExpenseModel extends Model implements Auditable
 
             $updateExpense->update($updateData);
         }
+    }
+
+    public function getExpense($id)
+    {
+        return ExpenseModel::join('expense_categories', 'expense_categories_id', 'expense_categories.id')
+            ->select('e_c_name', 'expenses.*')
+            ->where('expenses.id',$id)
+            ->first();
     }
 }

@@ -50,7 +50,11 @@ class expense extends Controller
      */
     public function show(string $id)
     {
-        //
+        $getExpenseDetailClass = new ExpenseModel();
+        $getExpense = $getExpenseDetailClass->getExpense($id);
+        return view('Pos.expenseDetail',[
+            'expenseDetail' => $getExpense
+        ]);
     }
 
     /**
