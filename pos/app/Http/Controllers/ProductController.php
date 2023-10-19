@@ -44,6 +44,7 @@ class ProductController extends Controller
      */
     public function store(Request $request,)
     {
+        
         $validateData = $request->validate([
             'p_code' => 'required',
             'product_name' => 'required',
@@ -52,38 +53,51 @@ class ProductController extends Controller
             'description' => 'required',
             'photo1' => 'required',
         ]);
-
-        $extension = "https://kyawswar.s3.ap-southeast-1.amazonaws.com/";
-        $pathOne = $pathTwo = $pathThree = $pathFour = null;
-        if ($request->hasFile('photo1')) {
-            $path_one = $request->file('photo1')->storePublicly('public/images');
-            $pathOne = $extension . $path_one;
-        }
-        if ($request->hasFile('photo2')) {
-            $path_two = $request->file('photo2')->storePublicly('public/images');
-            $pathTwo = $extension . $path_two;
-        }
-        if ($request->hasFile('photo2')) {
-            $path_three = $request->file('photo3')->storePublicly('public/images');
-            $pathThree = $extension . $path_three;
-        }
-        if ($request->hasFile('photo2')) {
-            $path_four = $request->file('photo4')->storePublicly('public/images');
-            $pathFour = $extension . $path_four;
-        }
-
         $product = new Product();
         $product->product_name = $request->product_name;
         $product->p_code = $request->p_code;
         $product->categories_id = $request->category;
         $product->sub_categories_id = $request->subcategory;
-        $product->p_one = $pathOne;
-        $product->p_two = $pathTwo;
-        $product->p_three = $pathThree;
-        $product->p_four = $pathFour;
         $product->price = $request->price;
         $product->quantity = $request->quantity;
         $product->description = $request->description;
+        
+        if ($request->hasFile('photo1')) {
+            $extension = $request->file('photo1')->extension();
+            $filename = time() . '.'. $request->file('photo1')->getClientOriginalName() . $extension;
+                $path3 = 'sksproducts/' . $filename;
+                $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('photo1')->getRealPath()), 'public');
+                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/sksproducts/";
+                $pathOne = $linkpath . $filename;
+                $product->p_one = $pathOne;
+        }
+        if ($request->hasFile('photo2')) {
+            $extension = $request->file('photo2')->extension();
+            $filename = time() . '.'. $request->file('photo2')->getClientOriginalName() . $extension;
+                $path3 = 'sksproducts/' . $filename;
+                $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('photo2')->getRealPath()), 'public');
+                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/sksproducts/";
+                $pathTwo = $linkpath . $filename;
+                $product->p_two = $pathTwo;
+        }
+        if ($request->hasFile('photo3')) {
+            $extension = $request->file('photo3')->extension();
+                $filename = time() . '.'. $request->file('photo3')->getClientOriginalName() . $extension;
+                $path3 = 'sksproducts/' . $filename;
+                $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('photo3')->getRealPath()), 'public');
+                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/sksproducts/";
+                $pathThree = $linkpath . $filename;
+                $product->p_three = $pathThree;
+        }
+        if ($request->hasFile('photo4')) {
+            $extension = $request->file('photo4')->extension();
+            $filename = time() . '.'. $request->file('photo4')->getClientOriginalName() . $extension;
+                $path3 = 'sksproducts/' . $filename;
+                $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('photo4')->getRealPath()), 'public');
+                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/sksproducts/";
+                $pathFour = $linkpath . $filename;
+                $product->p_four = $pathFour;
+        }
         $product->save();
 
         return redirect('/product/create')->withSuccess('Added Product Succefully');
