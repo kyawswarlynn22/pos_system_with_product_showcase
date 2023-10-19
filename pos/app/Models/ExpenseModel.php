@@ -28,9 +28,9 @@ class ExpenseModel extends Model implements Auditable
         if ($request->hasFile('expphoto')) {
             $extension = $request->file('expphoto')->extension();
             $filename = time() . '.' . $extension;
-            $path3 = 'public/' . $filename;
+            $path3 = 'Expense/' . $filename;
             $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('expphoto')->getRealPath()), 'public');
-            $linkpath = "https://sks.sgp1.digitaloceanspaces.com/public/";
+            $linkpath = "https://sks.sgp1.digitaloceanspaces.com/Expense/";
             $dbstore = $linkpath . $filename;
             $storeExpense->photo = $dbstore;
         }
@@ -63,9 +63,9 @@ class ExpenseModel extends Model implements Auditable
             if ($request->hasFile('expphoto')) {
                 $extension = $request->file('expphoto')->extension();
                 $filename = time() . '.' . $extension;
-                $path3 = 'public/' . $filename;
+                $path3 = 'Expense/' . $filename;
                 $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('expphoto')->getRealPath()), 'public');
-                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/public/";
+                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/Expense/";
                 $dbstore = $linkpath . $filename;
                 $updateData['photo'] = $dbstore;
             }
