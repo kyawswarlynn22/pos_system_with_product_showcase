@@ -13,6 +13,8 @@ class RetailSaleDetails extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'retail_sale_details';
 
     protected $fillable = ['retail_sales_id', 'products_id', 'p_quantity', 'p_price', 'del_flg'];

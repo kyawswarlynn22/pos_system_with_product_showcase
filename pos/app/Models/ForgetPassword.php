@@ -16,6 +16,8 @@ class ForgetPassword extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'password_reset_tokens';
 
     protected $fillable = ['mail', 'token'];

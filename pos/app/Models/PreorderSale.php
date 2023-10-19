@@ -12,6 +12,8 @@ class PreorderSale extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'preorder_sales';
 
     protected $fillable = ['customers_id', 'disscount', 'grand_total', 'remark', 'del_flg'];

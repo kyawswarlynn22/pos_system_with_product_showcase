@@ -12,6 +12,8 @@ class SubCategory extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'sub_categories';
 
     protected $fillable = ['sub_c_name', 'category_id', 'description'];

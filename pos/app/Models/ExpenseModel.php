@@ -14,6 +14,8 @@ class ExpenseModel extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'expenses';
 
     protected $fillable = ['expense_categories_id', 'description', 'date', 'amount', 'photo', 'del_flg'];

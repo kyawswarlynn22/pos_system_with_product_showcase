@@ -13,6 +13,8 @@ class PurchaseDetails extends Model  implements Auditable
 
   use \OwenIt\Auditing\Auditable;
 
+  public $timestamps = false;
+
   protected $table = 'purchase_details';
 
   protected $fillable = ['product_id', 'product_quantity', 'price_per_unit', 'del_flg'];

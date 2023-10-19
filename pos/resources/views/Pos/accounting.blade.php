@@ -26,23 +26,63 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-
+            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Opening Balance
+                    Purchase
                 </th>
                 <td class="px-6 text-center  py-4">
-                    0
+                    {{ $purchase }}
                 </td>
                 <td class="px-6 text-center  py-4">
-                    0
                 </td>
             </tr>
-
-
+            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    CashSale
+                </th>
+                <td class="px-6 text-center  py-4">
+                    
+                </td>
+                <td class="px-6 text-center  py-4">
+                    {{ $cash }}
+                </td>
+            </tr>
+            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Deposit Sale
+                </th>
+                <td class="px-6 text-center  py-4">
+                    {{ $deposit }}
+                </td>
+                <td class="px-6 text-center  py-4">
+                    
+                </td>
+            </tr>
+            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Expense
+                </th>
+                <td class="px-6 text-center  py-4">
+                    {{ $expense }}
+                </td>
+                <td class="px-6 text-center  py-4">
+                    
+                </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    Expense
+                </th>
+                <td class="px-6 text-center  py-4">
+                    
+                </td>
+                <td class="px-6 text-center  py-4">
+                    {{ $income }}
+                </td>
+            </tr>
         </tbody>
     </table>
     <div>
-        <p class=" text-xl font-semibol mt-5">Cash In Hand Balance:  2560000Ks</p>
+        <p class=" text-xl font-semibol mt-5">Cash In Hand Balance: 2560000Ks</p>
     </div>
 @endsection

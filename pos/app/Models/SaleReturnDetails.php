@@ -13,6 +13,8 @@ class SaleReturnDetails extends Model  implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'sale_return_details';
 
     protected $fillable = ['sale_returns_id', 'products_id ', 'price', 'quantity', 'del_flg'];

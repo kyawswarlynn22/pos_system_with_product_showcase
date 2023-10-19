@@ -12,6 +12,8 @@ class StockAdjust extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'stock_adjustment';
 
     protected $fillable = ['product_id', 'stock','adjusted'];

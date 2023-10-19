@@ -12,6 +12,8 @@ class Product extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'products';
 
     protected $fillable = [

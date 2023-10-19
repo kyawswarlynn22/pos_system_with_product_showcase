@@ -12,6 +12,8 @@ class Category extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'categories';
 
     protected $fillable = ['c_name', 'description', 'del_flg'];

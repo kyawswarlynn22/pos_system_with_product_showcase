@@ -12,6 +12,8 @@ class DepositSale extends Model  implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'deposit_sales';
 
     protected $fillable = ['customers_id ', 'pur_date', 'discount', 'grand_total', 'deposit', 'credit', 'paid', 'remark', 'del_flg'];
@@ -48,6 +50,7 @@ class DepositSale extends Model  implements Auditable
         $depositsale->discount = $request->discount;
         $depositsale->grand_total = $request->grandtotal;
         $depositsale->deposit = $request->deposit;
+        $depositsale->pre_deposit = $request->deposit;
         $depositsale->credit = $request->credit;
         $depositsale->paid = $request->status;
         $depositsale->remark = $request->remark;

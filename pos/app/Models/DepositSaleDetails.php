@@ -13,6 +13,8 @@ class DepositSaleDetails extends Model  implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'deposit_sale_details';
 
     protected $fillable = ['deposit_sales_id', 'products_id', 'price', 'quantity', 'del_flg'];

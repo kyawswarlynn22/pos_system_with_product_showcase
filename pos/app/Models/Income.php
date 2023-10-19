@@ -13,6 +13,8 @@ class Income extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'incomes';
 
     protected $fillable = ['expense_categories_id', 'description', 'date', 'amount', 'photo', 'del_flg'];

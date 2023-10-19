@@ -18,6 +18,8 @@ class User extends Authenticatable implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -87,11 +89,12 @@ class User extends Authenticatable implements Auditable
 
 
 
-    public function usernameUpdate($email){
-        return User::where('email',$email)->first();
+    public function usernameUpdate($email)
+    {
+        return User::where('email', $email)->first();
     }
 
-    public function usernameChange($request,$id)
+    public function usernameChange($request, $id)
     {
         $user = User::find($id);
         if ($user) {
@@ -101,15 +104,15 @@ class User extends Authenticatable implements Auditable
         }
     }
 
-    public function passwordUpdate($request,$id)
+    public function passwordUpdate($request, $id)
     {
-        $user =User::find($id);
+        $user = User::find($id);
         if ($user) {
-           if (Hash::check($request->current,$user->password)) {
-            $user->update([
-                'password' => Hash::make($request->new),
-            ]);
-           }
+            if (Hash::check($request->current, $user->password)) {
+                $user->update([
+                    'password' => Hash::make($request->new),
+                ]);
+            }
         };
     }
 
@@ -117,5 +120,4 @@ class User extends Authenticatable implements Auditable
     {
         return $this->hasOne(ActivityLog::class);
     }
-
 }

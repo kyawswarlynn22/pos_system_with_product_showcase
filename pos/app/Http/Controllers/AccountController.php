@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accounting;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -11,7 +12,19 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('Pos.accounting');
+        $AccountingClass = new Accounting();
+        $totalExpense = $AccountingClass->expense();
+        $totalIncome = $AccountingClass->income();
+        $totalPurchase = $AccountingClass->purchase();
+        $totalCash = $AccountingClass->cash();
+        $totalDeposit = $AccountingClass->deposit();
+        return view('Pos.accounting',[
+            'expense' => $totalExpense,
+            'income' => $totalIncome,
+            'purchase' => $totalPurchase,
+            'cash' => $totalCash,
+            'deposit' => $totalDeposit,
+        ]);
     }
 
     /**

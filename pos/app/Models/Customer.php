@@ -12,6 +12,8 @@ class Customer extends Model implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'customers';
 
     protected $fillable = ['cus_name','phone','address','del_flg'];

@@ -11,6 +11,8 @@ class ActivityLog extends Model
 
     protected $table = 'audits';
 
+    public $timestamps = false;
+
     public function user()
     {
         return $this->belongsTo('User::class');

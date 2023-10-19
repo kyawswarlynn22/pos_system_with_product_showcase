@@ -12,6 +12,8 @@ class Purchase extends Model  implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+
     protected $table = 'purchases';
 
     protected $fillable = ['sup_country', 'p_date', 'grand_total', 'ship_status', 'del_flg'];

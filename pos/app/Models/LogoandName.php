@@ -12,6 +12,8 @@ class LogoandName extends Model   implements Auditable
 
     use \OwenIt\Auditing\Auditable;
 
+    public $timestamps = false;
+    
     protected $table = 'logoand_names';
 
     protected $fillable = ['logo','business_name'];
