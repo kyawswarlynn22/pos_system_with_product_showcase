@@ -53,6 +53,18 @@ class ProductController extends Controller
             'description' => 'required',
             'photo1' => 'required',
         ]);
+
+        $exists = Product::where('p_code', $request->p_code)->exists();
+        $existsProduct = Product::where('product_name', $request->product_name);
+        
+        if ($exists) {
+            return redirect('/product/create')->withSuccess('Serial No already exists');
+        }
+
+        if ($existsProduct) {
+            return redirect('/product/create')->withSuccess('Product name already exists');
+        }
+
         $product = new Product();
         $product->product_name = $request->product_name;
         $product->p_code = $request->p_code;

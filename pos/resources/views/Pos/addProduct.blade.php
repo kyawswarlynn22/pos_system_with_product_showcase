@@ -130,7 +130,7 @@
     @if (session('success'))
         <script>
             let msg = @json(session('success'));
-            swal("Good job!", msg, "success");
+            swal("Oops!", msg, "error");
         </script>
     @endif
     </div>
