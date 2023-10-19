@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\LogoandName;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Storage;
 
 class LogoandNameController extends Controller
 {
@@ -66,11 +67,16 @@ class LogoandNameController extends Controller
             $logoandname->update([
                 'business_name' => $request->business,
             ]);
+
             if ($request->hasFile('logo')) {
-                $logo = $request->file('logo')->storePublicly('public/images');
-                $business_logo = $extension . $logo;
+                $extension = $request->file('logo')->extension();
+                $filename = time() . '.' . $request->file('logo')->getClientOriginalName() . $extension;
+                $path3 = 'Logo/' . $filename;
+                $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('logo')->getRealPath()), 'public');
+                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/Logo/";
+                $logo = $linkpath . $filename;
                 $logoandname->update([
-                    'logo' => $business_logo,
+                    'logo' => $logo,
                 ]);
             }
         }
