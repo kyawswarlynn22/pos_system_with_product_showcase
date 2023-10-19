@@ -159,19 +159,6 @@ class ProductController extends Controller
                 'description' => $request->description,
             ];
 
-            if ($request->hasFile('expphoto')) {
-                $extension = $request->file('expphoto')->extension();
-                $filename = time() . '.' . $extension;
-                $path3 = 'public/' . $filename;
-                $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('expphoto')->getRealPath()), 'public');
-                $linkpath = "https://sks.sgp1.digitaloceanspaces.com/public/";
-                $dbstore = $linkpath . $filename;
-                $updateData['photo'] = $dbstore;
-            }
-
-
-
-
             if ($request->hasFile('photo1')) {
                 $extension = $request->file('photo1')->extension();
                 $filename = time() . '.' . $request->file('photo1')->getClientOriginalName() . $extension;
@@ -210,7 +197,7 @@ class ProductController extends Controller
             }
             $productdetail->update($updateData);
         }
-        return redirect('/product')->withSuccess('Added Product Succefully');
+        return redirect('/product')->withSuccess('Edited Product Succefully');
     }
 
     /**
