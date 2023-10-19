@@ -33,7 +33,7 @@ class expenseCagetoryController extends Controller
     {
         $addCategoryClass = new ExpenseCategory();
         $addCategory = $addCategoryClass->expenseCategoryAdd($request);
-        return redirect('/expenseCategory');
+        return redirect('/expenseCategory/create');
     }
 
     /**

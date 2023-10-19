@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
-use PHPUnit\Framework\Attributes\RunClassInSeparateProcess;
+
 
 class ExpenseModel extends Model implements Auditable
 {
@@ -80,5 +80,10 @@ class ExpenseModel extends Model implements Auditable
             ->select('e_c_name', 'expenses.*')
             ->where('expenses.id',$id)
             ->first();
+    }
+
+    public function expenseCategoryallList()
+    {
+        return ExpenseCategory::all();
     }
 }

@@ -28,21 +28,21 @@
                     <input type="text" name="categoryDescription" id="description"
                         value="{{ $ExpenseDetail->description }}"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Description">
+                        placeholder="Description" required>
                 </div>
                 <div class="mb-6 w-full">
                     <label for="description"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
                     <input type="date" name="date" id="date" value="{{ $ExpenseDetail->date }}"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Description">
+                        placeholder="Description" required>
                 </div>
                 <div class="mb-6 w-full">
                     <label for="amount"
                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
                     <input type="number" name="amount" id="amount" value="{{ $ExpenseDetail->amount }}"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Amount">
+                        placeholder="Amount" required>
                 </div>
             </div>
             <div

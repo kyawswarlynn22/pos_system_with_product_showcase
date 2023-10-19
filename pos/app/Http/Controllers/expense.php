@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Expense as ModelsExpense;
 use App\Models\ExpenseCategory;
 use App\Models\ExpenseModel;
+use App\Models\Income;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
@@ -18,8 +19,12 @@ class expense extends Controller
     {
         $getExpenseAllListClass = new ExpenseModel();
         $getExpenseAllList = $getExpenseAllListClass->getExpenseList();
+
+        $getIncomeAllListClass = new Income();
+        $getIncomeAllList = $getIncomeAllListClass->getIncomeList();
         return view('Pos.expenseList', [
-            'expenseList' => $getExpenseAllList
+            'expenseList' => $getExpenseAllList,
+            'incomeList' => $getIncomeAllList,
         ]);
     }
 

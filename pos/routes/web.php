@@ -9,6 +9,7 @@ use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
 use App\Http\Controllers\expenseCagetoryController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\IncomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoandNameController;
 use App\Http\Controllers\PasswordController;
@@ -82,6 +83,8 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('expenseCategory', expenseCagetoryController::class);
 
     Route::resource('expense', expense::class);
+
+    Route::resource('income', IncomeController::class);
 
     Route::resource('account', AccountController::class);
 
