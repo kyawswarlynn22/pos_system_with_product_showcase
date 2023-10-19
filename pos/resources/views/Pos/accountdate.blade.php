@@ -116,10 +116,12 @@
 
         var creditSubtotal = purchase + expense;
         var debitSubtotal = cash + deposit + income;
+        var totalbal = debitSubtotal - creditSubtotal;
 
-        credit.innerText = creditSubtotal;
-        debit.innerText = debitSubtotal;
-        total.innerText = debitSubtotal - creditSubtotal + 'Ks'
+
+        credit.innerText = creditSubtotal.toLocaleString();
+        debit.innerText = debitSubtotal.toLocaleString();
+        total.innerText = totalbal.toLocaleString() + "Ks";
     </script>
 
 @endsection
