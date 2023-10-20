@@ -2,6 +2,7 @@
 
 @section('title', 'Cash Sale');
 @section('body')
+<div>
     <p class=" text-2xl">Cash In Hand</p>
 
     <form action="/account" method="post">
@@ -102,7 +103,7 @@
         <span class=" text-xl font-semibol mt-5">Balance: </span>
         <span id="balance" class="text-xl font-semibol mt-5">546587</span>
     </div>
-
+</div>
     <script>
         var purchasestring = document.getElementById("pur").innerText;
         var cashstring = document.getElementById("cash").innerText;

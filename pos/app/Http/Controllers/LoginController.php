@@ -80,9 +80,14 @@ class LoginController extends Controller
             $userRole = $user->role;
             Session::put('userRole', $userRole);
             $request->session()->put("email", $request->email);
-
-            return redirect('/dashboard')
-                ->withSuccess('Login Successfully');
+            if ($userRole == 0) {
+                return redirect('/dashboard')
+                    ->withSuccess('Login Successfully');
+            }
+            if ($userRole == 1) {
+                return redirect('/customer/create')
+                    ->withSuccess('Login Successfully');
+            }
         }
         Session::flush();
 
