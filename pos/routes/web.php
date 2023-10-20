@@ -22,6 +22,7 @@ use App\Http\Controllers\StockAdjustController;
 use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +36,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+
+
 
 Route::get('/', [LoginController::class, 'logoandName']);
 
@@ -100,24 +104,5 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('stockadjustment', StockAdjustController::class);
 
-
-
-    Route::get('/salereturn//edit', function () {
-        return view('Pos.editSalereturn');
-    });
-
-    Route::get('/user//edit', function () {
-        return view('Pos.editUser');
-    });
-
-
-    /* Details */
-
-
-
-
-
-    Route::get('/salereturn//detail', function () {
-        return view('Pos.salereturnDetail');
-    });
+    Route::get('/cashsale/{id}/edit', [CashsaleController::class, 'edit']);
 });
