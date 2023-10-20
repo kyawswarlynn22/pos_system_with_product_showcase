@@ -1,8 +1,8 @@
 @extends('layout.sidebarandnav')
 
-@section('title', 'Add Purchase');
+@section('title', 'Add Sale Return');
 @section('body')
-    <p class=" text-2xl">Add Purchase</p>
+    <p class=" text-2xl">Add Salereturn</p>
     <form action="/salereturn" method="post">
         @csrf
         <div class="mt-3 rounded-lg shadow-lg p-5">

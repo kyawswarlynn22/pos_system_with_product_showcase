@@ -85,7 +85,7 @@
                     <input type="number" readonly class="rounded-lg font-semibold text-lg w-28 border-transparent"
                         name="grandtotal" id="gtotal">
                 </div>
-                <div class=" mt-28 mb-5 flex flex-col">
+                <div class=" mb-5 flex flex-col">
                     <label for="description">Remarks</label>
                     <textarea name="remark" id="" cols="100" rows="2"></textarea>
                 </div>

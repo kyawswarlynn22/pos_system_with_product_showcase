@@ -104,5 +104,5 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('stockadjustment', StockAdjustController::class);
 
-    Route::get('/cashsale/{id}/edit', [CashsaleController::class, 'edit']);
+
 });

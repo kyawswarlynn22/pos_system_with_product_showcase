@@ -2,7 +2,7 @@
 
 @section('title', 'Preorder Sale');
 @section('body')
-    <p class=" text-2xl">Add Preorder Sale Invoice</p>
+    <p class=" text-2xl">Add Preorder Sale</p>
 
     <form action="/preordersale" method="post">
         @csrf

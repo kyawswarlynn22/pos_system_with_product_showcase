@@ -40,7 +40,7 @@ class SubCategory extends Model implements Auditable
         return $subCategory = SubCategory::select('sub_c_name', 'categories.c_name', 'sub_categories.description', 'sub_categories.id')
             ->join('categories', 'sub_categories.category_id', 'categories.id')
             ->orderBy('sub_categories.id', 'desc')
-            ->paginate(10);
+            ->paginate(5);
     }
 
     public function subCategoryAllList()

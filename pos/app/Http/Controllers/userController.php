@@ -74,8 +74,13 @@ class userController extends Controller
      */
     public function destroy(string $id)
     {
-        $userDelClass = new User();
-        $userDel = $userDelClass->userDel($id);
+        $userDel = User::find($id);
+        if ($userDel) {
+            $userDel->update([
+                'del_flg' => 1
+            ]);
+        }
+        
         return redirect('/user');
     }
 }
