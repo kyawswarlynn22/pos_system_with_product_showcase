@@ -30,7 +30,16 @@
                     class="self-center text-3xl font-semibold whitespace-nowrap text-black">{{ $business_name }}</span>
             </a>
     </nav>
-    <p class=" mt-40 ml-5 text-2xl font-bold">Invoice</p>
+    <div class=" ">
+        <p class=" mt-40 ml-5 text-2xl font-bold">Invoice</p>
+        <button id="hidden" onclick="printInvoice()"
+            class="bg-sky-950 float-right mx-5 -mt-8 text-sky-400 border border-sky-400 border-b-4 font-medium overflow-hidden relative px-4 py-2 rounded-md hover:brightness-150 hover:border-t-4 hover:border-b active:opacity-75 outline-none duration-300 group">
+            <span
+                class="bg-sky-400 shadow-sky-400 absolute -top-[150%] left-0 inline-flex w-80 h-[5px] rounded-md opacity-50 group-hover:top-[150%] duration-500 shadow-[0_0_10px_10px_rgba(0,0,0,0.3)]"></span>
+            Print
+        </button>
+    </div>
+
     <div class="mt-3 rounded-lg p-5">
         <div class=" border-b "></div>
         <div class="flex justify-between">
@@ -52,9 +61,8 @@
         </div>
         <div class="mt-5">
             <table class="w-full text-sm text-left text-gray-500 rounded-lg dark:text-gray-400">
-                <thead class="text-xs text-white uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-blue-800 uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
                     <tr>
-
                         <th scope="col" class="px-6 py-3 rounded-l-lg">
                             Product Name
                         </th>
@@ -84,7 +92,6 @@
                                 {{ $item->p_quantity }}
                             </td>
                             <td id="itotal" class="px-6 py-4 itot">
-                                
                             </td>
                         </tr>
                     @empty
@@ -101,12 +108,12 @@
             <div class="flex mt-5 space-x-3 ">
                 <span class=" font-semibold text-lg">Grand Total : </span>
                 <input id="total" type="text" hidden value="{{ $ProductDetails->grand_total }}">
-                <span class=" font-semibold text-lg">Ks</span>
+                <span class=" font-semibold text-lg " id="gtotal">Ks</span>
             </div>
 
 
         </div>
-
+        <input value="{{ $ProductDetails->remark }}" class=" mt-40 text-blue-800">
     </div>
     </div>
 
@@ -115,27 +122,40 @@
 
             var iprice = document.getElementsByClassName("iprice");
             var iquantity = document.getElementsByClassName("iquantity");
-            var itotal = document.getElementsByClassName("itot");
-            var it = document.getElementById('total');
-            console.log(it.value.toLocaleString('en-US'));
+            var subtotal = document.getElementsByClassName("itot");
+            var itotal = document.getElementById("total").value;
+            var it = document.getElementById('gtotal');
+            var strtonum = Number(itotal);
+            it.innerHTML = strtonum.toLocaleString() + " " + 'Ks';
 
             for (let i = 0; i < iprice.length; i++) {
 
                 var price = Number(iprice[i].innerText);
                 var quantity = Number(iquantity[i].innerText);
                 var total = price * quantity;
-                itotal[i].innerHTML = total.toLocaleString();
-
-
-                // const number = parseFloat(numberOnly.replace(/[^0-9]/g, ""));
-                // const formattedNumber = number.toLocaleString();
-                // itotal[i].value = formattedNumber;
-                // gt = gt + iprice[i].value * iquantity[i].value;
-                // console.log(gt);
-                // gtotal.value = gt - discount.value;
+                subtotal[i].innerHTML = total.toLocaleString();
             }
+            var button = document.getElementById('hidden');
+            console.log(button);
+            button.addEventListener("click", function() {
+                window.print();
+            });
         });
     </script>
+    <style>
+        #hidden {
+            display: block;
+            /* or any other display property */
+        }
+
+        /* Styles for printing (hidden) */
+
+        @media print {
+            #hidden {
+                display: none;
+            }
+        }
+    </style>
 </body>
 
 </html>
