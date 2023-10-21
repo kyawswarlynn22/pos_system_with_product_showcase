@@ -55,7 +55,7 @@ class ProductController extends Controller
         ]);
 
         $exists = Product::where('p_code', $request->p_code)->exists();
-        $existsProduct = Product::where('product_name', $request->product_name);
+        $existsProduct = Product::where('product_name', $request->product_name)->exists();
         
         if ($exists) {
             return redirect('/product/create')->withSuccess('Serial No already exists');
