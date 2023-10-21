@@ -1,11 +1,15 @@
 <!doctype html>
 <html>
+@php
+    $logo = session()->get('logo');
+    $business_name = session()->get('business_name');
+@endphp
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <link rel="icon" href="{{ asset('images/asiaRoyalLogo.png') }}" sizes="16x16" type="image/png">
+    <link rel="icon" href="{{ $logoandname->logo }}" sizes="16x16" type="image/png">
     <script src="https://kit.fontawesome.com/31104486ca.js" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
@@ -19,7 +23,7 @@
         <div class="rounded-xl bg-gray-400 mr-10  bg-opacity-50 px-5 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
             <div class="text-white">
                 <div class="mb-8 flex flex-col  items-center">
-                    <img src="{{ asset('images/SKS Logo.png') }}" class="mb-5" width="200" alt=""
+                    <img src="{{ $logoandname->logo }}" class="mb-5" width="200" alt=""
                         srcset="" />
                     <p class=" text-xl font-semibold">Forget Password?</p>
                     <span class="text-black">Enter the email address assoiated with your account <br>

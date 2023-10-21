@@ -125,6 +125,8 @@
                         class=" bg-yellow-400  text-white rounded-lg font-medium px-5 py-2">Submit</button>
                     <button type="button" class=" bg-gray-400 rounded-lg font-medium px-5 py-2">Cancel</button>
                 </span>
+                <input hidden type="text" id="deposit">
+                <input hidden type="text" id="credit">
             </div>
     </form>
 

@@ -25,16 +25,19 @@
                 </div>
                 <form action="/signin" method="post">
                     @csrf
-                    <div class="mb-4 text-lg">
-                        <input
-                            class=" rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                            type="email" name="email" placeholder="your email" />
+                    <div class=" flex  flex-col justify-center items-center">
+                        <div class="mb-4 text-lg">
+                            <input
+                                class=" rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                type="email" name="email" placeholder="your email" />
+                        </div>
+                        <div class="mb-4 text-lg">
+                            <input
+                                class="rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                                type="Password" name="password" placeholder="*********" />
+                        </div>
                     </div>
-                    <div class="mb-4 text-lg">
-                        <input
-                            class="rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
-                            type="Password" name="password" placeholder="*********" />
-                    </div>
+
                     <div class=" flex  justify-center text-lg text-black">
                         <button type="submit"
                             class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Login</button>
