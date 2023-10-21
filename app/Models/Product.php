@@ -18,7 +18,7 @@ class Product extends Model implements Auditable
 
     protected $fillable = [
         'product_name', 'p_code', 'categories_id', 'sub_categories_id ', 'p_one',
-        'p_two', 'p_three', 'p_four', 'price', 'quantity', 'description'
+        'p_two', 'p_three', 'p_four', 'price', 'quantity', 'description','del_flg'
     ];
 
     public function productAllData()
@@ -40,6 +40,7 @@ class Product extends Model implements Auditable
             ->join('categories', 'categories_id', 'categories.id')
             ->join('sub_categories', 'sub_categories_id', 'sub_categories.id')
             ->orderBy('products.id', 'desc')
+            ->where('products.del_flg',0)
             ->paginate(10);
     }
 
@@ -62,6 +63,7 @@ class Product extends Model implements Auditable
             ->join('categories', 'categories_id', 'categories.id')
             ->join('sub_categories', 'sub_categories_id', 'sub_categories.id')
             ->orderBy('products.id', 'desc')
+            ->where('products.del_flg', 0)
             ->get();
     }
 

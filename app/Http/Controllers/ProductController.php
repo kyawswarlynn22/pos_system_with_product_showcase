@@ -218,7 +218,11 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $productdetail = Product::find($id);
-        $productdetail->delete();
+        if ($productdetail) {
+            $productdetail->update([
+                'del_flg' => 1,
+            ]);
+        }
         return redirect('/product')->withSuccess('Product Delete  Succefully');
     }
 }

@@ -10,8 +10,6 @@ class Accounting extends Model
 {
     use HasFactory;
 
-
-
     public function income()
     {
         $currentDate = Carbon::now()->format('Y-m-d');
