@@ -86,4 +86,15 @@ class CustomerController extends Controller
         $customerDel = $customerDelClass->customerDel($id);
         return redirect('/customer');
     }
+
+    function search_customer(Request $request)
+    {
+        $data = $request->input('search_customer');
+        $searchData = Customer::where('cus_name','like', '%'.$data .'%')
+        ->orwhere('address','like', '%'.$data .'%')
+        ->paginate(5);
+        return view('Pos.customerList',[
+            'customerList' => $searchData
+        ]);
+    }
 }
