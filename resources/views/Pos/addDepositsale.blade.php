@@ -2,7 +2,10 @@
 
 @section('title', 'Add Deposit Sale');
 @section('body')
-    <p class=" text-2xl">Add Deposit Sale</p>
+    <div class=" flex justify-between">
+        <p class=" text-2xl">Add Deposit Sale</p>
+   <a href="/customer/create"> <button class="px-3 py-2 bg-blue-600 rounded-lg text-white">+ Add Customer</button></a>
+    </div>
     <form action="/depositsale" method="post">
         @csrf
         <div class="mt-3 rounded-lg shadow-lg p-5">
