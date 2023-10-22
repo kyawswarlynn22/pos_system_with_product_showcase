@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class RetailSale extends Model implements Auditable
@@ -49,13 +50,13 @@ class RetailSale extends Model implements Auditable
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
         $price = $request->input('price', []);
-        $serial = $request->input('serial',[]);
+        $serial = $request->input('serial', []);
 
         $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
-        $existsInDeposit = DepositSaleDetails::whereIn('serial_no',$serial)->exists();
-       
+        $existsInDeposit = DepositSaleDetails::whereIn('serial_no', $serial)->exists();
+
         if ($existsInCash || $existsInDeposit) {
-            return redirect()->back()->with('fail', 'Serial No already exists');
+            return back()->with('fail', 'Serial No already exists');
         }
         if ($request->has('preorder_id')) {
             $preorder =   PreorderSale::find($request->preorder_id);
@@ -97,12 +98,12 @@ class RetailSale extends Model implements Auditable
     {
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
-        $serial = $request->input('serial',[]);
+        $serial = $request->input('serial', []);
         $price = $request->input('price', []);
 
         $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
-        $existsInDeposit = DepositSaleDetails::where('serial_no',$serial)->exists();
-       
+        $existsInDeposit = DepositSaleDetails::where('serial_no', $serial)->exists();
+
         if ($existsInCash) {
             return redirect()->back()->with('fail', 'Serial No already exists');
         }
@@ -139,5 +140,16 @@ class RetailSale extends Model implements Auditable
                 $cashsaleDetails->save();
             }
         }
+    }
+
+    public function  forserial()
+    {
+      return  $results = DB::table('retail_sale_details')
+            ->join('retail_sales', 'retail_sale_details.retail_sales_id', '=', 'retail_sales.id')
+            ->join('products', 'retail_sale_details.products_id', '=', 'products.id')
+            ->join('customers', 'retail_sales.customers_id', '=', 'customers.id')
+            ->select('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no','customers.phone')
+            ->groupBy('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no','customers.phone')
+            ->paginate(5);
     }
 }

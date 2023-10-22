@@ -2,18 +2,18 @@
 
 @section('title', 'Cash Sale');
 @section('body')
-<div>
-    <p class=" text-2xl">Cash In Hand</p>
+    <div>
+        <p class=" text-2xl">Cash In Hand</p>
 
-    <form action="/account" method="post">
-        @csrf
-        <div class=" flex items-center space-x-2 mt-5">
-            <p>Start Date</p>
-            <input name="start_date" type="date">
-            <p>End Date</p>
-            <input name="end_date" type="date">
-            <button type="submit" class=" rounded-lg bg-yellow-400 px-3 py-1">Submit</button>
-    </form>
+        <form action="/account" method="post">
+            @csrf
+            <div class=" flex items-center space-x-2 mt-5">
+                <p>Start Date</p>
+                <input name="start_date" type="date">
+                <p>End Date</p>
+                <input name="end_date" type="date">
+                <button type="submit" class=" rounded-lg bg-yellow-400 px-3 py-1">Submit</button>
+        </form>
     </div>
     <table class="w-full mt-5 text-sm text-left text-gray-500 rounded-lg dark:text-gray-400">
         <thead class="text-xs text-white uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
@@ -74,7 +74,7 @@
 
                 </td>
             </tr>
-            <tr class="bg-white border-b border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="bg-white  border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     Income
                 </th>
@@ -83,6 +83,17 @@
                 </td>
                 <td id="income" class="px-6 text-center  py-4">
                     {{ $income }}
+                </td>
+            </tr>
+            <tr class="bg-white border-b border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    SaleReturn
+                </th>
+                <td id="salereturn" class="px-6 text-center  py-4">
+                    {{ $salereturn }}
+                </td>
+                <td  class="px-6 text-center  py-4">
+                   
                 </td>
             </tr>
             <tr
@@ -103,26 +114,31 @@
         <span class=" text-xl font-semibol mt-5">Balance: </span>
         <span id="balance" class="text-xl font-semibol mt-5">546587</span>
     </div>
-</div>
+    </div>
     <script>
         var purchasestring = document.getElementById("pur").innerText;
         var cashstring = document.getElementById("cash").innerText;
         var depositstring = document.getElementById("deposit").innerText;
         var expensestring = document.getElementById("exp").innerText;
         var incomestring = document.getElementById("income").innerText;
+        var saleturnstring = document.getElementById('salereturn').innerText;
         var credit = document.getElementById("credit");
         var debit = document.getElementById("debit");
         var total = document.getElementById('balance');
+      
 
         var purchase = parseInt(purchasestring);
         var cash = parseInt(cashstring);
         var deposit = parseInt(depositstring);
         var expense = parseInt(expensestring);
         var income = parseInt(incomestring);
+        var salereturn = parseInt(saleturnstring);
 
-        var creditSubtotal = purchase + expense;
+
+        var creditSubtotal = purchase + expense + salereturn ;
         var debitSubtotal = cash + deposit + income;
         var totalbal = debitSubtotal - creditSubtotal;
+
 
 
         credit.innerText = creditSubtotal.toLocaleString();

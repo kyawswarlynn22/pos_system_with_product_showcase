@@ -90,6 +90,7 @@
 
                     </ul>
                 </li>
+
                 <li>
                     <button type="button"
                         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
@@ -120,6 +121,15 @@
                                 List</a>
                         </li>
                     </ul>
+                </li>
+                <li>
+                    <a href="/serial"
+                        class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                        <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 17V7l7 10V7m4 10h5m-5-7a2.5 3 0 1 0 5 0a2.5 3 0 1 0-5 0"/>
+                        </svg>
+                        <span class="ml-3">Serial</span>
+                    </a>
                 </li>
                 <li>
                     <button type="button"

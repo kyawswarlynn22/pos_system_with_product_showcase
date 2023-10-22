@@ -8,6 +8,8 @@ use App\Models\ExpenseModel;
 use App\Models\Income;
 use App\Models\Purchase;
 use App\Models\RetailSale;
+use App\Models\SaleReturn;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -23,12 +25,16 @@ class AccountController extends Controller
         $totalPurchase = $AccountingClass->purchase();
         $totalCash = $AccountingClass->cash();
         $totalDeposit = $AccountingClass->deposit();
+        $totalSaleReturn = $AccountingClass->saleReturn();
+
+        // dd($totalExpense,$totalIncome,$totalPurchase,$totalCash,$totalDeposit,$totalSaleReturn);
         return view('Pos.accounting', [
             'expense' => $totalExpense,
             'income' => $totalIncome,
             'purchase' => $totalPurchase,
             'cash' => $totalCash,
             'deposit' => $totalDeposit,
+            'salereturn' => $totalSaleReturn,
         ]);
     }
 
@@ -44,28 +50,37 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        $startDate = $request->start_date;
-        $endDate = $request->end_date;
-        $expenses = ExpenseModel::whereBetween('created_at', [$startDate, $endDate])
-            ->sum('amount');
-        $purchase = Purchase::whereBetween('created_at', [$startDate, $endDate])
-            ->sum('grand_total');
-        $income = Income::whereBetween('created_at', [$startDate, $endDate])
-            ->sum('amount');
-        $cash = RetailSale::whereBetween('created_at', [$startDate, $endDate])
-            ->sum('grand_total');
-        $deposit = DepositSale::whereBetween('created_at', [$startDate, $endDate])
-            ->sum('pre_deposit');
+        $startDate = Carbon::parse($request->start_date)->startOfDay();
+        $endDate = Carbon::parse($request->end_date)->endOfDay();
 
-            return view('Pos.accountdate', [
-                'start_date' => $request->start_date,
-                'end_date' => $request->end_date,
-                'expense' => $expenses,
-                'income' => $income,
-                'purchase' => $purchase,
-                'cash' => $cash,
-                'deposit' => $deposit,
-            ]);
+        $income = Income::where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->sum('amount');
+        $expenses = ExpenseModel::where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->sum('amount');
+        $purchase = Purchase::where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->sum('grand_total');
+        $cash = RetailSale::where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->sum('grand_total');
+        $deposit = DepositSale::where('created_at', '>=', $startDate)
+            ->where('created_at', '<=', $endDate)
+            ->sum('pre_deposit');
+        $salereturn = SaleReturn::whereBetween('created_at', [$startDate, $endDate])
+            ->sum('grand_total');
+
+        return view('Pos.accountdate', [
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+            'expense' => $expenses,
+            'income' => $income,
+            'purchase' => $purchase,
+            'cash' => $cash,
+            'deposit' => $deposit,
+            'salereturn' => $salereturn,
+        ]);
     }
 
     /**

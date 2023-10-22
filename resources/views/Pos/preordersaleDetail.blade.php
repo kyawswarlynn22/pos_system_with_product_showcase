@@ -36,6 +36,9 @@
                             <th scope="col" class="px-6 py-3">
                                 Quantity
                             </th>
+                            <th scope="col" class="px-6 py-3">
+                                Serial No
+                            </th>
                             <th scope="col" class="px-6 text-right  py-3">
                                 Subtotal
                             </th>
@@ -62,6 +65,11 @@
                                     <input type="number" readonly name="quantities[]"
                                         class="outline-none border-transparent border-gray-300 rounded-lg iquantity"
                                         value="{{ $item->quantity }}">
+                                </td>
+                                <td>
+                                    <input type="text"  name="serial[]"
+                                        class="outline-none border-grey-400 border-gray-300 rounded-lg "
+                                        >
                                 </td>
                                 <td>
                                     <input type="text" readonly
@@ -102,7 +110,12 @@
                 <button class=" bg-gray-400 rounded-lg font-medium px-5 py-2">Cancel</button>
             </div>
         </div>
-
+        @if (session('fail'))
+        <script>
+            let msg = @json(session('fail'));
+            swal("Done", msg, "error");
+        </script>
+    @endif
         </div>
 
         <script src="{{ asset('js/calculation.js') }}" defer></script>

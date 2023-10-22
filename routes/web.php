@@ -18,6 +18,7 @@ use App\Http\Controllers\preordersaleController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\salereturnController;
+use App\Http\Controllers\SerialController;
 use App\Http\Controllers\StockAdjustController;
 use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
@@ -103,6 +104,8 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('productpending', PendingController::class);
 
     Route::resource('stockadjustment', StockAdjustController::class);
+
+    Route::resource('serial', SerialController::class);
 
     Route::get('search_customer',[CustomerController::class,'search_customer']);
 

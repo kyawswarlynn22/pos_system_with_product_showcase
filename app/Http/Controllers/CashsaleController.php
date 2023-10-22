@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DepositSaleDetails;
 use App\Models\Purchase;
 use App\Models\RetailSale;
 use App\Models\RetailSaleDetails;
@@ -44,14 +45,25 @@ class CashsaleController extends Controller
      */
     public function store(Request $request)
     {
-
+        $serial = $request->input('serial', []);
         $cashsaleStoreClass = new RetailSale();
-        $cashsaleStore = $cashsaleStoreClass->storeCashsaleData($request);
-        $getlastId = $cashsaleStoreClass->lastId();
 
-        $cashsaleDetailsClass = new RetailSaleDetails();
-        $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($getlastId);
-        
+
+        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
+        $existsInDeposit = DepositSaleDetails::whereIn('serial_no', $serial)->exists();
+
+        if ($existsInCash || $existsInDeposit) {
+            return back()->with('fail', 'Serial No already exists');
+        } else {
+            $cashsaleStore = $cashsaleStoreClass->storeCashsaleData($request);
+            $getlastId = $cashsaleStoreClass->lastId();
+            $cashsaleDetailsClass = new RetailSaleDetails();
+            $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($getlastId);
+        }
+        if ($request->has('preorder_id')) {
+            return redirect('/preordersale');
+        }
+
         return back();
     }
 
@@ -83,7 +95,7 @@ class CashsaleController extends Controller
         $getProductClass = new Purchase();
         $cashsaleData = $cashsaleDataClass->cashsaleData($id);
         $cashsaleDetailsData = $cashsaleDetailsDataClass->getCashsaleDetail($id);
-      
+
         $getProduct = $getProductClass->getProduct();
         $customerList = $cashsaleDataClass->getCustomer();
 
@@ -100,9 +112,9 @@ class CashsaleController extends Controller
      */
     public function update(Request $request, string $id)
     {
-       
+
         $updateCashsaleDetailsClass = new RetailSale();
-        $updateCashsaleDetails = $updateCashsaleDetailsClass->updateCashsaleDetail($request,$id);
+        $updateCashsaleDetails = $updateCashsaleDetailsClass->updateCashsaleDetail($request, $id);
         $cashsaleDetailsClass = new RetailSaleDetails();
         $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($id);
 

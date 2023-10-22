@@ -68,7 +68,7 @@
 
                 </td>
             </tr>
-            <tr class="bg-white border-b border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+            <tr class="bg-white border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
                 <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     Income
                 </th>
@@ -77,6 +77,17 @@
                 </td>
                 <td id="income" class="px-6 text-center  py-4">
                     {{ $income }}
+                </td>
+            </tr>
+            <tr class="bg-white border-b border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    SaleReturn
+                </th>
+                <td id="salereturn" class="px-6 text-center  py-4">
+                    {{ $salereturn }}
+                </td>
+                <td  class="px-6 text-center  py-4">
+                   
                 </td>
             </tr>
             <tr
@@ -104,6 +115,7 @@
         var depositstring = document.getElementById("deposit").innerText;
         var expensestring = document.getElementById("exp").innerText;
         var incomestring = document.getElementById("income").innerText;
+        var saleturnstring = document.getElementById('salereturn').innerText;
         var credit = document.getElementById("credit");
         var debit = document.getElementById("debit");
         var total = document.getElementById('balance');
@@ -113,8 +125,9 @@
         var deposit = parseInt(depositstring);
         var expense = parseInt(expensestring);
         var income = parseInt(incomestring);
+        var salereturn = parseInt(saleturnstring);
 
-        var creditSubtotal = purchase + expense;
+        var creditSubtotal = purchase + expense + salereturn;
         var debitSubtotal = cash + deposit + income;
         var totalbal = debitSubtotal - creditSubtotal;
 
