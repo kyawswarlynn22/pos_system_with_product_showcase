@@ -79,6 +79,7 @@
                     <button id="delBut" type="button" class=" bg-red-500 px-2 py-1 rounded-md my-5">Delete
                         Row</button>
                 </div>
+                //for nav
                 <div class="mt-5 flex items-center justify-end  ">
                     <span class=" font-semibold text-lg">Discount(Ks) : </span>
                     <input type="number" class="rounded-lg font-semibold text-lg w-28 border-transparent" name="discount"
