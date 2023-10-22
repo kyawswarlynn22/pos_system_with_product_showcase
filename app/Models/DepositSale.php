@@ -166,5 +166,6 @@ class DepositSale extends Model  implements Auditable
             ->select('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
             ->groupBy('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
             ->paginate(5);
+            
     }
 }
