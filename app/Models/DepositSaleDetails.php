@@ -23,7 +23,7 @@ class DepositSaleDetails extends Model  implements Auditable
     {
         return  $cashSaleDetils = DepositSaleDetails::join('products', 'products.id', 'deposit_sale_details.products_id')
             ->where('deposit_sales_id', $id)
-            ->select('products.product_name', 'deposit_sale_details.quantity', 'deposit_sale_details.price')
+            ->select('products.product_name', 'deposit_sale_details.quantity', 'deposit_sale_details.price','serial_no')
             ->get();
     }
 
@@ -56,7 +56,7 @@ class DepositSaleDetails extends Model  implements Auditable
     {
         return  $cashSaleDetils = DepositSaleDetails::join('products', 'products.id', 'deposit_sale_details.products_id')
             ->where('deposit_sale_details.deposit_sales_id', $id)
-            ->select('products.id','products.product_name', 'deposit_sale_details.quantity', 'deposit_sale_details.price')
+            ->select('products.id','products.product_name', 'deposit_sale_details.quantity', 'deposit_sale_details.price','serial_no')
             ->get();
     }
 

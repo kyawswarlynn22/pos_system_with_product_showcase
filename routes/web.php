@@ -105,4 +105,6 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('stockadjustment', StockAdjustController::class);
 
     Route::get('search_customer',[CustomerController::class,'search_customer']);
+
+    
 });

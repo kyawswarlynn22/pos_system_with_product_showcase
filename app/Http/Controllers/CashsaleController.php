@@ -44,6 +44,7 @@ class CashsaleController extends Controller
      */
     public function store(Request $request)
     {
+
         $cashsaleStoreClass = new RetailSale();
         $cashsaleStore = $cashsaleStoreClass->storeCashsaleData($request);
         $getlastId = $cashsaleStoreClass->lastId();
@@ -51,7 +52,7 @@ class CashsaleController extends Controller
         $cashsaleDetailsClass = new RetailSaleDetails();
         $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($getlastId);
         
-        return redirect('/cashsale');
+        return back();
     }
 
     /**

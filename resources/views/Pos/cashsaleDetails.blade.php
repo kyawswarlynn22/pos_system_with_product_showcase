@@ -73,6 +73,9 @@
                             Quantity
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Serial No
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Total
                         </th>
                     </tr>
@@ -90,6 +93,9 @@
                             </td>
                             <td class="px-6 py-4 iquantity">
                                 {{ $item->p_quantity }}
+                            </td>
+                            <td class="px-6 py-4 ">
+                                {{ $item->serial_no }}
                             </td>
                             <td id="itotal" class="px-6 py-4 itot">
                             </td>
@@ -132,6 +138,8 @@
 
                 var price = Number(iprice[i].innerText);
                 var quantity = Number(iquantity[i].innerText);
+                console.log(price);
+                console.log(quantity);
                 var total = price * quantity;
                 subtotal[i].innerHTML = total.toLocaleString();
             }

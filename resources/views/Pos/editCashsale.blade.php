@@ -63,6 +63,7 @@
                             <th scope="col" class="px-6 py-3 rounded-l-lg">Product</th>
                             <th scope="col" class="px-6 py-3">Price</th>
                             <th scope="col" class="px-6 py-3">Quantity</th>
+                            <th scope="col" class="px-6 py-3">Serial No</th>
                             <th scope="col" class="px-6 float-right py-3">Amount</th>
                             <th scope="col" class="px-6 py-3 rounded-r-lg"></th>
                         </tr>
@@ -85,6 +86,11 @@
                                     <input type="number" readonly name="quantities[]"
                                         class="outline-none border-transparent border-gray-300 rounded-lg iquantity"
                                         value="{{ $item->p_quantity }}">
+                                </td>
+                                <td>
+                                    <input type="text" readonly name="serial[]"
+                                        class="outline-none border-transparent border-gray-300 rounded-lg "
+                                        value="{{ $item->serial_no }}">
                                 </td>
                                 <td>
                                     <input type="text" readonly

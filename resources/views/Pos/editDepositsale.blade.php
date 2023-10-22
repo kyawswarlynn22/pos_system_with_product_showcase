@@ -99,6 +99,11 @@
                                         value="{{ $item->quantity }}">
                                 </td>
                                 <td>
+                                    <input type="text" readonly name="serial[]"
+                                        class="outline-none border-transparent border-gray-300 rounded-lg "
+                                        value="{{ $item->serial_no }}">
+                                </td>
+                                <td>
                                     <input type="text" readonly
                                         class="outline-none w-full text-right float-right border-transparent rounded-lg itotal"
                                         value="">

@@ -46,6 +46,17 @@ class RetailSale extends Model implements Auditable
 
     public function storeCashsaleData($request)
     {
+        $products = $request->input('productsid', []);
+        $quantity = $request->input('quantities', []);
+        $price = $request->input('price', []);
+        $serial = $request->input('serial',[]);
+
+        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
+        $existsInDeposit = DepositSaleDetails::whereIn('serial_no',$serial)->exists();
+       
+        if ($existsInCash || $existsInDeposit) {
+            return redirect()->back()->with('fail', 'Serial No already exists');
+        }
         if ($request->has('preorder_id')) {
             $preorder =   PreorderSale::find($request->preorder_id);
             if ($preorder) {
@@ -63,15 +74,13 @@ class RetailSale extends Model implements Auditable
 
         $lastId = RetailSale::max('id');
 
-        $products = $request->input('productsid', []);
-        $quantity = $request->input('quantities', []);
-        $price = $request->input('price', []);
 
         for ($product = 0; $product < count($products); $product++) {
             if ($products[$product] != '') {
                 $cashsaleDetails = new RetailSaleDetails();
                 $cashsaleDetails->retail_sales_id = $lastId;
                 $cashsaleDetails->products_id  = $products[$product];
+                $cashsaleDetails->serial_no = $serial[$product];
                 $cashsaleDetails->p_quantity = $quantity[$product];
                 $cashsaleDetails->p_price = $price[$product];
                 $cashsaleDetails->save();
@@ -86,6 +95,22 @@ class RetailSale extends Model implements Auditable
 
     public function updateCashsaleDetail($request, $id)
     {
+        $products = $request->input('productsid', []);
+        $quantity = $request->input('quantities', []);
+        $serial = $request->input('serial',[]);
+        $price = $request->input('price', []);
+
+        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
+        $existsInDeposit = DepositSaleDetails::where('serial_no',$serial)->exists();
+       
+        if ($existsInCash) {
+            return redirect()->back()->with('fail', 'Serial No already exists');
+        }
+
+        if ($existsInDeposit) {
+            return redirect()->back()->with('fail', 'Serial No already exists');
+        }
+
         $updateCashsale = RetailSale::find($id);
         if ($updateCashsale) {
             $updateCashsale->update([
@@ -102,9 +127,6 @@ class RetailSale extends Model implements Auditable
         $delCashsaleDetail = RetailSaleDetails::where('retail_sales_id', $id);
         $delCashsaleDetail->delete();
 
-        $products = $request->input('productsid', []);
-        $quantity = $request->input('quantities', []);
-        $price = $request->input('price', []);
 
         for ($product = 0; $product < count($products); $product++) {
             if ($products[$product] != '') {
@@ -112,6 +134,7 @@ class RetailSale extends Model implements Auditable
                 $cashsaleDetails->retail_sales_id = $id;
                 $cashsaleDetails->products_id  = $products[$product];
                 $cashsaleDetails->p_quantity = $quantity[$product];
+                $cashsaleDetails->serial_no = $serial[$product];
                 $cashsaleDetails->p_price = $price[$product];
                 $cashsaleDetails->save();
             }

@@ -130,9 +130,16 @@
     @if (session('success'))
         <script>
             let msg = @json(session('success'));
-            swal("Oops!", msg, "error");
+            swal("Done", msg, "success");
         </script>
     @endif
+    @if (session('fail'))
+    <script>
+        let msg = @json(session('fail'));
+        swal("Done", msg, "error");
+    </script>
+@endif
+
     </div>
 
     <script src="{{ asset('js/uploadPhoto.js') }}" defer></script>

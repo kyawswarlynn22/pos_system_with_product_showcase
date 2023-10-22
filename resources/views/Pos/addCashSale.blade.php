@@ -66,6 +66,7 @@
                             <th scope="col" class="px-6 py-3 rounded-l-lg">Product</th>
                             <th scope="col" class="px-6 py-3">Price</th>
                             <th scope="col" class="px-6 py-3">Quantity</th>
+                            <th scope="col" class="px-6 py-3">Serial No</th>
                             <th scope="col" class="px-6 float-right py-3">Amount</th>
                             <th scope="col" class="px-6 py-3 rounded-r-lg"></th>
                         </tr>
@@ -101,6 +102,12 @@
             <input type="hidden" id="credit">
             <input type="hidden" id="deposit">
     </form>
+    @if (session('fail'))
+    <script>
+        let msg = @json(session('fail'));
+        swal("Oops!", msg, "error");
+    </script>
+@endif
 
     <script src="{{ asset('js/calculation.js') }}" defer></script>
 

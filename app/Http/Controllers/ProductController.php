@@ -58,11 +58,13 @@ class ProductController extends Controller
         $existsProduct = Product::where('product_name', $request->product_name)->exists();
         
         if ($exists) {
-            return redirect('/product/create')->withSuccess('Serial No already exists');
+            // return redirect('/product/create')->withSuccess('Serial No already exists');
+            return redirect()->back()->with('fail', 'Item Code already exists');
         }
 
         if ($existsProduct) {
-            return redirect('/product/create')->withSuccess('Product name already exists');
+            // return redirect('/product/create')->withSuccess('Product name already exists');
+            return redirect()->back()->with('fail', 'Product Name already exists');
         }
 
         $product = new Product();

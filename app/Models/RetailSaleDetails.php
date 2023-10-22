@@ -23,7 +23,7 @@ class RetailSaleDetails extends Model implements Auditable
     {
         return  $cashSaleDetils = RetailSaleDetails::join('products', 'products.id', 'retail_sale_details.products_id')
             ->where('retail_sale_details.retail_sales_id', $id)
-            ->select('products.product_name', 'p_quantity', 'p_price')
+            ->select('products.product_name', 'p_quantity', 'p_price','serial_no')
             ->get();
     }
 
