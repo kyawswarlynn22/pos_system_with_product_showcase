@@ -57,7 +57,7 @@ class expense extends Controller
     {
         $getExpenseDetailClass = new ExpenseModel();
         $getExpense = $getExpenseDetailClass->getExpense($id);
-        return view('Pos.expenseDetail',[
+        return view('Pos.expenseDetail', [
             'expenseDetail' => $getExpense
         ]);
     }
@@ -82,9 +82,9 @@ class expense extends Controller
      */
     public function update(Request $request, string $id)
     {
-       $updateExpenseClass = new ExpenseModel();
-       $updateExpense = $updateExpenseClass->updateExpense($request,$id);
-       return redirect('/expense');
+        $updateExpenseClass = new ExpenseModel();
+        $updateExpense = $updateExpenseClass->updateExpense($request, $id);
+        return redirect('/expense');
     }
 
     /**
@@ -92,6 +92,10 @@ class expense extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = ExpenseModel::find($id);
+        if ($delete) {
+            $delete->delete();
+            return redirect('/expense');
+        }
     }
 }

@@ -29,6 +29,7 @@
                 <span
                     class="self-center text-3xl font-semibold whitespace-nowrap text-black">{{ $business_name }}</span>
             </a>
+            <div class="ml-8">No.3 Lower Kyi Myin Daing Road, KyeeMyinDaing Tsp, Yangon. <br> +959783668894</div>
     </nav>
     <div class=" ">
         <p class=" mt-40 ml-5 text-2xl font-bold">Invoice</p>

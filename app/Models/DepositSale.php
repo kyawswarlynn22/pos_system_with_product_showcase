@@ -51,6 +51,20 @@ class DepositSale extends Model  implements Auditable
         $serial = $request->input('serial', []);
         $price = $request->input('price', []);
 
+        for ($product = 0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                $cashsaleDetails = new RetailSaleDetails();
+                if ($serial[$product] === null) {
+                    return back()->with('fail', 'Add Serial Number');
+                }
+
+                $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
+                if ($checkstock->count() !== 0) {
+                    return back()->with('fail', 'Stock not enough');
+                }
+            }
+        }
+
         $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
         $existsInDeposit = DepositSaleDetails::where('serial_no', $serial)->exists();
 
@@ -101,7 +115,24 @@ class DepositSale extends Model  implements Auditable
 
     public function updateDepositSaleDetail($request, $id)
     {
+        $products = $request->input('productsid', []);
+        $quantity = $request->input('quantities', []);
+        $serial = $request->input('serial', []);
+        $price = $request->input('price', []);
 
+        for ($product = 0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                $cashsaleDetails = new RetailSaleDetails();
+                if ($serial[$product] === null) {
+                    return back()->with('fail', 'Add Serial Number');
+                }
+
+                $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
+                if ($checkstock->count() !== 0) {
+                    return back()->with('fail', 'Stock not enough');
+                }
+            }
+        }
 
         $updateProductStockclass = new DepositSaleDetails();
         $getsend = DepositSale::select('paid')->where('id', $id)->first();
@@ -126,10 +157,7 @@ class DepositSale extends Model  implements Auditable
         $delCashsaleDetail = DepositSaleDetails::where('deposit_sales_id', $id);
         $delCashsaleDetail->delete();
 
-        $products = $request->input('productsid', []);
-        $quantity = $request->input('quantities', []);
-        $serial = $request->input('serial', []);
-        $price = $request->input('price', []);
+
 
         $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
         $existsInDeposit = DepositSaleDetails::whereIn('serial_no', $serial)->exists();
@@ -141,6 +169,8 @@ class DepositSale extends Model  implements Auditable
         if ($existsInDeposit) {
             return back()->with('fail', 'Serial No already exists');
         }
+
+
 
 
 
@@ -166,6 +196,5 @@ class DepositSale extends Model  implements Auditable
             ->select('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
             ->groupBy('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
             ->paginate(5);
-            
     }
 }

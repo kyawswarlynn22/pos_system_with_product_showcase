@@ -157,6 +157,15 @@
                 </span>
             </div>
     </form>
+
+    @if (session('fail'))
+        <script>
+            let msg = @json(session('fail'));
+            swal("Oops!", msg, "error");
+        </script>
+    @endif
+
+
     <input type="hidden" id="discount">
     <script src="{{ asset('js/calculation.js') }}" defer></script>
 

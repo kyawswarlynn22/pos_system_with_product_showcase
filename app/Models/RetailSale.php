@@ -96,21 +96,36 @@ class RetailSale extends Model implements Auditable
 
     public function updateCashsaleDetail($request, $id)
     {
+
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
         $serial = $request->input('serial', []);
         $price = $request->input('price', []);
 
-        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
-        $existsInDeposit = DepositSaleDetails::where('serial_no', $serial)->exists();
+        for ($product = 0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                $cashsaleDetails = new RetailSaleDetails();
+                if ($serial[$product] === null) {
+                    return back()->with('fail', 'Add Serial Number');
+                }
 
-        if ($existsInCash) {
-            return redirect()->back()->with('fail', 'Serial No already exists');
-        }
+                $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
+                if ($checkstock->count() !== 0) {
+                    return back()->with('fail', 'Stock not enough');
+                }
+            }
+        };
 
-        if ($existsInDeposit) {
-            return redirect()->back()->with('fail', 'Serial No already exists');
-        }
+        // $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
+        // $existsInDeposit = DepositSaleDetails::where('serial_no', $serial)->exists();
+
+        // if ($existsInCash) {
+        //     return redirect()->back()->with('fail', 'Serial No already exists');
+        // }
+
+        // if ($existsInDeposit) {
+        //     return redirect()->back()->with('fail', 'Serial No already exists');
+        // }
 
         $updateCashsale = RetailSale::find($id);
         if ($updateCashsale) {
@@ -144,12 +159,17 @@ class RetailSale extends Model implements Auditable
 
     public function  forserial()
     {
-      return  $results = DB::table('retail_sale_details')
+        return  $results = DB::table('retail_sale_details')
             ->join('retail_sales', 'retail_sale_details.retail_sales_id', '=', 'retail_sales.id')
             ->join('products', 'retail_sale_details.products_id', '=', 'products.id')
             ->join('customers', 'retail_sales.customers_id', '=', 'customers.id')
-            ->select('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no','customers.phone')
-            ->groupBy('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no','customers.phone')
+            ->select('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no', 'customers.phone')
+            ->groupBy('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no', 'customers.phone')
             ->paginate(5);
+    }
+
+    public function getProduct()
+    {
+        return Product::where('quantity', '>', 0)->get();
     }
 }
