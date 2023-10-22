@@ -159,12 +159,12 @@ class DepositSale extends Model  implements Auditable
 
     public function  forserialdep()
     {
-      return  $results = DB::table('deposit_sale_details')
+        return  $results = DB::table('deposit_sale_details')
             ->join('deposit_sales', 'deposit_sale_details.deposit_sales_id', '=', 'deposit_sales.id')
             ->join('products', 'deposit_sale_details.products_id', '=', 'products.id')
             ->join('customers', 'deposit_sales.customers_id', '=', 'customers.id')
-            ->select('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no','customers.phone')
-            ->groupBy('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no','customers.phone')
+            ->select('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
+            ->groupBy('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
             ->paginate(5);
     }
 }

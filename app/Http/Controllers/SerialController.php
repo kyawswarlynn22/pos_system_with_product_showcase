@@ -15,9 +15,9 @@ class SerialController extends Controller
     {
         $serialClass = new RetailSale();
         $serial = $serialClass->forserial();
-       $serialDepClass = new DepositSale();
-       $serialDep = $serialDepClass->forserialdep();
-        return view('Pos.serialNoWithCustomer',[
+        $serialDepClass = new DepositSale();
+        $serialDep = $serialDepClass->forserialdep();
+        return view('Pos.serialNoWithCustomer', [
             'serialinCash' => $serial,
             'serialinDeposit' => $serialDep,
         ]);
