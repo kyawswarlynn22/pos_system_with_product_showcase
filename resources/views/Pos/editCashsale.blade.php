@@ -135,9 +135,15 @@
                 <input hidden type="text" id="credit">
             </div>
     </form>
+    </form>
+    @if (session('fail'))
+        <script>
+            let msg = @json(session('fail'));
+            swal("Oops!", msg, "error");
+            </script>
+            @endif
+        <script src="{{ asset('js/calculation.js') }}" defer></script>
 
-    <script src="{{ asset('js/calculation.js') }}" defer></script>
 
 
-
-@endsection
+    @endsection

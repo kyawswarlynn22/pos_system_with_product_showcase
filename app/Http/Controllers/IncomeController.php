@@ -79,6 +79,10 @@ class IncomeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delete = Income::find($id);
+        if ($delete) {
+            $delete->delete();
+            return redirect('/expense');
+        }
     }
 }

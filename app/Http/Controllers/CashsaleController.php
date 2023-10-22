@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DepositSaleDetails;
+use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\RetailSale;
 use App\Models\RetailSaleDetails;
@@ -32,7 +33,7 @@ class CashsaleController extends Controller
         $lastid = $lastidClass->lastId();
         $customerList = $lastidClass->getCustomer();
         $getProductClass = new Purchase();
-        $getProduct = $getProductClass->getProduct();
+        $getProduct = $lastidClass->getProduct();
         return view('Pos.addCashSale', [
             'lastId' => $lastid,
             'customerList' => $customerList,
@@ -45,12 +46,29 @@ class CashsaleController extends Controller
      */
     public function store(Request $request)
     {
+
+        $products = $request->input('productsid', []);
+        $quantity = $request->input('quantities', []);
         $serial = $request->input('serial', []);
+        for ($product = 0; $product < count($products); $product++) {
+            if ($products[$product] != '') {
+                $cashsaleDetails = new RetailSaleDetails();
+                if ($serial[$product] === null) {
+                    return back()->with('fail', 'Add Serial Number');
+                } 
+
+                $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
+                if ($checkstock->count() !== 0) {
+                    return back()->with('fail', 'Stock not enough');
+                }
+            }
+        }
+
+        $serials = $request->input('serial', []);
         $cashsaleStoreClass = new RetailSale();
 
-
-        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
-        $existsInDeposit = DepositSaleDetails::whereIn('serial_no', $serial)->exists();
+        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serials)->exists();
+        $existsInDeposit = DepositSaleDetails::whereIn('serial_no', $serials)->exists();
 
         if ($existsInCash || $existsInDeposit) {
             return back()->with('fail', 'Serial No already exists');
@@ -63,7 +81,6 @@ class CashsaleController extends Controller
         if ($request->has('preorder_id')) {
             return redirect('/preordersale');
         }
-
         return back();
     }
 
@@ -96,7 +113,7 @@ class CashsaleController extends Controller
         $cashsaleData = $cashsaleDataClass->cashsaleData($id);
         $cashsaleDetailsData = $cashsaleDetailsDataClass->getCashsaleDetail($id);
 
-        $getProduct = $getProductClass->getProduct();
+        $getProduct = $cashsaleDataClass->getProduct();
         $customerList = $cashsaleDataClass->getCustomer();
 
         return view('Pos.editCashsale', [
@@ -118,7 +135,7 @@ class CashsaleController extends Controller
         $cashsaleDetailsClass = new RetailSaleDetails();
         $cashsaleDetails = $cashsaleDetailsClass->updateSotckCount($id);
 
-        return redirect('/cashsale');
+        return back();
     }
 
     /**

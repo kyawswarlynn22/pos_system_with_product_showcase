@@ -88,4 +88,5 @@ class ExpenseModel extends Model implements Auditable
     {
         return ExpenseCategory::all();
     }
+
 }

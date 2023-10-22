@@ -30,7 +30,7 @@ class depositsaleController extends Controller
         $lastidClass = new RetailSale();
         $customerList = $lastidClass->getCustomer();
         $getProductClass = new Purchase();
-        $getProduct = $getProductClass->getProduct();
+        $getProduct = $lastidClass->getProduct();
         $lastIdClass = new DepositSale();
         $lastId = $lastIdClass->getlastId();
         return view('Pos.addDepositsale', [
@@ -83,9 +83,8 @@ class depositsaleController extends Controller
         $getProductDetailsclass = new DepositSaleDetails();
         $getDepositSaleDetail = $getProductDetailsclass->getDepositSlaeDetail($id);
 
-        $getProductClass = new Purchase();
+        $getProductClass = new RetailSale();
         $getProduct = $getProductClass->getProduct();
-
         return view('Pos.editDepositsale', [
             'customerList' => $customerList,
             'DepositSaleDetails' => $getDepositSaleDetails,
@@ -113,7 +112,7 @@ class depositsaleController extends Controller
             $updateDepositSale = $updateStockCountClass->updateSotckCount($id);
         }
 
-        return redirect('/depositsale');
+        return back();
     }
 
     /**
