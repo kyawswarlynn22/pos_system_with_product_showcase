@@ -11,6 +11,7 @@ class SerialController extends Controller
     /**
      * Display a listing of the resource.
      */
+    //display listing of serial number
     public function index()
     {
         $serialClass = new RetailSale();
