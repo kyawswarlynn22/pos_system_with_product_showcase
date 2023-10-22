@@ -76,9 +76,7 @@ class userController extends Controller
     {
         $userDel = User::find($id);
         if ($userDel) {
-            $userDel->update([
-                'del_flg' => 1
-            ]);
+           $userDel->delete();
         }
         
         return redirect('/user');
