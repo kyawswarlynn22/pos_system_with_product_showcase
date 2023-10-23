@@ -23,6 +23,7 @@
                         </label>
                     <select name="customer" id="customer"
                         class="bg-gray-50 border w-1/2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">-- choose customer --</option>
                         @forelse ($customerList as $item)
                             <option value="{{ $item->id }}">{{ $item->cus_name }}</option>
                         @empty
@@ -79,7 +80,7 @@
                     <button id="delBut" type="button" class=" bg-red-500 px-2 py-1 rounded-md my-5">Delete
                         Row</button>
                 </div>
-                //for nav
+                
                 <div class="mt-5 flex items-center justify-end  ">
                     <span class=" font-semibold text-lg">Discount(Ks) : </span>
                     <input type="number" class="rounded-lg font-semibold text-lg w-28 border-transparent" name="discount"
@@ -110,7 +111,19 @@
     </script>
 @endif
 
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        // Your jQuery code here
+        console.log('GOOD');
+        $("#customer").select2();
+        console.log('Logg');
+    });
+</script> --}}
+
     <script src="{{ asset('js/calculation.js') }}" defer></script>
+
+
 
 
 

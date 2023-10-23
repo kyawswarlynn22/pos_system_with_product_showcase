@@ -109,7 +109,6 @@ class Product extends Model implements Auditable
 
     public function updateStockCount($request, $id)
     {
-
         $adjust = Product::find($id);
         $newStockCount = $adjust->quantity + $request->stock;
 

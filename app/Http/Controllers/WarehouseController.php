@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
 class WarehouseController extends Controller
@@ -11,7 +12,11 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        //
+        $productListClass = new Warehouse();
+        $productList = $productListClass->getProductList();
+        return view('Pos.warhouseProductList', [
+            'productData' => $productList,
+        ]);
     }
 
     /**
@@ -19,7 +24,7 @@ class WarehouseController extends Controller
      */
     public function create()
     {
-        //
+        return view('Pos.addwarehouseproduct');
     }
 
     /**
@@ -27,7 +32,9 @@ class WarehouseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $addProductClass = new Warehouse();
+        $addProduct = $addProductClass->addProducts($request);
+        return redirect('/warehouse');
     }
 
     /**
@@ -35,7 +42,6 @@ class WarehouseController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -43,7 +49,11 @@ class WarehouseController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $productDetailClass = new Warehouse();
+        $productDetail = $productDetailClass->getProductDetail($id);
+        return view('Pos.editWarehouseProductList', [
+            'productDetail' => $productDetail,
+        ]);
     }
 
     /**
@@ -51,7 +61,15 @@ class WarehouseController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $updateProduct = Warehouse::find($id);
+        if ($updateProduct) {
+            $updateProduct->update([
+                'product_name' => $request->product_name,
+                'buy_price' => $request->price,
+                'quantity' => $request->quantity,
+            ]);
+        }
+        return redirect('/warehouse');
     }
 
     /**
@@ -59,6 +77,8 @@ class WarehouseController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $productDelClass = new Warehouse();
+        $productDel = $productDelClass->productDel($id);
+        return redirect('/warehouse');
     }
 }

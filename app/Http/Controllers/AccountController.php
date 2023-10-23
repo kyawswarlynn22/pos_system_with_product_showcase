@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accounting;
+use App\Models\DailyCih;
 use App\Models\DepositSale;
 use App\Models\ExpenseModel;
 use App\Models\Income;
@@ -26,6 +27,10 @@ class AccountController extends Controller
         $totalCash = $AccountingClass->cash();
         $totalDeposit = $AccountingClass->deposit();
         $totalSaleReturn = $AccountingClass->saleReturn();
+        $closeornotClass = new DailyCih();
+        $maxid = $closeornotClass::max('id');
+        $closeornot = $closeornotClass->checkCloseOrnot($maxid);
+        $lastCIHAmt = $closeornotClass->lasCIHamt($maxid);
 
         // dd($totalExpense,$totalIncome,$totalPurchase,$totalCash,$totalDeposit,$totalSaleReturn);
         return view('Pos.accounting', [
@@ -35,6 +40,8 @@ class AccountController extends Controller
             'cash' => $totalCash,
             'deposit' => $totalDeposit,
             'salereturn' => $totalSaleReturn,
+            'salecolse' => $closeornot,
+            'cashinhand' =>$lastCIHAmt,
         ]);
     }
 

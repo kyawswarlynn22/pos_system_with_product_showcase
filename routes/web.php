@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashsaleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DailyCihController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
@@ -24,6 +25,7 @@ use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\WarehouseStockController;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
@@ -111,4 +113,8 @@ Route::middleware('loginCheck')->group(function () {
     Route::get('search_customer', [CustomerController::class, 'search_customer']);
 
     Route::resource('warehouse', WarehouseController::class);
+
+    Route::resource('warehouseadjustment', WarehouseStockController::class);
+
+    Route::resource('saleClosing', DailyCihController::class);
 });
