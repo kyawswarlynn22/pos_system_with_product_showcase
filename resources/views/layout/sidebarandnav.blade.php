@@ -152,17 +152,17 @@
                     </button>
                     <ul id="warehouse" class="hidden py-2 space-y-2">
                         <li>
-                            <a href="/product/create"
+                            <a href="/warehouse/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
                                 Product</a>
                         </li>
                         <li>
-                            <a href="/stockadjustment"
+                            <a href="/warehouse"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                                 Product List</a>
                         </li>
                         <li>
-                            <a href="/stockadjustment/create"
+                            <a href="/warhouseadjustment/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Stock
                                 add or substract
                             </a>

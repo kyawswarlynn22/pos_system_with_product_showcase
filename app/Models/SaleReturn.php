@@ -84,4 +84,10 @@ class SaleReturn extends Model  implements Auditable
             ]);
         }
     }
+
+    public function delSaleReturn($id)
+    {
+        $delSalereturn = SaleReturn::find($id);
+        $delSalereturn->delete();
+    }
 }
