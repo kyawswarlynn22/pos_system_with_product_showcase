@@ -23,7 +23,7 @@ class DepositSale extends Model  implements Auditable
     {
         return $depositSale = DepositSale::join('customers', 'customers.id', 'deposit_sales.customers_id')
             ->join('deposit_sale_details', 'deposit_sales_id', 'deposit_sales.id')
-            ->select('customers.cus_name', 'pur_date', 'paid', 'deposit', 'credit', 'grand_total', 'deposit_sales.id')
+            ->select('customers.cus_name', 'pur_date', 'paid', 'deposit', 'credit', 'grand_total', 'deposit_sales.id',DB::raw('DATE(deposit_sales.pur_date) as date_only'))
             ->where('deposit_sales.del_flg', 0)
             ->groupBy('customers.cus_name', 'pur_date', 'paid', 'deposit', 'credit', 'grand_total', 'deposit_sales.id')
             ->orderBy('deposit_sales.id', 'desc')
@@ -35,7 +35,7 @@ class DepositSale extends Model  implements Auditable
         return $cashSaleDetails = DepositSale::join('customers', 'deposit_sales.customers_id', 'customers.id')
             ->join('deposit_sale_details', 'deposit_sales_id', 'deposit_sales.id')
             ->where('deposit_sales.id', $id)
-            ->select('pur_date', 'discount', 'paid', 'credit', 'deposit', 'grand_total', 'remark', 'customers.*')
+            ->select('pur_date', 'discount', 'paid', 'credit', 'deposit', 'grand_total', 'remark', 'customers.*',DB::raw('DATE(deposit_sales.pur_date) as date_only'))
             ->first();
     }
 

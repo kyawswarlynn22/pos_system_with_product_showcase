@@ -22,7 +22,7 @@ class RetailSale extends Model implements Auditable
     public function getCashSaleData()
     {
         return $retailsSale = RetailSale::join('customers', 'customers.id', 'retail_sales.customers_id')
-            ->select('customers.cus_name', 'pur_date', 'grand_total', 'retail_sales.id')
+            ->select('customers.cus_name', 'pur_date', 'grand_total', 'retail_sales.id',DB::raw('DATE(retail_sales.pur_date) as date_only'))
             ->where('retail_sales.del_flg', 0)
             ->orderBy('retail_sales.id', 'desc')->paginate(5);
     }
@@ -31,7 +31,7 @@ class RetailSale extends Model implements Auditable
     {
         return $cashSaleDetails = RetailSale::join('customers', 'retail_sales.customers_id', 'customers.id')
             ->where('retail_sales.id', $id)
-            ->select('pur_date', 'discount', 'grand_total', 'remark', 'customers.*')
+            ->select('pur_date', 'discount', 'grand_total', 'remark', 'customers.*',DB::raw('DATE(retail_sales.pur_date) as date_only'))
             ->first();
     }
 

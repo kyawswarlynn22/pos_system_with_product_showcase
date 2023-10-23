@@ -50,7 +50,7 @@
                             {{ $item->cus_name }}
                         </th>
                         <td class="px-6 text-center  py-4">
-                            {{ $item->pur_date }}
+                            {{ $item->date_only }}
                         </td>
                         <td class="px-6 text-center  py-4">
                             {{ $item->grand_total }}
@@ -83,10 +83,20 @@
                                 </a>
                             @endif
 
+                            @php
+                                $timezone = 'Asia/Yangon';
+                                $currentDateTime = \Carbon\Carbon::now($timezone);
+                                $dynamicDate = $item->date_only;
+                                $defaultTime = '23:59:59';
+                                $targetDateTime = \Carbon\Carbon::parse($dynamicDate . ' ' . $defaultTime, $timezone);
+                            @endphp
+
                             <form action="/cashsale/{{ $item->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+
+                                <button @if ($targetDateTime < $currentDateTime) hidden @endif
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline delete_icon">
                                     <svg width="24" height="24" viewBox="0 0 28 28"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path fill="#ef4444"
@@ -102,9 +112,13 @@
                 @endforelse
             </tbody>
         </table>
+        @foreach ($CashSaleData as $item)
+            <span class="created-at hidden">{{ $item->created_at }}</span>
+        @endforeach
         <div class="p-5">
             {{ $CashSaleData->links('pagination::tailwind') }}
         </div>
     </div>
+
 
 @endsection
