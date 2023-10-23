@@ -143,6 +143,8 @@ class CashsaleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $deleteCashClass = new RetailSale();
+        $deleteCash = $deleteCashClass->cashSaleDel($id);
+        return back();
     }
 }

@@ -172,4 +172,16 @@ class RetailSale extends Model implements Auditable
     {
         return Product::where('quantity', '>', 0)->get();
     }
+
+    public function cashSaleDel($id)
+    {
+        $updateProductStockclass = new RetailSaleDetails();
+        $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
+
+        $deleteCashSale = RetailSale::find($id);
+        $deleteCashSale->delete();
+
+        $delCashsaleDetail = RetailSaleDetails::where('retail_sales_id', $id);
+        $delCashsaleDetail->delete();
+    }
 }

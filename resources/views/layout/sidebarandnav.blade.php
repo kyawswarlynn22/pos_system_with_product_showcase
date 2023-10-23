@@ -135,7 +135,7 @@
                 <li>
                     <button type="button"
                         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
-                        aria-controls="product" data-collapse-toggle="product">
+                        aria-controls="warehouse" data-collapse-toggle="warehouse">
                         <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <g fill="none" stroke="#949494" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
                                 <path d="M3 21V8l9-4l9 4v13"/>
@@ -150,7 +150,7 @@
                                 stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg>
                     </button>
-                    <ul id="product" class="hidden py-2 space-y-2">
+                    <ul id="warehouse" class="hidden py-2 space-y-2">
                         <li>
                             <a href="/product/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
