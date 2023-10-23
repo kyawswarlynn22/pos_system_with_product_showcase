@@ -32,15 +32,39 @@ class Warehouse extends Model implements Auditable
         return Warehouse::where('del_flg', 0)->paginate(8);
     }
 
+    public function productlist()
+    {
+        return Warehouse::where('del_flg', 0)->get();
+    }
+
     public function getProductDetail($id)
     {
-        return  $productDetail = Warehouse::where('id',$id)->first();
+        return  $productDetail = Warehouse::where('id', $id)->first();
     }
 
     public function productDel($id)
     {
         $productDel = Warehouse::find($id);
         $productDel->delete();
-      
+    }
+
+    public function updateStockCount($request, $id)
+    {
+
+        $adjust = Warehouse::find($id);
+        $newStockCount = $adjust->quantity + $request->stock;
+
+        if ($adjust) {
+            $adjust->update([
+                'quantity' => $newStockCount,
+            ]);
+        }
+
+        $adjustnone = Warehousedb::find($request->p_id);
+        if ($adjustnone) {
+            $adjustnone->update([
+                'adjusted' => 1,
+            ]);
+        }
     }
 }

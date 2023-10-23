@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Warehouse;
+use App\Models\Warehousedb;
 use Illuminate\Http\Request;
 
 class WarehouseStockController extends Controller
@@ -12,7 +13,14 @@ class WarehouseStockController extends Controller
      */
     public function index()
     {
-        
+        $wareProductListClass = new Warehousedb();
+        $wareProductList = $wareProductListClass->pendinglist();
+        return view(
+            'Pos.warehouseproductpending',
+            [
+                'productData' => $wareProductList,
+            ]
+        );
     }
 
     /**
@@ -22,7 +30,7 @@ class WarehouseStockController extends Controller
     {
         $productListClass = new Warehouse();
         $productList = $productListClass->getProductList();
-        return view('Pos.addandsubstract',[
+        return view('Pos.addandsubstract', [
             'productData' => $productList,
         ]);
     }
@@ -32,7 +40,9 @@ class WarehouseStockController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $storeproductClass = new Warehousedb();
+        $storeproduct = $storeproductClass->storependingList($request);
+        return back();
     }
 
     /**
@@ -48,7 +58,16 @@ class WarehouseStockController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $editAdjustClass = new Warehousedb();
+        $editAdjust = $editAdjustClass->editAdjust($id);
+
+        $getproductClass = new Warehouse();
+        $getproduct = $getproductClass->productlist($id);
+
+        return view('Pos.editconfrimstock',[
+            'EditAdjust' => $editAdjust,
+            'productData' => $getproduct,
+        ]);
     }
 
     /**
@@ -56,7 +75,9 @@ class WarehouseStockController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+       $updateStockClass = new Warehouse();
+       $updateStock = $updateStockClass->updateStockCount($request,$id);
+       return back();
     }
 
     /**

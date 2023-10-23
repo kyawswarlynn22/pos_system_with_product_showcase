@@ -5,7 +5,7 @@
     <p class=" text-2xl">Stock Add or Substract</p>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-5">
-        <form action="/stockadjustment" method="post">
+        <form action="/warehouseadjustment" method="post">
             @csrf
             <div class="flex space-x-3 p-5 w-full justify-items-center items-center">
                 <div class="mb-6 w-full">

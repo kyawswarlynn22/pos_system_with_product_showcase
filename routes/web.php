@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashsaleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DailyCihController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
@@ -114,4 +115,6 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('warehouse', WarehouseController::class);
 
     Route::resource('warehouseadjustment', WarehouseStockController::class);
+
+    Route::resource('saleClosing', DailyCihController::class);
 });
