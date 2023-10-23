@@ -24,12 +24,14 @@
     <nav
         class=" bg-blue-700  dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+            <div class=" flex flex-col justify-center items-center">
             <a href="/dashboard" class="flex items-center">
                 <img src="{{ $logo }}" class="h-20 mr-3" alt="SKS Logo">
                 <span
                     class="self-center text-3xl font-semibold whitespace-nowrap text-black">{{ $business_name }}</span>
             </a>
             <div class="ml-8">No.3 Lower Kyi Myin Daing Road, KyeeMyinDaing Tsp, Yangon. <br> +959783668894</div>
+        </div>
     </nav>
     <div class=" ">
         <p class=" mt-40 ml-5 text-2xl font-bold">Invoice</p>
@@ -55,7 +57,7 @@
                 <span>Invoice No : {{ $InvoiceNo }}</span>
                 <div>
                     <span>Invoice Date :</span>
-                    <span>{{ $DepositSaleDetail->pur_date }}</span>
+                    <span>{{ $DepositSaleDetail->date_only }}</span>
                 </div>
             </div>
 

@@ -58,7 +58,7 @@
                             {{ $item->cus_name }}
                         </th>
                         <td class="px-6 text-center  py-4">
-                            {{ $item->pur_date }}
+                            {{ $item->date_only }}
                         </td>
                         <td class="px-6 text-center  py-4">
                             {{ $item->deposit }}
@@ -102,10 +102,18 @@
                                     </svg>
                                 </a>
                             @endif
+                            @php
+                                $timezone = 'Asia/Yangon';
+                                $currentDateTime = \Carbon\Carbon::now($timezone);
+                                $dynamicDate = $item->date_only;
+                                $defaultTime = '23:59:58';
+                                $targetDateTime = \Carbon\Carbon::parse($dynamicDate . ' ' . $defaultTime, $timezone);
+                            @endphp
                             <form action="/depositsale/{{ $item->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                                <button @if ($targetDateTime < $currentDateTime) hidden @endif
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                                     <svg width="24" height="24" viewBox="0 0 28 28"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path fill="#ef4444"

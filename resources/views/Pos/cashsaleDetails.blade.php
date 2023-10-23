@@ -57,7 +57,7 @@
                 <span>Invoice No : {{ $InvoiceNo }}</span>
                 <div>
                     <span>Invoice Date :</span>
-                    <span>{{ $ProductDetails->pur_date }}</span>
+                    <span>{{ $ProductDetails->date_only }}</span>
                 </div>
             </div>
 

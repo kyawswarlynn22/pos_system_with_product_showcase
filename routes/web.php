@@ -108,7 +108,7 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('serial', SerialController::class);
 
-    Route::get('search_customer',[CustomerController::class,'search_customer']);
+    Route::get('search_customer', [CustomerController::class, 'search_customer']);
 
     Route::resource('warehouse', WarehouseController::class);
 });

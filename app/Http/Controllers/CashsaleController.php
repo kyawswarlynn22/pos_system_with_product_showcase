@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\Purchase;
 use App\Models\RetailSale;
 use App\Models\RetailSaleDetails;
+use DateTime;
+use DateTimeZone;
 use Illuminate\Http\Request;
 
 class CashsaleController extends Controller
@@ -18,7 +20,6 @@ class CashsaleController extends Controller
     {
         $getCashSaleDataClass = new RetailSale();
         $getCashSaleData = $getCashSaleDataClass->getCashSaleData();
-
         return view('Pos.cashsaleList', [
             'CashSaleData' => $getCashSaleData,
         ]);
@@ -55,7 +56,7 @@ class CashsaleController extends Controller
                 $cashsaleDetails = new RetailSaleDetails();
                 if ($serial[$product] === null) {
                     return back()->with('fail', 'Add Serial Number');
-                } 
+                }
 
                 $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
                 if ($checkstock->count() !== 0) {
