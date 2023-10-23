@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Purchase;
 use App\Models\RetailSale;
+use App\Models\RetailSaleDetails;
 use App\Models\SaleReturn;
 use App\Models\SaleReturnDetails;
 use Illuminate\Http\Request;
@@ -117,6 +118,11 @@ class salereturnController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $updateStockCountClass = new SaleReturnDetails();
+        $updateSalereturn = $updateStockCountClass->delupdateStockCount($id);
+
+        $delSalereturnClass = new SaleReturn();
+        $delSalereturn = $delSalereturnClass->delSaleReturn($id);
+        return back();
     }
 }
