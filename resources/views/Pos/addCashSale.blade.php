@@ -23,6 +23,7 @@
                         </label>
                     <select name="customer" id="customer"
                         class="bg-gray-50 border w-1/2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        <option value="">-- choose customer --</option>
                         @forelse ($customerList as $item)
                             <option value="{{ $item->id }}">{{ $item->cus_name }}</option>
                         @empty
