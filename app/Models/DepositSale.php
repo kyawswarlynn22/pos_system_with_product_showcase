@@ -197,4 +197,20 @@ class DepositSale extends Model  implements Auditable
             ->groupBy('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
             ->paginate(5);
     }
+
+    public function depositDel($id)
+    {
+        $updateProductStockclass = new DepositSaleDetails();
+        $getsend = DepositSale::select('paid')->where('id', $id)->first();
+        if ($getsend->paid == 1) {
+            // dd("plus mal");
+            $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
+        }
+
+        $deleteDeposit = DepositSale::find($id);
+        $deleteDeposit->delete();
+
+        $delCashsaleDetail = DepositSaleDetails::where('deposit_sales_id', $id);
+        $delCashsaleDetail->delete();
+    }
 }

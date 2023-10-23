@@ -120,6 +120,8 @@ class depositsaleController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delDepositClass = new DepositSale();
+        $delDeposit = $delDepositClass->depositDel($id);
+        return back();
     }
 }

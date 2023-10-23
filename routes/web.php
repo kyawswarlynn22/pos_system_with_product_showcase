@@ -23,6 +23,7 @@ use App\Http\Controllers\StockAdjustController;
 use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\WarehouseController;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Route;
@@ -109,5 +110,5 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::get('search_customer',[CustomerController::class,'search_customer']);
 
-    
+    Route::resource('warehouse', WarehouseController::class);
 });
