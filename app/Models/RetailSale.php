@@ -42,7 +42,7 @@ class RetailSale extends Model implements Auditable
 
     public function getCustomer()
     {
-        return Customer::get();
+        return Customer::where('del_flg',0)->get();
     }
 
     public function storeCashsaleData($request)
