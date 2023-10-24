@@ -10,6 +10,12 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function getCustomer()
+     {
+     $data = Customer::where('cus_name','like','%'.request('q').'%')->where('del_flg',0)->paginate(10);
+        return response()->json($data);
+     }
     public function index()
     {   
         $customerListClass = new Customer();

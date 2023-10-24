@@ -117,4 +117,9 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('warehouseadjustment', WarehouseStockController::class);
 
     Route::resource('saleClosing', DailyCihController::class);
+
+    // Route::get('getCustomer', [CustomerController::class, 'getCustomer'])->name('getCustomerData');
+
+    Route::get('getCustomer',[ CustomerController::class,'getCustomer'])->name('selectproducts');
+
 });
