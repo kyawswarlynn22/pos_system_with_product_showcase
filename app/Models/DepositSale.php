@@ -54,9 +54,6 @@ class DepositSale extends Model  implements Auditable
         for ($product = 0; $product < count($products); $product++) {
             if ($products[$product] != '') {
                 $cashsaleDetails = new RetailSaleDetails();
-                if ($serial[$product] === null) {
-                    return back()->with('fail', 'Add Serial Number');
-                }
 
                 $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
                 if ($checkstock->count() !== 0) {
