@@ -25,7 +25,6 @@ class Income extends Model implements Auditable
         $storeIncome = new Income();
         $storeIncome->expense_categories_id  = $request->category_id;
         $storeIncome->description = $request->categoryDescription;
-        $storeIncome->date = $request->date;
         $storeIncome->amount = $request->amount;
         if ($request->hasFile('expphoto')) {
             $extension = $request->file('expphoto')->extension();
@@ -46,12 +45,13 @@ class Income extends Model implements Auditable
 
     public function getIncomeList()
     {
-        return Income::join('expense_categories', 'expense_categories_id', 'expense_categories.id')
-            ->select('e_c_name', 'incomes.*')
-            ->paginate(5);
+        return Income::join('expense_categories', 'expense_categories.id', '=', 'incomes.expense_categories_id')
+            ->select('expense_categories.e_c_name', 'incomes.*')
+            ->orderBy('incomes.id', 'desc')
+            ->paginate(8);
     }
 
-    
+
     public function updateIncome($request, $id)
     {
         $updateModel = Income::find($id);
@@ -59,7 +59,6 @@ class Income extends Model implements Auditable
             $updateData = [
                 'expense_categories_id' => $request->category_id,
                 'description' => $request->categoryDescription,
-                'date' => $request->date,
                 'amount' => $request->amount,
             ];
 
@@ -81,7 +80,7 @@ class Income extends Model implements Auditable
     {
         return Income::join('expense_categories', 'expense_categories_id', 'expense_categories.id')
             ->select('e_c_name', 'incomes.*')
-            ->where('incomes.id',$id)
+            ->where('incomes.id', $id)
             ->first();
     }
 }
