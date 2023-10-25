@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Accounting;
 use App\Models\ActivityLog;
 use App\Models\LogoandName;
+use App\Models\RetailSaleDetails;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
@@ -15,11 +17,30 @@ class DashboardController extends Controller
     public function index()
     {
         $auditsClass = new ActivityLog();
+        $AccountingClass = new Accounting();
+        $topProductsClass = new RetailSaleDetails();
         $audits = $auditsClass->getMetadata();
-       
+        $totalExpense = $AccountingClass->expense();
+        $totalIncome = $AccountingClass->income();
+        $totalCash = $AccountingClass->cash();
+        $totalDeposit = $AccountingClass->deposit();
+        $totalSaleReturn = $AccountingClass->saleReturn();
+        $totalPurchase = $AccountingClass->purchase();
+        $topProducts = $topProductsClass->gettopProducts();
+
+
         return view(
             'dashboard',
-            ['audits' => $audits]
+            [
+                'audits' => $audits,
+                'expense' => $totalExpense,
+                'income' => $totalIncome,
+                'cash' => $totalCash,
+                'purchase' => $totalPurchase,
+                'deposit' => $totalDeposit,
+                'salereturn' => $totalSaleReturn,
+                'topProducts' => $topProducts,
+            ]
         );
     }
 

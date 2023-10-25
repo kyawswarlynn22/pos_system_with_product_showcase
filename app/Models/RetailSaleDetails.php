@@ -19,11 +19,22 @@ class RetailSaleDetails extends Model implements Auditable
 
     protected $fillable = ['retail_sales_id', 'products_id', 'p_quantity', 'p_price', 'del_flg'];
 
+    public function gettopProducts()
+    {
+      return  $topProducts = RetailSaleDetails::select('products.product_name', DB::raw('SUM(retail_sale_details.p_quantity) as total_quantity'))
+            ->join('products', 'retail_sale_details.products_id', '=', 'products.id')
+            ->groupBy('products.product_name')
+            ->orderBy('total_quantity', 'desc')
+            ->limit(3)
+            ->get();
+           
+    }
+
     public function getCashsaleDetail($id)
     {
         return  $cashSaleDetils = RetailSaleDetails::join('products', 'products.id', 'retail_sale_details.products_id')
             ->where('retail_sale_details.retail_sales_id', $id)
-            ->select('products.product_name', 'p_quantity', 'p_price','serial_no')
+            ->select('products.product_name', 'p_quantity', 'p_price', 'serial_no')
             ->get();
     }
 
