@@ -669,7 +669,7 @@
         </script>
 
 
-        <script src="{{ asset('js/calculation.js') }}" defer></script>
+        <script src="{{ asset('js/output.js') }}" defer></script>
 
         <script>
             $(document).ready(function() {
