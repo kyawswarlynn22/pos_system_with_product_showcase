@@ -25,7 +25,6 @@ class ExpenseModel extends Model implements Auditable
         $storeExpense = new ExpenseModel();
         $storeExpense->expense_categories_id  = $request->category_id;
         $storeExpense->description = $request->categoryDescription;
-        $storeExpense->date = $request->date;
         $storeExpense->amount = $request->amount;
         if ($request->hasFile('expphoto')) {
             $extension = $request->file('expphoto')->extension();
@@ -48,7 +47,8 @@ class ExpenseModel extends Model implements Auditable
     {
         return ExpenseModel::join('expense_categories', 'expense_categories_id', 'expense_categories.id')
             ->select('e_c_name', 'expenses.*')
-            ->paginate(5);
+            ->orderBy('expenses.id','desc')
+            ->paginate(8);
     }
 
     public function updateExpense($request, $id)
@@ -58,7 +58,6 @@ class ExpenseModel extends Model implements Auditable
             $updateData = [
                 'expense_categories_id' => $request->category_id,
                 'description' => $request->categoryDescription,
-                'date' => $request->date,
                 'amount' => $request->amount,
             ];
 

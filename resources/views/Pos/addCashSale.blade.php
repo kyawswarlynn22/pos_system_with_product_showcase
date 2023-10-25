@@ -564,7 +564,7 @@
                         </label>
 
                         <select name="customer" class=" w-64 h-10" id="customerList"></select>
-                       
+
                     </div>
                 </div>
                 <div class="flex space-x-3  w-8/12 justify-items-center items-center">
@@ -666,25 +666,44 @@
         <script>
             $(document).ready(function() {
 
-                        $("#customerList").select2({
-                            placeholder: 'Choose Customer',
-                            ajax: {
-                                url: "{{ route('selectproducts') }}",
-                                processResults: function({
-                                    data
-                                }) {
+                $("#customerList").select2({
+                    placeholder: 'Choose Customer',
+                    ajax: {
+                        url: "{{ route('selectproducts') }}",
+                        processResults: function({
+                            data
+                        }) {
+                            return {
+                                results: $.map(data, function(item) {
                                     return {
-                                        results: $.map(data, function(item) {
-                                            return {
-                                                id: item.id,
-                                                text: item.cus_name,
-                                            }
-                                        })
+                                        id: item.id,
+                                        text: item.cus_name,
                                     }
-                                }
+                                })
                             }
-                        })
-                    });
+                        }
+                    }
+                })
+
+                $("#productselect").select2({
+                    placeholder: 'Choose Products',
+                    ajax: {
+                        url: "{{ route('selectp') }}",
+                        processResults: function({
+                            data
+                        }) {
+                            return {
+                                results: $.map(data, function(item) {
+                                    return {
+                                        id: item.id,
+                                        text: item.product_name,
+                                    }
+                                })
+                            }
+                        }
+                    }
+                })
+            });
         </script>
 
     </div>

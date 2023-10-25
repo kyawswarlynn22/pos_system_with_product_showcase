@@ -105,12 +105,8 @@ $(document).ready(function () {
     $("#day").text(day);
 
     var items = document.getElementById("itemQuantity");
-    document.getElementById("add").disabled = true;
-    var selectElement = document.getElementById("productselect");
-
-    selectElement.addEventListener("change", function () {
-        document.getElementById("add").disabled = false;
-    });
+   
+   
     items.addEventListener("keyup", function () {
         var itemQuantity = items.value;
         if (itemQuantity < 1 || itemQuantity > 100) {

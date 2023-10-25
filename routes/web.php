@@ -122,4 +122,6 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::get('getCustomer',[ CustomerController::class,'getCustomer'])->name('selectproducts');
 
+    Route::get('getProduct',[ ProductController::class,'getProduct'])->name('selectp');
+
 });
