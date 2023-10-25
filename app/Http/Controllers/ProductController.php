@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+
+    public function getProduct()
+     {
+     $data = Product::where('product_name','like','%'.request('q').'%')->where('del_flg',0)->paginate(10);
+        return response()->json($data);
+     }
     /**
      * Display a listing of the resource.
      */

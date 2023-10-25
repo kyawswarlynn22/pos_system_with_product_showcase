@@ -21,6 +21,8 @@ class Product extends Model implements Auditable
         'p_two', 'p_three', 'p_four', 'price', 'quantity', 'description', 'del_flg'
     ];
 
+    
+
     public function productAllData()
     {
         return $product = Product::select(
