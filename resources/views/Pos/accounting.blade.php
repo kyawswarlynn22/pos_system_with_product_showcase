@@ -30,107 +30,132 @@
             <button class=" float-right bg-red-500 rounded-lg px-3 py-1">Balance Closing</button>
         @endif
     </form>
-    <table class="w-full mt-5 text-sm text-left text-gray-500 rounded-lg dark:text-gray-400">
-        <thead class="text-xs text-white uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-                <th scope="col" class="px-6 py-3 rounded-l-lg">
-                    Description
-                </th>
-                <th scope="col" class="px-6 text-center  py-3">
-                    Credit Amount
-                </th>
-                <th scope="col" class="px-6 text-center  py-3">
-                    Debit Amount
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Purchase
-                </th>
-                <td id="pur" class="px-6 text-center  py-4">
-                    {{ $purchase }}
-                </td>
-                <td class="px-6 text-center  py-4">
-                </td>
-            </tr>
-            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    CashSale
-                </th>
-                <td class="px-6 text-center  py-4">
 
-                </td>
-                <td id="cash" class="px-6 text-center  py-4">
-                    {{ $cash }}
-                </td>
-            </tr>
-            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Deposit Sale
-                </th>
-                <td class="px-6 text-center  py-4">
+    <div class=" flex space-x-2 ">
 
-                </td>
-                <td id="deposit" class="px-6 text-center  py-4">
-                    {{ $deposit }}
-                </td>
-            </tr>
-            <tr class="bg-white  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Expense
-                </th>
-                <td id="exp" class="px-6 text-center  py-4">
-                    {{ $expense }}
-                </td>
-                <td class="px-6 text-center  py-4">
+        <div class="relative overflow-x-auto w-1/2 shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-blue-100 dark:text-blue-100">
+                <thead class="text-xs text-white uppercase bg-blue-600 dark:text-white">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-xl">Income</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Description
+                        </th>
 
-                </td>
-            </tr>
-            <tr class="bg-white  border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Income
-                </th>
-                <td class="px-6 text-center  py-4">
+                        <th scope="col" class="px-6 py-3 float-right">
+                           Amount
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-blue-500 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                            Cash Sale
+                        </th>
+                        <td id="cash" class="px-6 py-4 float-right">
+                            {{ $cash }}
+                        </td>
+                    </tr>
+                    <tr class="bg-blue-500 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                           Deposit Sale
+                        </th>
 
-                </td>
-                <td id="income" class="px-6 text-center  py-4">
-                    {{ $income }}
-                </td>
-            </tr>
-            <tr class="bg-white border-b border-black  dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    SaleReturn
-                </th>
-                <td id="salereturn" class="px-6 text-center  py-4">
-                    {{ $salereturn }}
-                </td>
-                <td class="px-6 text-center  py-4">
+                        <td id="deposit" class="px-6 py-4 float-right">
+                            {{ $deposit }}
+                        </td>
+                    </tr>
+                    <tr class="bg-blue-500 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                            Income
+                        </th>
 
-                </td>
-            </tr>
-            <tr
-                class="bg-white border-b border-black border-l border-r dark:bg-gray-800  hover:bg-gray-50 dark:hover:bg-gray-600">
-                <th scope="row" class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Subtotal
-                </th>
-                <td id="credit" class="px-6 text-center  py-4">
+                        <td id="income" class="px-6 py-4 float-right">
+                            {{ $income }}
+                        </td>
+                    </tr>
+                    <tr class="bg-blue-500 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                            Total Income(mmk)
+                        </th>
 
-                </td>
-                <td id="debit" class="px-6 text-center  py-4">
+                        <td id="debit" class="px-6 py-4 float-right">
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="m-5 mt-20 flex justify-end space-x-5">
-        <span class=" text-xl font-semibol mt-5">Balance: </span>
+        <div class="relative overflow-x-auto w-1/2 shadow-md sm:rounded-lg">
+            <table class="w-full text-sm text-left text-blue-100 dark:text-blue-100">
+                <thead class="text-xs text-white uppercase  bg-sky-800 dark:text-white">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-xl">Outcome</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Description
+                        </th>
+                        <th scope="col" class="px-6 py-3 float-right">
+                            Amount
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-sky-700 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                            Purchase
+                        </th>
+
+                        <td id="pur" class="px-6 py-4 float-right">
+                            {{ $purchase }}
+                        </td>
+                    </tr>
+                    <tr class="bg-sky-700 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                            Sale Return
+                        </th>
+
+                        <td id="salereturn" class="px-6 py-4 float-right">
+                            {{ $salereturn }}
+                        </td>
+                    </tr>
+                    <tr class="bg-sky-700 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                            Expense
+                        </th>
+
+                        <td id="exp" class="px-6 py-4 float-right">
+                           {{ $expense }}
+                        </td>
+                    </tr>
+                    <tr class="bg-sky-700 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                           Total Outcome(mmk)
+                        </th>
+
+                        <td id="credit" class="px-6 py-4 float-right">
+                          
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+   
+    <div class=" rounded-lg  mt-5 p-4 text-right font-medium shadow-md bg-blue-500">
+        <span class=" text-xl font-semibol mt-5">Today Balance: </span>
         <span id="balance" class="text-xl font-semibol mt-5">546587</span>
     </div>
-    
+
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 bg-gray-400 mb-20">
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
         <span class=" text-2xl">Cash In Hand Balance: </span>
         <span class=" text-2xl" id="cashinhand">{{ $cashinhand }} </span>MMK
     </div>
@@ -162,12 +187,11 @@
         var totalbal = debitSubtotal - creditSubtotal;
         grand_total_value.value = totalbal;
 
-      
+
         credit.innerText = creditSubtotal.toLocaleString();
         debit.innerText = debitSubtotal.toLocaleString();
         total.innerText = totalbal.toLocaleString() + "Ks";
         cih.innerText = cashinhand.toLocaleString();
-        
     </script>
 
 @endsection
