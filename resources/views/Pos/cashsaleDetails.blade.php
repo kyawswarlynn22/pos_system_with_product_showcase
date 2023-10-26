@@ -27,10 +27,14 @@
             <div class=" flex flex-col justify-center items-center">
                 <a href="/dashboard" class="flex items-center">
                     <img src="{{ $logo }}" class="h-20 mr-3" alt="SKS Logo">
-                    <span
-                        class="self-center text-3xl font-semibold whitespace-nowrap text-black">{{ $business_name }}</span>
+                    <div class=" flex  flex-col items-start text-blue-800">
+                        <span
+                            class="self-center text-3xl font-semibold text-blue-800 whitespace-nowrap">{{ $business_name }}</span>
+                        <span class="">No.3 Lower Kyi Myin Daing Road, KyeeMyinDaing Tsp, Yangon. <br>
+                            +959783668894</span>
+                    </div>
                 </a>
-                <div class="ml-8">No.3 Lower Kyi Myin Daing Road, KyeeMyinDaing Tsp, Yangon. <br> +959783668894</div>
+               
             </div>
     </nav>
     <div class=" ">
