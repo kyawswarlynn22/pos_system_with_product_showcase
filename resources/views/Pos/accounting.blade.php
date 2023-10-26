@@ -92,7 +92,7 @@
 
         <div class="relative overflow-x-auto w-1/2 shadow-md sm:rounded-lg">
             <table class="w-full text-sm text-left text-blue-100 dark:text-blue-100">
-                <thead class="text-xs text-white uppercase bg-blue-950 dark:text-white">
+                <thead class="text-xs text-white uppercase bg-pink-900 dark:text-white">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-xl ">Outcome</th>
                         <th></th>
@@ -107,7 +107,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-blue-800 border-b ">
+                    <tr class="bg-pink-800 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Purchase
                         </th>
@@ -116,7 +116,7 @@
                             {{ $purchase }}
                         </td>
                     </tr>
-                    <tr class="bg-blue-800 border-b ">
+                    <tr class="bg-pink-800 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Sale Return
                         </th>
@@ -125,7 +125,7 @@
                             {{ $salereturn }}
                         </td>
                     </tr>
-                    <tr class="bg-blue-800 border-b ">
+                    <tr class="bg-pink-800 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Expense
                         </th>
@@ -134,7 +134,7 @@
                            {{ $expense }}
                         </td>
                     </tr>
-                    <tr class="bg-blue-800 border-b border-blue-400">
+                    <tr class="bg-pink-800 border-b border-blue-400">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                            Total Outcome(mmk)
                         </th>
