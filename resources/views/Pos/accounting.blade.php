@@ -107,7 +107,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-sky-700 border-b border-blue-400">
+                    <tr class="bg-sky-700 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Purchase
                         </th>
@@ -116,7 +116,7 @@
                             {{ $purchase }}
                         </td>
                     </tr>
-                    <tr class="bg-sky-700 border-b border-blue-400">
+                    <tr class="bg-sky-700 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Sale Return
                         </th>
@@ -125,7 +125,7 @@
                             {{ $salereturn }}
                         </td>
                     </tr>
-                    <tr class="bg-sky-700 border-b border-blue-400">
+                    <tr class="bg-sky-700 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Expense
                         </th>
