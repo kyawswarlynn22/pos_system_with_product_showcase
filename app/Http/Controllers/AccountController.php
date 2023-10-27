@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Accounting;
+use App\Models\CashThb;
 use App\Models\DailyCih;
 use App\Models\DepositSale;
 use App\Models\ExpenseModel;
@@ -21,6 +22,7 @@ class AccountController extends Controller
     public function index()
     {
         $AccountingClass = new Accounting();
+        $CashTHB = new CashThb();
         $totalExpense = $AccountingClass->expense();
         $totalIncome = $AccountingClass->income();
         $totalPurchase = $AccountingClass->purchase();
@@ -30,7 +32,9 @@ class AccountController extends Controller
         $closeornotClass = new DailyCih();
         $maxid = $closeornotClass::max('id');
         $closeornot = $closeornotClass->checkCloseOrnot($maxid);
-        $lastCIHAmt = $closeornotClass->lasCIHamt($maxid);
+        $lastCIHAmt = $closeornotClass->lasCIHamt();
+        $lastCIHTHB = $CashTHB->lasCIHamt();
+       
 
         // dd($totalExpense,$totalIncome,$totalPurchase,$totalCash,$totalDeposit,$totalSaleReturn);
         return view('Pos.accounting', [
@@ -42,6 +46,7 @@ class AccountController extends Controller
             'salereturn' => $totalSaleReturn,
             'salecolse' => $closeornot,
             'cashinhand' =>$lastCIHAmt,
+            'cashinhandThb' => $lastCIHTHB,
         ]);
     }
 

@@ -159,6 +159,10 @@
         <span class=" text-2xl">Cash In Hand Balance: </span>
         <span class=" text-2xl" id="cashinhand">{{ $cashinhand }} </span>MMK
     </div>
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
+        <span class=" text-2xl">Cash In Hand(THB): </span>
+        <span class=" text-2xl" id="">{{ $cashinhandThb }} </span>THB
+    </div>
     <script>
         var purchasestring = document.getElementById("pur").innerText;
         var cashstring = document.getElementById("cash").innerText;
