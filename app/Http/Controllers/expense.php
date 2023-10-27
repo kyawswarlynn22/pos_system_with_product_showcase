@@ -8,7 +8,7 @@ use App\Models\ExpenseModel;
 use App\Models\Income;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use League\CommonMark\Extension\CommonMark\Node\Inline\Strong;
+
 
 class expense extends Controller
 {
@@ -25,6 +25,20 @@ class expense extends Controller
         return view('Pos.expenseList', [
             'expenseList' => $getExpenseAllList,
             'incomeList' => $getIncomeAllList,
+        ]);
+    }
+
+    public function datefilter($request)
+    {
+        
+        $getExpenseAllListClass = new ExpenseModel();
+        $getExpenseAllList = $getExpenseAllListClass->datefilter($request);
+
+        // $getIncomeAllListClass = new Income();
+        // $getIncomeAllList = $getIncomeAllListClass->getIncomeList();
+        return view('Pos.expenseList', [
+            'expenseList' => $getExpenseAllList,
+            // 'incomeList' => $getIncomeAllList,
         ]);
     }
 

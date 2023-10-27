@@ -43,6 +43,14 @@ class Income extends Model implements Auditable
         return Income::where('id', $id)->first();
     }
 
+    public function datefilter($request)
+    {
+        $date = $request->date;
+
+        return $expenseDate = Income::whereDate('created_at', $date)
+            ->get();
+    }
+
     public function getIncomeList()
     {
         return Income::join('expense_categories', 'expense_categories.id', '=', 'incomes.expense_categories_id')
