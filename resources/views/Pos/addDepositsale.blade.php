@@ -478,18 +478,22 @@
     </aside>
 
     <nav
-        class=" bg-blue-700  dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+        class=" bg-blue-700 p-3 dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
-            <a href="/dashboard" class="flex items-center">
-                <img src="{{ $logo }}" class="h-10 mr-3" alt="SKS Logo">
-                <span
-                    class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">{{ $business_name }}</span>
-            </a>
+            <div class="text-center">
+                <button
+                    class="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                    type="button" data-drawer-target="drawer-navigation"
+                    data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
+                    Show navigation
+                </button>
+            </div>
+            
             <div class="flex md:order-2">
                 <a href="/purchase/create">
                     <button type="button"
                         class="text-white bg-yellow-400 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-0 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <div class="flex justify-center items-center align-middle pt-2">
+                        <div class="flex justify-center items-center align-middle pt-3">
                             <p class="mx-1"> <svg width="24" height="24" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill="#ffffff"
@@ -501,7 +505,7 @@
                 <a href="/cashsale/create">
                     <button type="button"
                         class="text-white ml-2 bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 py-0 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        <div class="flex justify-center items-center pt-2">
+                        <div class="flex justify-center items-center pt-3">
                             <p class="mx-1"> <svg width="24" height="24" viewBox="0 0 24 24"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path fill="#ffffff"
@@ -523,19 +527,11 @@
                 </button>
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                <ul
-                    class="flex flex-col md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <div class="text-center">
-                            <button
-                                class="text-white bg-green-500 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-                                type="button" data-drawer-target="drawer-navigation"
-                                data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
-                                Show navigation
-                            </button>
-                        </div>
-                    </li>
-                </ul>
+                <a href="/dashboard" class="flex items-center">
+                    <img src="{{ $logo }}" class="h-10 mr-3" alt="SKS Logo">
+                    <span
+                        class="self-center text-2xl font-semibold whitespace-nowrap text-white dark:text-white">{{ $business_name }}</span>
+                </a>
             </div>
         </div>
     </nav>
