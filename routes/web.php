@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashsaleController;
+use App\Http\Controllers\CashThbController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DailyCihController;
@@ -118,7 +119,7 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::resource('saleClosing', DailyCihController::class);
 
-    // Route::get('getCustomer', [CustomerController::class, 'getCustomer'])->name('getCustomerData');
+    Route::resource('cashthb', CashThbController::class);
 
     Route::get('getCustomer',[ CustomerController::class,'getCustomer'])->name('selectproducts');
 
