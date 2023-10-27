@@ -51,6 +51,21 @@ class Accounting extends Model
             ->sum('grand_total');
     }
 
+    public function warehousePurchase()
+    {
+        $timezone = 'Asia/Yangon';
+        $currentDate = \Carbon\Carbon::now($timezone);
+        $currentDateFormatted = $currentDate->format('Y-m-d');
+
+
+        $startTime = $currentDateFormatted . ' 00:00:00';
+        $endTime = $currentDateFormatted . ' 23:59:59';
+
+        return $totalExpense = WarehousePurchase::where('created_at', '>=', $startTime)
+            ->where('created_at', '<=', $endTime)
+            ->sum('grand_total');
+    }
+
     public function cash()
     {
         $timezone = 'Asia/Yangon';

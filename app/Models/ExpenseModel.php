@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
 
@@ -47,8 +48,16 @@ class ExpenseModel extends Model implements Auditable
     {
         return ExpenseModel::join('expense_categories', 'expense_categories_id', 'expense_categories.id')
             ->select('e_c_name', 'expenses.*')
-            ->orderBy('expenses.id','desc')
+            ->orderBy('expenses.id', 'desc')
             ->paginate(8);
+    }
+
+    public function datefilter($request)
+    {
+        $date = $request->date;
+
+        return $expenseDate = ExpenseModel::whereDate('created_at', $date)
+            ->get();
     }
 
     public function updateExpense($request, $id)
@@ -79,7 +88,7 @@ class ExpenseModel extends Model implements Auditable
     {
         return ExpenseModel::join('expense_categories', 'expense_categories_id', 'expense_categories.id')
             ->select('e_c_name', 'expenses.*')
-            ->where('expenses.id',$id)
+            ->where('expenses.id', $id)
             ->first();
     }
 
@@ -87,5 +96,4 @@ class ExpenseModel extends Model implements Auditable
     {
         return ExpenseCategory::all();
     }
-
 }

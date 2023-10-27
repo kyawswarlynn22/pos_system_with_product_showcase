@@ -10,8 +10,10 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
 use App\Http\Controllers\expenseCagetoryController;
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\IncomeController;
+use App\Http\Controllers\IncomeDateController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoandNameController;
 use App\Http\Controllers\PasswordController;
@@ -26,6 +28,7 @@ use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\WarehousePurchaseController;
 use App\Http\Controllers\WarehouseStockController;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Routing\RouteGroup;
@@ -67,6 +70,8 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::get('/get-product-details/{id}', 'App\Http\Controllers\PurchaseController@getProductDetails');
 
+    Route::get('/get-product/{id}', 'App\Http\Controllers\WarehousePurchaseController@getProductDetails');
+
     Route::resource('/dashboard', DashboardController::class);
 
     Route::get('/signout', [LoginController::class, 'signOut']);
@@ -92,6 +97,10 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('expenseCategory', expenseCagetoryController::class);
 
     Route::resource('expense', expense::class);
+
+    Route::resource('incomedatefilter', IncomeDateController::class);
+
+    Route::resource('expensedatefilter', ExpenseController::class);
 
     Route::resource('income', IncomeController::class);
 
@@ -120,6 +129,8 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('saleClosing', DailyCihController::class);
 
     Route::resource('cashthb', CashThbController::class);
+
+    Route::resource('warehousepurchase', WarehousePurchaseController::class);
 
     Route::get('getCustomer',[ CustomerController::class,'getCustomer'])->name('selectproducts');
 

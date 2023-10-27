@@ -1,20 +1,17 @@
-
-
 @extends('layout.sidebarandnav')
 
-@section('title', 'Edit Purchase');
+@section('title', 'Add Warehouse Purchase');
 @section('body')
-    <p class=" text-2xl">Edit Purchase</p>
-    <form action="/purchase/{{ $lastId }}" method="post">
+    <p class=" text-2xl">Add Warehouse Purchase</p>
+    <form action="/warehousepurchase" method="post">
         @csrf
-        @method('put')
         <div class="mt-3 rounded-lg shadow-lg p-5">
             <div class="row">
                 <div class="col-xs-6 col-sm-6 col-md-6 ">
-                    <span>{{ $grand_total->created_at }} </span>
+                    <span id="day"></span> : <span id="year"></span>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-6 text-right">
-                    <span>Invoice: {{ $lastId }}</span>
+                    <span>Invoice: {{ $lastId +1 }}</span>
                 </div>
             </div>
             <div class="flex w-full justify-around items-center space-x-3 p-5">
@@ -23,19 +20,19 @@
                         Country</label>
                     <select name="country" id="country"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option @if ($grand_total->sup_country == 0) selected @endif value="0">Myanmar</option>
-                        <option @if ($grand_total->sup_country == 1) selected @endif value="1">China</option>
+                        <option value="0">Myanmar</option>
+                        <option value="1">China</option>
                     </select>
                 </div>
-
+                
 
                 <div class="mb-6 w-full">
                     <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shipping
                         Status</label>
                     <select name="status" id="status"
                         class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                        <option @if ($grand_total->ship_status == 0) selected @endif value="0">Pending</option>
-                        <option @if ($grand_total->ship_status == 1) selected @endif value="1">Received</option>
+                        <option value="0">Pending</option>
+                        <option value="1">Received</option>
                     </select>
                 </div>
 
@@ -78,53 +75,20 @@
                         </tr>
                     </thead>
                     <tbody id="new">
-                        @forelse ($PurchaseDetails as $item)
-                            <tr
-                                class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                                <td class="px-6 py-4">
-                                    <input type="text" readonly
-                                        class="outline-none border-gray-300 border-transparent rounded-md product_select"
-                                        value="{{ $item->product_name }}">
-                                </td>
-                                <td class="px-6 py-3">
-                                    <input type="number" readonly name="price[]"
-                                        class="outline-none border-transparent rounded-lg iprice"
-                                        value="{{ $item->price }}">
-                                </td>
-                                <td>
-                                    <input type="number" readonly name="quantities[]"
-                                        class="outline-none border-transparent border-gray-300 rounded-lg iquantity"
-                                        value="{{ $item->product_quantity }}">
-                                </td>
-                                <td>
-                                    <input type="text" readonly
-                                        class="outline-none w-full text-right float-right border-transparent rounded-lg itotal"
-                                        value="">
-                                </td>
-                                <td class="px-6 py-4">
-                                    <input type="text" readonly name="productsid[]" hidden
-                                        class="outline-none border-gray-300 border-transparent rounded-md product_select"
-                                        value="{{ $item->product_id }}">
-                                </td>
-                            </tr>
-
-                        @empty
-                        @endforelse
                     </tbody>
                 </table>
                 <div class="flex justify-end">
-                    <button id="delBut" type="button" class=" bg-red-500 px-2 py-1 rounded-md my-5">Delete
-                        Row</button>
+                    <button id="delBut" type="button" class=" bg-red-500 px-2 py-1 rounded-md my-5">Delete Row</button>
                 </div>
 
                 <div class="mt-5 float-right">
                     <span class=" font-semibold text-lg">Grand Total : </span>
-                    <input type="number" required class=" rounded-lg" value="{{ $grand_total->grand_total }}"
-                        name="grandtotal" id="">
-                </div>
-                <div class="mt-20 mb-5 flex flex-col">
+                    <input type="number" required class="rounded-lg" name="grandtotal" id="">
+                    <input type="hidden" id="gtotal">
                     <input type="hidden" id="credit">
                     <input type="hidden" id="deposit">
+                </div>
+                <div class="mt-20 mb-5 flex flex-col">
                 </div>
                 <span class="mt-5 ml-[83%]">
                     <button type="submit"
@@ -134,8 +98,8 @@
             </div>
     </form>
     <input type="hidden" id="discount">
-    <input type="hidden" id="gtotal">
-    <script src="{{ asset('js/output.js') }}" defer></script>
+    <script src="{{ asset('js/warehouse.js') }}" defer></script>
+
 
 
 @endsection

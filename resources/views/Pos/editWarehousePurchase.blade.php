@@ -1,11 +1,9 @@
-
-
 @extends('layout.sidebarandnav')
 
 @section('title', 'Edit Purchase');
 @section('body')
     <p class=" text-2xl">Edit Purchase</p>
-    <form action="/purchase/{{ $lastId }}" method="post">
+    <form action="/warehousepurchase/{{ $lastId }}" method="post">
         @csrf
         @method('put')
         <div class="mt-3 rounded-lg shadow-lg p-5">
@@ -89,7 +87,7 @@
                                 <td class="px-6 py-3">
                                     <input type="number" readonly name="price[]"
                                         class="outline-none border-transparent rounded-lg iprice"
-                                        value="{{ $item->price }}">
+                                        value="{{ $item->buy_price }}">
                                 </td>
                                 <td>
                                     <input type="number" readonly name="quantities[]"
@@ -135,7 +133,7 @@
     </form>
     <input type="hidden" id="discount">
     <input type="hidden" id="gtotal">
-    <script src="{{ asset('js/output.js') }}" defer></script>
+    <script src="{{ asset('js/warehouse.js') }}" defer></script>
 
 
 @endsection

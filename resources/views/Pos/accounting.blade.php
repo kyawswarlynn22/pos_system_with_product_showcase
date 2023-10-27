@@ -109,6 +109,15 @@
                 <tbody>
                     <tr class="bg-pink-800 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                          Warehouse Purchase
+                        </th>
+
+                        <td id="warehousepurchase" class="px-6 py-4 float-right">
+                            {{ $warehousepurchase }}
+                        </td>
+                    </tr>
+                    <tr class="bg-pink-800 border-b ">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Purchase
                         </th>
 
@@ -170,6 +179,7 @@
         var expensestring = document.getElementById("exp").innerText;
         var incomestring = document.getElementById("income").innerText;
         var saleturnstring = document.getElementById('salereturn').innerText;
+        var warehousestring = document.getElementById('warehousepurchase').innerText;
         var credit = document.getElementById("credit");
         var debit = document.getElementById("debit");
         var total = document.getElementById('balance');
@@ -182,11 +192,12 @@
         var deposit = parseInt(depositstring);
         var expense = parseInt(expensestring);
         var income = parseInt(incomestring);
+        var warehouse = parseInt(warehousestring);
         var salereturn = parseInt(saleturnstring);
         var cashinhand = parseInt(cih.innerText);
 
 
-        var creditSubtotal = purchase + expense + salereturn;
+        var creditSubtotal = purchase + expense + salereturn + warehouse;
         var debitSubtotal = cash + deposit + income;
         var totalbal = debitSubtotal - creditSubtotal;
         grand_total_value.value = totalbal;
