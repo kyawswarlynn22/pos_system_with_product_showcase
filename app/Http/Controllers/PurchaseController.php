@@ -101,12 +101,7 @@ class PurchaseController extends Controller
         $stockUpdateClass = new PurchaseDetails();
         $stockUpdate = $stockUpdateClass->updateSotckCount($id);
         return redirect('/purchase');
-        // return view(
-        //     'Pos.purchaseList',
-        //     [
-        //         'purchaseData' => $getPurchaseData,
-        //     ]
-        // );
+      
     }
 
     /**
