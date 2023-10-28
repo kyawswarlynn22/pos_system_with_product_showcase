@@ -33,7 +33,7 @@ class Warehousedb extends Model implements Auditable
         return Warehousedb::select('stock', 'warehouse_product.product_name', 'warehouse_adjust.id', 'w_product_id')
         ->join('warehouse_product', 'warehouse_product.id', 'w_product_id')
         ->where('adjusted', 0)
-        ->paginate(10);
+        ->paginate(15);
         
     }
 

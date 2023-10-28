@@ -24,7 +24,7 @@ class RetailSale extends Model implements Auditable
         return $retailsSale = RetailSale::join('customers', 'customers.id', 'retail_sales.customers_id')
             ->select('customers.cus_name', 'pur_date', 'grand_total', 'retail_sales.id',DB::raw('DATE(retail_sales.pur_date) as date_only'))
             ->where('retail_sales.del_flg', 0)
-            ->orderBy('retail_sales.id', 'desc')->paginate(5);
+            ->orderBy('retail_sales.id', 'desc')->paginate(15);
     }
 
     public function getCashSaleDetails($id)
@@ -165,7 +165,7 @@ class RetailSale extends Model implements Auditable
             ->join('customers', 'retail_sales.customers_id', '=', 'customers.id')
             ->select('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no', 'customers.phone')
             ->groupBy('retail_sales.pur_date', 'customers.cus_name', 'retail_sale_details.serial_no', 'customers.phone')
-            ->paginate(5);
+            ->paginate(15);
     }
 
     public function getProduct()

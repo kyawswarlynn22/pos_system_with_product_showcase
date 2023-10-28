@@ -22,7 +22,7 @@ class Customer extends Model implements Auditable
     {
         return Customer::orderBy('id', 'desc')
             ->where('del_flg', 0)
-            ->paginate(8);
+            ->paginate(15);
     }
 
     public function customerDetail($id)

@@ -29,7 +29,7 @@ class Warehouse extends Model implements Auditable
 
     public function getProductList()
     {
-        return Warehouse::where('del_flg', 0)->paginate(8);
+        return Warehouse::where('del_flg', 0)->paginate(15);
     }
 
     public function productlist()

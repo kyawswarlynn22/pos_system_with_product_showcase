@@ -103,13 +103,6 @@ $(document).ready(function () {
     }
     var day = myFunction();
     $("#day").text(day);
-    var items = document.getElementById("itemQuantity");
-    items.addEventListener("keyup", function () {
-        var itemQuantity = items.value;
-        if (itemQuantity < 1 || itemQuantity > 100) {
-            items.value = "";
-        }
-    });
 
     $(".get-details").click(function () {
         var button = $(this);

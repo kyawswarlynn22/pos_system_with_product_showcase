@@ -49,7 +49,7 @@ class ExpenseModel extends Model implements Auditable
         return ExpenseModel::join('expense_categories', 'expense_categories_id', 'expense_categories.id')
             ->select('e_c_name', 'expenses.*')
             ->orderBy('expenses.id', 'desc')
-            ->paginate(8);
+            ->paginate(15);
     }
 
     public function datefilter($request)

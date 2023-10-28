@@ -30,7 +30,7 @@ class SaleReturn extends Model  implements Auditable
         return $retailsSale = SaleReturn::join('customers', 'customers.id', 'sale_returns.customers_id')
             ->select('customers.cus_name', 'return_date', 'grand_total','sale_returns.id',DB::raw('DATE(sale_returns.return_date) as date_only'))
             ->where('sale_returns.del_flg', 0)
-            ->orderBy('sale_returns.id', 'desc')->paginate(8);
+            ->orderBy('sale_returns.id', 'desc')->paginate(15);
     }
 
     // public function getSaleReturn($id)
