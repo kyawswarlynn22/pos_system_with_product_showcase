@@ -14,11 +14,15 @@ class WarehousePurchaseController extends Controller
      */
     public function index()
     {
-        $getPurchaseDataClass = new WarehousePurchase();
+        $getPurchaseDataClass = new WarehousePurDetail();
         $getPurchaseData = $getPurchaseDataClass->getPurchaseData();
-     
+
+        $getPurchaseDataClassList = new WarehousePurchase();
+        $getPurchaseDataList = $getPurchaseDataClassList->getPurchaseData();
+
         return view('Pos.warehousePurchaseList', [
             'purchaseData' => $getPurchaseData,
+            'purchaseList' => $getPurchaseDataList,
         ]);
     }
 
@@ -42,7 +46,7 @@ class WarehousePurchaseController extends Controller
      */
     public function store(Request $request)
     {
-       
+
         $purchaseStoreClass = new WarehousePurchase();
         $purchaseStore = $purchaseStoreClass->storePurchaseData($request);
         $getLastId = $purchaseStoreClass->getlastId();
@@ -93,14 +97,17 @@ class WarehousePurchaseController extends Controller
     public function update(Request $request, string $id)
     {
         $updatePurchasedDetailClass = new WarehousePurchase();
-        $updatePurchasedDetail = $updatePurchasedDetailClass->updatePurchaseDetail($request, $id);
-        $getPurchaseData = $updatePurchasedDetailClass->getPurchaseData();
         $stockUpdateClass = new WarehousePurDetail();
+        $updatePurchasedDetail = $updatePurchasedDetailClass->updatePurchaseDetail($request, $id);
+        $getPurchaseData = $stockUpdateClass->getPurchaseData();
+
         $stockUpdate = $stockUpdateClass->updateSotckCount($id);
+        $getPurchaseDataList = $updatePurchasedDetailClass->getPurchaseData();
         return view(
             'Pos.warehousePurchaseList',
             [
                 'purchaseData' => $getPurchaseData,
+                'purchaseList' => $getPurchaseDataList,
             ]
         );
     }

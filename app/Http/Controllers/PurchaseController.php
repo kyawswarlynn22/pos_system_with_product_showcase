@@ -18,8 +18,11 @@ class PurchaseController extends Controller
     {
         $getPurchaseDataClass = new Purchase();
         $getPurchaseData = $getPurchaseDataClass->getPurchaseData();
+        $getPurchaseProducts = $getPurchaseDataClass->getPurchaseProduct();
+       
         return view('Pos.purchaseList', [
             'purchaseData' => $getPurchaseData,
+            'purchaseList' => $getPurchaseProducts,
         ]);
     }
 
@@ -97,12 +100,13 @@ class PurchaseController extends Controller
         $getPurchaseData = $updatePurchasedDetailClass->getPurchaseData();
         $stockUpdateClass = new PurchaseDetails();
         $stockUpdate = $stockUpdateClass->updateSotckCount($id);
-        return view(
-            'Pos.purchaseList',
-            [
-                'purchaseData' => $getPurchaseData,
-            ]
-        );
+        return redirect('/purchase');
+        // return view(
+        //     'Pos.purchaseList',
+        //     [
+        //         'purchaseData' => $getPurchaseData,
+        //     ]
+        // );
     }
 
     /**

@@ -85,15 +85,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="bg-pink-800 border-b ">
-                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
-                          Warehouse Purchase
-                        </th>
-
-                        <td id="warehousepurchase" class="px-6 py-4 float-right">
-                            {{ $warehosepurchase }}
-                        </td>
-                    </tr>
+                   
                     <tr class="bg-pink-800 border-b ">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Purchase
@@ -150,7 +142,6 @@
         var expensestring = document.getElementById("exp").innerText;
         var incomestring = document.getElementById("income").innerText;
         var saleturnstring = document.getElementById('salereturn').innerText;
-        var warehousestring = document.getElementById('warehousepurchase').innerText;
         var credit = document.getElementById("credit");
         var debit = document.getElementById("debit");
         var total = document.getElementById('balance');
@@ -158,12 +149,11 @@
         var purchase = parseInt(purchasestring);
         var cash = parseInt(cashstring);
         var deposit = parseInt(depositstring);
-        var warehouse = parseInt(warehousestring);
         var expense = parseInt(expensestring);
         var income = parseInt(incomestring);
         var salereturn = parseInt(saleturnstring);
 
-        var creditSubtotal = purchase + expense + salereturn + warehouse;
+        var creditSubtotal = purchase + expense + salereturn ;
         var debitSubtotal = cash + deposit + income;
         var totalbal = debitSubtotal - creditSubtotal;
 

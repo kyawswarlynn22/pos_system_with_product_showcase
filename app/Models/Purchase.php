@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use OwenIt\Auditing\Contracts\Auditable;
 
 class Purchase extends Model  implements Auditable
@@ -21,6 +22,14 @@ class Purchase extends Model  implements Auditable
     public function getPurchaseData()
     {
         return $purchases = Purchase::orderBy('id', 'desc')->paginate(10);
+    }
+
+    public function getPurchaseProduct()
+    {
+        return $purchase = PurchaseDetails::join('purchases','purchases.id','=','purchase_details.purchase_id')
+        ->join('products','products.id','=','purchase_details.product_id')
+        ->select('products.*','purchase_details.*','purchases.*',DB::raw('DATE(purchases.p_date) as date_only'))
+        ->orderBy('purchase_details.id', 'desc')->paginate(10);
     }
 
     public function getPurchaseDetail($id)
