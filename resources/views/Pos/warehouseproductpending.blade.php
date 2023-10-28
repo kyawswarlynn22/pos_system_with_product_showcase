@@ -50,23 +50,26 @@
                         <td class="px-6 text-center py-4">
                             {{ $product->stock }}
                         </td>
-                        <form action="/warehouseadjustment/{{ $product->w_product_id }}" method="POST" >
+                        <form action="/warehouseadjustment/{{ $product->w_product_id }}" method="POST">
                             @csrf
                             @method('PUT')
                             <input type="text" name="stock" value="{{ $product->stock }}" hidden>
                             <input type="text" name="p_id" value="{{ $product->id }}" hidden>
                             <td class=" flex justify-center  space-x-2 text-white items-baseline ">
-                              
+
                                 <button type="submit" class="px-5 rounded-md py-1 bg-blue-500">
                                     Accept
                                 </button>
                         </form>
-                        <a href="/warehouseadjustment/{{ $product->id }}/edit" <button
-                            class="px-5 rounded-md py-1 bg-blue-500">
-                            Edit
+                        <form action="/warehouseadjustment/{{ $product->id }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="px-5 rounded-md py-1 bg-red-500">
+                                Delete
                             </button>
-                        </a>
-                        </td>
+                        </form>
+                       
+                            </td>
                     </tr>
                 @empty
                     <div class=" text-center relative top-20 text-red-500 font-bold">No Product Data</div>

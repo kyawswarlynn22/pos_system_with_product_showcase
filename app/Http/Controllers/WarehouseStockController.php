@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StockAdjust;
 use App\Models\Warehouse;
 use App\Models\Warehousedb;
 use Illuminate\Http\Request;
@@ -85,6 +86,10 @@ class WarehouseStockController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delProductPending = Warehousedb::find($id);
+        if ($delProductPending) {
+            $delProductPending->delete();
+        }
+        return back();
     }
 }
