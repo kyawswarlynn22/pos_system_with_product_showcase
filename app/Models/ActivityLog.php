@@ -23,6 +23,6 @@ class ActivityLog extends Model
        return $audits = ActivityLog::select('users.name','auditable_type','event','old_values','new_values','audits.created_at')
        ->join('users','audits.user_id','users.id')
        ->orderBy('audits.id', 'desc')
-       ->paginate(10);
+       ->paginate(15);
     }
 }

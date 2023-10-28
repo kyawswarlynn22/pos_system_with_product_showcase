@@ -30,7 +30,7 @@ class ExpenseCategory extends Model implements Auditable
     {
         return ExpenseCategory::orderBy('id', 'desc')
             ->where('del_flg', 0)
-            ->paginate(8);
+            ->paginate(15);
     }
 
     public function expenseCategoryDetail($id)

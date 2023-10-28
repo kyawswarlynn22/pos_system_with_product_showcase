@@ -24,7 +24,7 @@ class Category extends Model implements Auditable
     {
         return Category::orderBy('id', 'desc')
             ->where('del_flg', 0)
-            ->paginate(5); 
+            ->paginate(15); 
     }
 
     public function categoryallList()

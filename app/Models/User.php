@@ -58,7 +58,7 @@ class User extends Authenticatable implements Auditable
     public function userList()
     {
         return User::orderBy('id', 'desc')
-            ->paginate(10);
+            ->paginate(15);
     }
 
     public function userDetail($id)

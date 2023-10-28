@@ -27,7 +27,7 @@ class DepositSale extends Model  implements Auditable
             ->where('deposit_sales.del_flg', 0)
             ->groupBy('customers.cus_name', 'pur_date', 'paid', 'deposit', 'credit', 'grand_total', 'deposit_sales.id')
             ->orderBy('deposit_sales.id', 'desc')
-            ->paginate(8);
+            ->paginate(15);
     }
 
     public function getDepositDetail($id)
@@ -192,7 +192,7 @@ class DepositSale extends Model  implements Auditable
             ->join('customers', 'deposit_sales.customers_id', '=', 'customers.id')
             ->select('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
             ->groupBy('deposit_sales.pur_date', 'customers.cus_name', 'deposit_sale_details.serial_no', 'customers.phone')
-            ->paginate(5);
+            ->paginate(15);
     }
 
     public function depositDel($id)

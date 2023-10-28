@@ -13,7 +13,7 @@ class CustomerController extends Controller
 
      public function getCustomer()
      {
-     $data = Customer::where('cus_name','like','%'.request('q').'%')->where('del_flg',0)->paginate(10);
+     $data = Customer::where('cus_name','like','%'.request('q').'%')->where('del_flg',0)->paginate(15);
         return response()->json($data);
      }
     public function index()
@@ -98,7 +98,7 @@ class CustomerController extends Controller
         $data = $request->input('search_customer');
         $searchData = Customer::where('cus_name','like', '%'.$data .'%')
         ->orwhere('address','like', '%'.$data .'%')
-        ->paginate(5);
+        ->paginate(15);
         return view('Pos.customerList',[
             'customerList' => $searchData
         ]);

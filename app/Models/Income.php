@@ -56,7 +56,7 @@ class Income extends Model implements Auditable
         return Income::join('expense_categories', 'expense_categories.id', '=', 'incomes.expense_categories_id')
             ->select('expense_categories.e_c_name', 'incomes.*')
             ->orderBy('incomes.id', 'desc')
-            ->paginate(8);
+            ->paginate(15);
     }
 
 

@@ -28,7 +28,7 @@ class PreorderSale extends Model implements Auditable
         return $retailsSale = PreorderSale::join('customers', 'customers.id', 'preorder_sales.customers_id')
             ->select('customers.cus_name', 'pur_date', 'grand_total', 'preorder_sales.id')
             ->where('preorder_sales.del_flg', 0)
-            ->orderBy('preorder_sales.id', 'desc')->paginate(8);
+            ->orderBy('preorder_sales.id', 'desc')->paginate(15);
     }
 
     public function getPreorderSaleDetail($id)
