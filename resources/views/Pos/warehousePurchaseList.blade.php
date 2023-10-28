@@ -80,7 +80,11 @@
                 @endforelse
 
             </tbody>
+            
         </table>
+        <div class="p-5">
+            {{ $purchaseData->links('pagination::tailwind') }}
+        </div>
         <div class="pt-10 font-medium">Warehouse Purchase List</div>
         <table class="w-full text-sm mt-10 text-left text-gray-500 rounded-lg dark:text-gray-400">
             <thead class="text-xs text-white uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
@@ -103,6 +107,7 @@
                     </th>
                 </tr>
             </thead>
+
             <tbody>
                 @forelse ($purchaseList as $item)
                     <tr
@@ -182,6 +187,9 @@
                 @endforelse
 
             </tbody>
+            <div class="p-5">
+                {{ $purchaseList->links('pagination::tailwind') }}
+            </div>
         </table>
     </div>
 
