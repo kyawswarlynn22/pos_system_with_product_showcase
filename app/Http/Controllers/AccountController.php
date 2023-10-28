@@ -27,7 +27,6 @@ class AccountController extends Controller
         $totalExpense = $AccountingClass->expense();
         $totalIncome = $AccountingClass->income();
         $totalPurchase = $AccountingClass->purchase();
-        $totalWarehousePurchase = $AccountingClass->warehousePurchase();
         $totalCash = $AccountingClass->cash();
         $totalDeposit = $AccountingClass->deposit();
         $totalSaleReturn = $AccountingClass->saleReturn();
@@ -49,7 +48,7 @@ class AccountController extends Controller
             'salecolse' => $closeornot,
             'cashinhand' => $lastCIHAmt,
             'cashinhandThb' => $lastCIHTHB,
-            'warehousepurchase' => $totalWarehousePurchase,
+           
         ]);
     }
 
@@ -77,9 +76,7 @@ class AccountController extends Controller
         $purchase = Purchase::where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate)
             ->sum('grand_total');
-        $warehousepurchase = WarehousePurchase::where('created_at', '>=', $startDate)
-            ->where('created_at', '<=', $endDate)
-            ->sum('grand_total');
+        
         $cash = RetailSale::where('created_at', '>=', $startDate)
             ->where('created_at', '<=', $endDate)
             ->sum('grand_total');
@@ -98,7 +95,7 @@ class AccountController extends Controller
             'cash' => $cash,
             'deposit' => $deposit,
             'salereturn' => $salereturn,
-            'warehosepurchase' => $warehousepurchase,
+           
         ]);
     }
 

@@ -5,7 +5,7 @@
 @section('title', 'Warehouse Purchase List');
 @section('body')
     <p class=" text-2xl"> Warehouse Purchase List</p>
-
+    <div class=" pt-10 pl-5 font-medium">Warehouse Product Purchase List</div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-5">
         <div class="pb-4 bg-white dark:bg-gray-900">
             <label for="table-search" class="sr-only">Search</label>
@@ -22,6 +22,7 @@
                     placeholder="Search...">
             </div>
         </div>
+       
         <table class="w-full text-sm text-left text-gray-500 rounded-lg dark:text-gray-400">
             <thead class="text-xs text-white uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
                 <tr>
@@ -33,10 +34,10 @@
                         Date
                     </th>
                     <th scope="col" class="px-6 text-center  py-3">
-                        Grand Total
+                        Product Name
                     </th>
                     <th scope="col" class="px-6 text-center  py-3 ">
-                        Shipping Status
+                        Quantity
                     </th>
                     <th scope="col" class="px-6 py-3 text-center  rounded-r-lg">
                         Action
@@ -58,7 +59,66 @@
 
                         </th>
                         <td class="px-6 text-center  py-4">
-                            {{ $item->created_at }}
+                            {{ $item->date_only }}
+                        </td>
+                        <td class="px-6 text-center  py-4">
+                            {{ $item->product_name }}
+                        </td>
+                        <td class="px-6 text-center py-4">
+                            {{ $item->product_quantity }}
+                        </td>
+                        <td class="px-6 text-center py-4">
+                            @if ($item->ship_status == 0)
+                                <p class=" text-red-500 font-semibold">Pending</p>
+                            @else
+                                <p class=" text-green-500 font-semibold">Recived</p>
+                            @endif
+                        </td>
+
+                    @empty
+                        <Span class=" text-red-500 font-bold">No Warehouse Purchase Producs</Span>
+                @endforelse
+
+            </tbody>
+        </table>
+        <div class="pt-10 font-medium">Warehouse Purchase List</div>
+        <table class="w-full text-sm mt-10 text-left text-gray-500 rounded-lg dark:text-gray-400">
+            <thead class="text-xs text-white uppercase bg-blue-400  dark:bg-gray-700 dark:text-gray-400">
+                <tr>
+
+                    <th scope="col" class="px-6 py-3 rounded-l-lg">
+                        Supplier Country
+                    </th>
+                    <th scope="col" class="px-6 text-center  py-3">
+                        Date
+                    </th>
+                    <th scope="col" class="px-6 text-center  py-3">
+                        Grand Total
+                    </th>
+                    <th scope="col" class="px-6 text-center  py-3 ">
+                        Shipping Status
+                    </th>
+                    <th scope="col" class="px-6 py-3 text-center  rounded-r-lg">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($purchaseList as $item)
+                    <tr
+                        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+
+                        <th scope="row"
+                            class="px-6 text py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            @if ($item->sup_country == 0)
+                                Myanmar
+                            @else
+                                China
+                            @endif
+
+                        </th>
+                        <td class="px-6 text-center  py-4">
+                            {{ $item->date_only }}
                         </td>
                         <td class="px-6 text-center  py-4">
                             {{ $item->grand_total }}
@@ -97,25 +157,25 @@
                                 </a>
                             @endif
                             @php
-                            $timezone = 'Asia/Yangon';
-                            $currentDateTime = \Carbon\Carbon::now($timezone);
-                            $dynamicDate = $item->date_only;
-                            $defaultTime = '23:59:59';
-                            $targetDateTime = \Carbon\Carbon::parse($dynamicDate . ' ' . $defaultTime, $timezone);
-                        @endphp
-                           <form action="/warehousepurchase/{{ $item->id }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+                                $timezone = 'Asia/Yangon';
+                                $currentDateTime = \Carbon\Carbon::now($timezone);
+                                $dynamicDate = $item->date_only;
+                                $defaultTime = '23:59:59';
+                                $targetDateTime = \Carbon\Carbon::parse($dynamicDate . ' ' . $defaultTime, $timezone);
+                            @endphp
+                            <form action="/warehousepurchase/{{ $item->id }}" method="POST">
+                                @csrf
+                                @method('DELETE')
 
-                            <button @if ($targetDateTime < $currentDateTime) hidden @endif
-                                class="font-medium text-blue-600 dark:text-blue-500 hover:underline delete_icon">
-                                <svg width="24" height="24" viewBox="0 0 28 28"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill="#ef4444"
-                                        d="M11.5 6h5a2.5 2.5 0 0 0-5 0ZM10 6a4 4 0 0 1 8 0h6.25a.75.75 0 0 1 0 1.5h-1.31l-1.217 14.603A4.25 4.25 0 0 1 17.488 26h-6.976a4.25 4.25 0 0 1-4.235-3.897L5.06 7.5H3.75a.75.75 0 0 1 0-1.5H10ZM7.772 21.978a2.75 2.75 0 0 0 2.74 2.522h6.976a2.75 2.75 0 0 0 2.74-2.522L21.436 7.5H6.565l1.207 14.478ZM11.75 11a.75.75 0 0 1 .75.75v8.5a.75.75 0 0 1-1.5 0v-8.5a.75.75 0 0 1 .75-.75Zm5.25.75a.75.75 0 0 0-1.5 0v8.5a.75.75 0 0 0 1.5 0v-8.5Z" />
-                                </svg>
-                            </button>
-                        </form>
+                                <button @if ($targetDateTime < $currentDateTime) hidden @endif
+                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline delete_icon">
+                                    <svg width="24" height="24" viewBox="0 0 28 28"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#ef4444"
+                                            d="M11.5 6h5a2.5 2.5 0 0 0-5 0ZM10 6a4 4 0 0 1 8 0h6.25a.75.75 0 0 1 0 1.5h-1.31l-1.217 14.603A4.25 4.25 0 0 1 17.488 26h-6.976a4.25 4.25 0 0 1-4.235-3.897L5.06 7.5H3.75a.75.75 0 0 1 0-1.5H10ZM7.772 21.978a2.75 2.75 0 0 0 2.74 2.522h6.976a2.75 2.75 0 0 0 2.74-2.522L21.436 7.5H6.565l1.207 14.478ZM11.75 11a.75.75 0 0 1 .75.75v8.5a.75.75 0 0 1-1.5 0v-8.5a.75.75 0 0 1 .75-.75Zm5.25.75a.75.75 0 0 0-1.5 0v8.5a.75.75 0 0 0 1.5 0v-8.5Z" />
+                                    </svg>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @empty
@@ -123,7 +183,6 @@
 
             </tbody>
         </table>
-       
     </div>
 
 @endsection

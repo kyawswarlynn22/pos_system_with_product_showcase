@@ -19,6 +19,15 @@ class WarehousePurDetail extends Model  implements Auditable
 
   protected $fillable = ['product_id', 'product_quantity', 'price_per_unit', 'del_flg'];
 
+  public function getPurchaseData()
+    {
+        // return $purchases = WarehousePurchase::select('warehouser_purchase.*',DB::raw('DATE(warehouser_purchase.p_date) as date_only'))->orderBy('id', 'desc')->paginate(10);
+        return $purchase = WarehousePurDetail::join('warehouser_purchase','warehouser_purchase.id','=','warehouser_purchase_details.purchase_id')
+        ->join('warehouse_product','warehouse_product.id','=','warehouser_purchase_details.product_id')
+        ->select('warehouse_product.*','warehouser_purchase_details.*','warehouser_purchase.*',DB::raw('DATE(warehouser_purchase.p_date) as date_only'))
+        ->orderBy('warehouser_purchase_details.id', 'desc')->paginate(10);
+    }
+
   public function getPurchaseDetail($id)
   {
     return  $purchasedProducts = WarehousePurDetail::join('warehouse_product', 'warehouse_product.id', 'warehouser_purchase_details.product_id')
