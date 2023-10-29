@@ -52,7 +52,7 @@ class Warehouse extends Model implements Auditable
     {
 
         $adjust = Warehouse::find($id);
-        $newStockCount = $adjust->quantity + $request->stock;
+        $newStockCount = $adjust->quantity - $request->stock;
 
         if ($adjust) {
             $adjust->update([

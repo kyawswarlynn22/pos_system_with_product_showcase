@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Damage;
 use App\Models\StockAdjust;
 use App\Models\Warehouse;
 use App\Models\Warehousedb;
@@ -16,10 +17,13 @@ class WarehouseStockController extends Controller
     {
         $wareProductListClass = new Warehousedb();
         $wareProductList = $wareProductListClass->pendinglist();
+        $DamageProductListClass = new Damage();
+        $DamageProductList = $DamageProductListClass->pendinglist();
         return view(
             'Pos.warehouseproductpending',
             [
                 'productData' => $wareProductList,
+                'damageData' => $DamageProductList,
             ]
         );
     }
