@@ -6,6 +6,7 @@ use App\Http\Controllers\CashThbController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DailyCihController;
+use App\Http\Controllers\DamageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\depositsaleController;
 use App\Http\Controllers\expense;
@@ -25,6 +26,7 @@ use App\Http\Controllers\salereturnController;
 use App\Http\Controllers\SerialController;
 use App\Http\Controllers\StockAdjustController;
 use App\Http\Controllers\SubcontrollerController;
+use App\Http\Controllers\TakeoutController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\WarehouseController;
@@ -131,6 +133,10 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('cashthb', CashThbController::class);
 
     Route::resource('warehousepurchase', WarehousePurchaseController::class);
+
+    Route::resource('damageproduct', DamageController::class);
+
+    Route::resource('stocktakeout', TakeoutController::class);
 
     Route::get('getCustomer',[ CustomerController::class,'getCustomer'])->name('selectproducts');
 
