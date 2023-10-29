@@ -25,6 +25,7 @@ use App\Http\Controllers\salereturnController;
 use App\Http\Controllers\SerialController;
 use App\Http\Controllers\StockAdjustController;
 use App\Http\Controllers\SubcontrollerController;
+use App\Http\Controllers\TakeoutController;
 use App\Http\Controllers\UpdateprofileController;
 use App\Http\Controllers\userController;
 use App\Http\Controllers\WarehouseController;
@@ -131,6 +132,8 @@ Route::middleware('loginCheck')->group(function () {
     Route::resource('cashthb', CashThbController::class);
 
     Route::resource('warehousepurchase', WarehousePurchaseController::class);
+
+    Route::resource('stocktakeout', TakeoutController::class);
 
     Route::get('getCustomer',[ CustomerController::class,'getCustomer'])->name('selectproducts');
 

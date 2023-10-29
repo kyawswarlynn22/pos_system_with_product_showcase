@@ -116,16 +116,6 @@ class RetailSale extends Model implements Auditable
             }
         };
 
-        // $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
-        // $existsInDeposit = DepositSaleDetails::where('serial_no', $serial)->exists();
-
-        // if ($existsInCash) {
-        //     return redirect()->back()->with('fail', 'Serial No already exists');
-        // }
-
-        // if ($existsInDeposit) {
-        //     return redirect()->back()->with('fail', 'Serial No already exists');
-        // }
 
         $updateCashsale = RetailSale::find($id);
         if ($updateCashsale) {
