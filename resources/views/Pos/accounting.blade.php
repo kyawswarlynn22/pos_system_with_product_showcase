@@ -156,13 +156,17 @@
     </div>
 
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
         <span class=" text-2xl">Cash In Hand Balance: </span>
         <span class=" text-2xl" id="cashinhand">{{ $cashinhand }} </span>MMK
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
         <span class=" text-2xl">Cash In Hand(THB): </span>
-        <span class=" text-2xl" id="">{{ $cashinhandThb }} </span>THB
+        <span class=" text-2xl" id="bat">{{ $cashinhandThb }} </span>THB
+    </div>
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
+        <span class=" text-2xl">Total Warehouse Purchase: </span>
+        <span class=" text-2xl" id="warehousepur">{{ $warehousePurchase }} </span>MMK
     </div>
     <script>
         var purchasestring = document.getElementById("pur").innerText;
@@ -176,6 +180,8 @@
         var total = document.getElementById('balance');
         var grand_total_value = document.getElementById('grandtotalamt');
         var cih = document.getElementById('cashinhand');
+        var bat = document.getElementById('bat');
+        var warehouse = document.getElementById('warehousepur');
 
 
         var purchase = parseInt(purchasestring);
@@ -186,6 +192,9 @@
        
         var salereturn = parseInt(saleturnstring);
         var cashinhand = parseInt(cih.innerText);
+        var cashinhandbat = parseInt(bat.innerText);
+        var warehousepurchase = parseInt(warehouse.innerText);
+       
 
 
         var creditSubtotal = purchase + expense + salereturn ;
@@ -198,6 +207,8 @@
         debit.innerText = debitSubtotal.toLocaleString();
         total.innerText = totalbal.toLocaleString() + "Ks";
         cih.innerText = cashinhand.toLocaleString();
+        bat.innerText = cashinhandbat.toLocaleString();
+        warehouse.innerText = warehousepurchase.toLocaleString();
     </script>
 
 @endsection
