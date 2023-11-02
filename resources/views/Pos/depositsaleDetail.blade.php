@@ -30,7 +30,7 @@
                     <div class=" flex  flex-col items-start justify-start text-blue-800">
                         <span
                             class="self-start text-3xl font-semibold text-blue-800 whitespace-nowrap">{{ $business_name }}</span>
-                        <span >No.3 Lower Kyi Myin Daing Road(Golden Butterfly Housing), KyeeMyinDaing Tsp, Yangon. <br>
+                        <span class="text-xs">No.3 Lower Kyi Myin Daing Road(Golden Butterfly Housing), KyeeMyinDaing Tsp, Yangon. <br>
                             +959783668894</span>
                     </div>
 
