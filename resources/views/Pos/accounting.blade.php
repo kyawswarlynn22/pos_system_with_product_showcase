@@ -156,22 +156,31 @@
     </div>
 
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
-        <span class=" text-2xl">Cash In Hand Balance: </span>
-        <span class=" text-2xl" id="cashinhand">{{ $cashinhand }} </span>MMK
+    <div class=" flex justify-between space-x-3">
+        <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
+            <span class=" text-2xl">Cash In Hand Balance: </span>
+            <span class=" text-2xl" id="cashinhand">{{ $cashinhand }} </span>MMK
+        </div>
+        <div class=" p-5 shadow-lg w-1/2  rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
+            <span class=" text-2xl">Cash In Hand(THB): </span>
+            <span class=" text-2xl" id="bat">{{ $cashinhandThb }} </span>THB
+        </div>
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
-        <span class=" text-2xl">Cash In Hand(THB): </span>
-        <span class=" text-2xl" id="bat">{{ $cashinhandThb }} </span>THB
+    <div class=" flex justify-between space-x-3">
+        <div class=" p-5 shadow-lg w-1/2 rounded-2xl  font-semibold bg-gray-400 mb-10">
+            <span class=" text-2xl">Showroom Product Values: </span>
+            <span class=" text-2xl" id="productsamt"></span>MMK
+        </div>
+        <div class=" p-5 shadow-lg w-1/2 rounded-2xl  font-semibold bg-gray-400 mb-10">
+            <span class=" text-2xl">Warehouse Product Values: </span>
+            <span class=" text-2xl" id="warehouseamt"> </span>MMK
+        </div>
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl font-semibold bg-gray-400 mb-10">
         <span class=" text-2xl">Total Warehouse Purchase: </span>
         <span class=" text-2xl" id="warehousepur">{{ $warehousePurchase }} </span>MMK
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
-        <span class=" text-2xl">Total Product Values: </span>
-        <span class=" text-2xl" id="productsamt">{{ $warehousePurchase }} </span>MMK
-    </div>
+   
 
     <script>
         var purchasestring = document.getElementById("pur").innerText;
@@ -218,6 +227,9 @@
 
         var amt = sessionStorage.getItem("productamt");
         productsamt.innerText = parseInt(amt).toLocaleString();
+
+        var amt = sessionStorage.getItem("warehouseamt");
+        warehouseamt.innerText = parseInt(amt).toLocaleString();
 
     </script>
 

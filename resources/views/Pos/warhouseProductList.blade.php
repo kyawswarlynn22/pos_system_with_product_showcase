@@ -35,6 +35,9 @@
                     <th scope="col" class="px-6 text-center  py-3 ">
                         Quantity
                     </th>
+                    <th scope="col" class="px-6 text-center  py-3 ">
+                        Amount
+                    </th>
                     <th scope="col" class="px-6 py-3 text-center  rounded-r-lg">
                         Action
                     </th>
@@ -50,22 +53,15 @@
 
                             <p class=" text-base">{{ $product->product_name }}</p>
                         </th>
-                        <td class="px-6 text-center  py-4">
+                        <td class="px-6 text-center  py-4 iprice">
                             {{ $product->buy_price }}
                         </td>
-                        <td class="px-6 text-center  py-4">
-                            @if ($product->quantity <= 5 && $product->quantity >= 1)
-                                <span class=" text-red-500"> {{ $product->quantity }}</span>
-                            @endif
-                            @if ($product->quantity <= 0)
-                                <span class=" text-red-500">Out of Stock</span>
-                            @endif
-                            @if ($product->quantity >= 6)
-                                {{ $product->quantity }}
-                            @endif
-
+                        <td class="px-6 text-center  py-4 iquantity">
+                            {{ $product->quantity }}
                         </td>
-
+                        <td class="px-6 text-center  py-4 isubtotal">
+                            
+                        </td>
                         <td class=" flex justify-center  space-x-2 items-baseline ">
                             {{-- <a href="/warehouse/{{ $product->id }}">
                                 <svg width="24" height="24" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg">
@@ -111,14 +107,10 @@
                 @empty
                     <span class=" text-red-500 font-bold">No Product Data</span>
                 @endforelse
-
-
             </tbody>
 
         </table>
-        <div class="p-5">
-            {{ $productData->links('pagination::tailwind') }}
-        </div>
+       
         @if (session('success'))
             <script>
                 let msg = @json(session('success'));
@@ -126,5 +118,20 @@
             </script>
         @endif
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var prices = document.getElementsByClassName("iprice");
+            var subtotals = document.getElementsByClassName("isubtotal");
+            var quantities = document.getElementsByClassName("iquantity");
+            var productTotal = 0
+            for (let i = 0; i < prices.length; i++) {
+                var price = parseFloat(prices[i].textContent);
+                var quantity = parseFloat(quantities[i].textContent);
+                subtotals[i].textContent = price * quantity;
+                productTotal += parseFloat(subtotals[i].textContent);
 
+            }
+            sessionStorage.setItem("warehouseamt", productTotal);
+        });
+    </script>
 @endsection
