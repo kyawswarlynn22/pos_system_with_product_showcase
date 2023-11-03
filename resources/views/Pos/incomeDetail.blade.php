@@ -2,7 +2,7 @@
 
 @section('title', 'Expense Details');
 @section('body')
-
+<button class=" px-8 py-1 bg-blue-600 rounded-lg text-white" onclick="goBack()" >Back</button><br>
     <span class=" text-2xl font-bold">Income Details</span>
     <main class="my-8">
 
@@ -22,5 +22,9 @@
 
 
     </div>
-
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 @endsection
