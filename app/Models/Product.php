@@ -39,11 +39,38 @@ class Product extends Model implements Auditable
             'quantity',
             'products.description'
         )
-            ->join('categories', 'categories_id', 'categories.id')
-            ->join('sub_categories', 'sub_categories_id', 'sub_categories.id')
+            ->join('categories', 'categories_id', '=', 'categories.id')
+            ->join('sub_categories', 'sub_categories_id', '=', 'sub_categories.id')
             ->orderBy('products.id', 'desc')
             ->where('products.del_flg', 0)
+            ->where('categories_id', '<>', 21)
+            ->get();
+        
+    }
+
+    public function chargesAndServices()
+    {
+        return $product = Product::select(
+            'products.id',
+            'categories.c_name',
+            'sub_categories.sub_c_name',
+            'product_name',
+            'p_code',
+            'p_one',
+            'p_two',
+            'p_three',
+            'p_four',
+            'price',
+            'quantity',
+            'products.description'
+        )
+            ->join('categories', 'categories_id', '=', 'categories.id')
+            ->join('sub_categories', 'sub_categories_id', '=', 'sub_categories.id')
+            ->orderBy('products.id', 'desc')
+            ->where('products.del_flg', 0)
+            ->where('categories_id', 21)
             ->paginate(15);
+        
     }
 
     public function productData()

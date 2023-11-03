@@ -164,10 +164,15 @@
         <span class=" text-2xl">Cash In Hand(THB): </span>
         <span class=" text-2xl" id="bat">{{ $cashinhandThb }} </span>THB
     </div>
-    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-10">
         <span class=" text-2xl">Total Warehouse Purchase: </span>
         <span class=" text-2xl" id="warehousepur">{{ $warehousePurchase }} </span>MMK
     </div>
+    <div class=" p-5 shadow-lg w-1/2 rounded-2xl mt-10 font-semibold bg-gray-400 mb-20">
+        <span class=" text-2xl">Total Product Values: </span>
+        <span class=" text-2xl" id="productsamt">{{ $warehousePurchase }} </span>MMK
+    </div>
+
     <script>
         var purchasestring = document.getElementById("pur").innerText;
         var cashstring = document.getElementById("cash").innerText;
@@ -182,6 +187,7 @@
         var cih = document.getElementById('cashinhand');
         var bat = document.getElementById('bat');
         var warehouse = document.getElementById('warehousepur');
+        var productsamt = document.getElementById('productsamt');
 
 
         var purchase = parseInt(purchasestring);
@@ -209,6 +215,10 @@
         cih.innerText = cashinhand.toLocaleString();
         bat.innerText = cashinhandbat.toLocaleString();
         warehouse.innerText = warehousepurchase.toLocaleString();
+
+        var amt = sessionStorage.getItem("productamt");
+        productsamt.innerText = parseInt(amt).toLocaleString();
+
     </script>
 
 @endsection
