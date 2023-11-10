@@ -316,6 +316,11 @@
                                 Sale</a>
                         </li>
                         <li>
+                            <a href="/creditsale/create"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Credit
+                                Sale</a>
+                        </li>
+                        <li>
                             <a href="/preordersale/create"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Preorder
                                 Sale</a>
@@ -331,8 +336,18 @@
                                 Sale List</a>
                         </li>
                         <li>
+                            <a href="/creditsale"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Credit
+                                Sale List</a>
+                        </li>
+                        <li>
                             <a href="/preordersale"
                                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Preorder
+                                Sale List</a>
+                        </li>
+                        <li>
+                            <a href="/todaypaid"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Today Paid Credit
                                 Sale List</a>
                         </li>
                     </ul>
