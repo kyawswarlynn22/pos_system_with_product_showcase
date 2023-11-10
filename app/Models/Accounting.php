@@ -100,4 +100,18 @@ class Accounting extends Model
         return $totoalwarehousePurchase = WarehousePurchase::where('ship_status',0)
         ->sum('grand_total');
     }
+
+    public function paidCredit()
+    {
+        $timezone = 'Asia/Yangon';
+        $currentDate = \Carbon\Carbon::now($timezone);
+        $currentDateFormatted = $currentDate->format('Y-m-d');
+
+        $startTime = $currentDateFormatted . ' 00:00:00';
+        $endTime = $currentDateFormatted . ' 23:59:59';
+
+        return $totalUnpaidamt = Creditsale::where('paid', 1)->where('updated_at', '>=', $startTime)
+            ->where('updated_at', '<=', $endTime)
+            ->sum('deposit_paid');
+    }
 }

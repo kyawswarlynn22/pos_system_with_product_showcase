@@ -36,6 +36,7 @@ class AccountController extends Controller
         $lastCIHAmt = $closeornotClass->lasCIHamt();
         $lastCIHTHB = $CashTHB->lasCIHamt();
         $totalWarehousePurchase = $AccountingClass->warhousePurchase();
+        $paidCredit = $AccountingClass->paidCredit();
       
 
 
@@ -51,6 +52,7 @@ class AccountController extends Controller
             'cashinhand' => $lastCIHAmt,
             'cashinhandThb' => $lastCIHTHB,
             'warehousePurchase' =>$totalWarehousePurchase,
+            'paidamt' => $paidCredit,
         ]);
     }
 

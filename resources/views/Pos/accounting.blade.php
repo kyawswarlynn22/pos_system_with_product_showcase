@@ -79,6 +79,15 @@
                     </tr>
                     <tr class="bg-blue-500 border-b border-blue-400">
                         <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
+                            Paid Credit Sale
+                        </th>
+
+                        <td id="paid" class="px-6 py-4 float-right">
+                            {{ $paidamt }}
+                        </td>
+                    </tr>
+                    <tr class="bg-blue-500 border-b border-blue-400">
+                        <th scope="row" class="px-6 py-4 font-medium text-blue-50 whitespace-nowrap dark:text-blue-100">
                             Total Income(mmk)
                         </th>
 
@@ -196,6 +205,7 @@
         var expensestring = document.getElementById("exp").innerText;
         var incomestring = document.getElementById("income").innerText;
         var saleturnstring = document.getElementById('salereturn').innerText;
+        var paidstring = document.getElementById('paid').innerText;
         var credit = document.getElementById("credit");
         var debit = document.getElementById("debit");
         var total = document.getElementById('balance');
@@ -212,6 +222,7 @@
         var deposit = parseInt(depositstring);
         var expense = parseInt(expensestring);
         var income = parseInt(incomestring);
+        var paid = parseInt(paidstring);
 
         var salereturn = parseInt(saleturnstring);
         var cashinhand = parseInt(cih.innerText);
@@ -221,7 +232,7 @@
 
 
         var creditSubtotal = purchase + expense + salereturn;
-        var debitSubtotal = cash + deposit + income;
+        var debitSubtotal = cash + deposit + income + paid;
         var totalbal = debitSubtotal - creditSubtotal;
         grand_total_value.value = totalbal;
       
