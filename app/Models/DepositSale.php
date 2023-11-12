@@ -98,6 +98,12 @@ class DepositSale extends Model  implements Auditable
                 $depositsaleDetails->save();
             }
         }
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $request->deposit;
+            $cashInHandBal->save();
+        }
     }
 
     public function getDepositSale($id)
@@ -137,6 +143,12 @@ class DepositSale extends Model  implements Auditable
             $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
         }
         $updateDepositSale = DepositSale::find($id);
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total -= $updateDepositSale->deposit;
+            $cashInHandBal->save();
+        }
         if ($updateDepositSale) {
             $updateDepositSale->update([
                 'customers_id' => $request->customer,
@@ -167,10 +179,6 @@ class DepositSale extends Model  implements Auditable
             return back()->with('fail', 'Serial No already exists');
         }
 
-
-
-
-
         for ($product = 0; $product < count($products); $product++) {
             if ($products[$product] != '') {
                 $depositSaleDetails = new DepositSaleDetails();
@@ -181,6 +189,10 @@ class DepositSale extends Model  implements Auditable
                 $depositSaleDetails->price = $price[$product];
                 $depositSaleDetails->save();
             }
+        }
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $request->deposit;
+            $cashInHandBal->save();
         }
     }
 
@@ -202,6 +214,15 @@ class DepositSale extends Model  implements Auditable
         if ($getsend->paid == 1) {
             // dd("plus mal");
             $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
+        }
+
+        $updateDepositSale = DepositSale::find($id);
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total -= $updateDepositSale->deposit;
+            $cashInHandBal->save();
         }
 
         $deleteDeposit = DepositSale::find($id);

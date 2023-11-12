@@ -37,6 +37,13 @@ class ExpenseModel extends Model implements Auditable
             $storeExpense->photo = $dbstore;
         }
         $storeExpense->save();
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total -= $request->amount;
+            $cashInHandBal->save();
+        }
     }
 
     public function getExpenseDetail($id)
@@ -63,6 +70,13 @@ class ExpenseModel extends Model implements Auditable
     public function updateExpense($request, $id)
     {
         $updateExpense = ExpenseModel::find($id);
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $updateExpense->amount;
+            $cashInHandBal->save();
+        }
         if ($updateExpense) {
             $updateData = [
                 'expense_categories_id' => $request->category_id,
@@ -81,6 +95,11 @@ class ExpenseModel extends Model implements Auditable
             }
 
             $updateExpense->update($updateData);
+
+            if ($cashInHandBal) {
+                $cashInHandBal->grand_total -= $updateExpense->amount;
+                $cashInHandBal->save();
+            }
         }
     }
 
@@ -95,5 +114,17 @@ class ExpenseModel extends Model implements Auditable
     public function expenseCategoryallList()
     {
         return ExpenseCategory::all();
+    }
+
+    public function delExpense($id)
+    {
+        $updateModel = ExpenseModel::find($id);
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $updateModel->amount;
+            $cashInHandBal->save();
+        }
     }
 }

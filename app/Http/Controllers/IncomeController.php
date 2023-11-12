@@ -79,6 +79,9 @@ class IncomeController extends Controller
      */
     public function destroy(string $id)
     {
+        $delIncomeClass  = new Income();
+        $delIncome = $delIncomeClass->delIncome($id);
+        
         $delete = Income::find($id);
         if ($delete) {
             $delete->delete();

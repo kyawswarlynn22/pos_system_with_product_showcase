@@ -87,6 +87,13 @@ class RetailSale extends Model implements Auditable
                 $cashsaleDetails->save();
             }
         }
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $request->grandtotal;
+            $cashInHandBal->save();
+        }
     }
 
     public function cashsaleData($id)
@@ -118,6 +125,13 @@ class RetailSale extends Model implements Auditable
 
 
         $updateCashsale = RetailSale::find($id);
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total -= $updateCashsale->grand_total;
+            $cashInHandBal->save();
+        }
         if ($updateCashsale) {
             $updateCashsale->update([
                 'customers_id' => $request->customer,
@@ -145,6 +159,10 @@ class RetailSale extends Model implements Auditable
                 $cashsaleDetails->save();
             }
         }
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $request->grandtotal;
+            $cashInHandBal->save();
+        }
     }
 
     public function  forserial()
@@ -165,6 +183,15 @@ class RetailSale extends Model implements Auditable
 
     public function cashSaleDel($id)
     {
+        $Cashsale = RetailSale::find($id);
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total -= $Cashsale->grand_total;
+            $cashInHandBal->save();
+        }
+        
         $updateProductStockclass = new RetailSaleDetails();
         $updateProductStock = $updateProductStockclass->delUpdateSotck($id);
 

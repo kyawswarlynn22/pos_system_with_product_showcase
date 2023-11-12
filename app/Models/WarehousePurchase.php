@@ -69,6 +69,13 @@ class WarehousePurchase extends Model  implements Auditable
                 dd("Product_id is null");
             }
         }
+
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total -= $request->grandtotal;
+            $cashInHandBal->save();
+        }
     }
 
     public function updatePurchaseDetail($request, $id)
@@ -80,6 +87,13 @@ class WarehousePurchase extends Model  implements Auditable
             $updateProductSockCount = $updateProductSockCountClass->deleteupdateSotckCount($id);
         }
         $updatePurchase = WarehousePurchase::find($id);
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $updatePurchase->grand_total;
+            $cashInHandBal->save();
+        }
+
         if ($updatePurchase) {
             $updatePurchase->update([
                 'sup_country' => $request->country,
@@ -106,6 +120,10 @@ class WarehousePurchase extends Model  implements Auditable
                 $purchaseDetails->save();
             }
         }
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total -= $request->grandtotal;
+            $cashInHandBal->save();
+        }
     }
 
     public function WarehousePurchaseDel($id)
@@ -114,6 +132,13 @@ class WarehousePurchase extends Model  implements Auditable
         $updateProductStock = $updateProductStockclass->deleteupdateSotckCount($id);
   
         $deleteWarehousePurchase = WarehousePurchase::find($id);
+        $updatePurchase = WarehousePurchase::find($id);
+        $cashInHand = DailyCih::max('id');
+        $cashInHandBal = DailyCih::find($cashInHand);
+        if ($cashInHandBal) {
+            $cashInHandBal->grand_total += $deleteWarehousePurchase->grand_total;
+            $cashInHandBal->save();
+        }
         $deleteWarehousePurchase->delete();
   
         $delWarehousePurchase = WarehousePurDetail::where('purchase_id', $id);

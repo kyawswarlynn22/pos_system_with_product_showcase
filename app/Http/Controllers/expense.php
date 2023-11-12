@@ -107,6 +107,9 @@ class expense extends Controller
     public function destroy(string $id)
     {
         $delete = ExpenseModel::find($id);
+        $delExpenseClass = new ExpenseModel();
+        $delExpense = $delExpenseClass->delExpense($id);
+        $delete = ExpenseModel::find($id);
         if ($delete) {
             $delete->delete();
             return redirect('/expense');
