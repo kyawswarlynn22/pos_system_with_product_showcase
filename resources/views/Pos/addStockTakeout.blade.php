@@ -572,7 +572,7 @@
     </aside>
 
     <nav
-        class=" bg-blue-700 p-3  dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
+        class=" bg-green-700 p-3  dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto">
 
             <div class="text-center">
