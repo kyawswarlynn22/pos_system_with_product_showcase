@@ -147,4 +147,6 @@ Route::middleware('loginCheck')->group(function () {
 
     Route::get('todaypaid', [CreditsaleController::class, 'todaypaid']);
 
+    Route::resource('complaint', ComplaintsController::class);
+
 });
