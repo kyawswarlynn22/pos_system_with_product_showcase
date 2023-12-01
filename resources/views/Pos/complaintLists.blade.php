@@ -86,7 +86,7 @@
     </div>
 </nav>
 @endif
-    <p class=" text-2xl mt-20 ml-5">Complaint List</p>
+    <p class=" text-2xl mt-10 ml-5">Complaint List</p>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-5">
         <div class="pb-4 bg-white dark:bg-gray-900">

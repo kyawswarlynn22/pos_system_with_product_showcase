@@ -88,7 +88,7 @@
     </nav>
 @endif
 
-<p class=" text-2xl mt-20 ml-10">Complaint Details</p>
+<p class=" text-2xl mt-10 ml-10">Complaint Details</p>
 <div class="flex justify-between">
     <div class=" flex-col flex ml-10 font-semibold mt-5 text-lg">
 

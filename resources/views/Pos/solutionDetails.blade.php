@@ -87,7 +87,7 @@
         </div>
     </nav>
 @endif
-<p class=" text-2xl mt-20 ml-5">Solution Details</p>
+<p class=" text-2xl mt-10 ml-5">Solution Details</p>
 
 <div class="ml-5 mr-5 mt-5 bg-gray-200 px-5 py-1 shadow-lg rounded-lg">
     <p class="font-semibold mt-5 text-lg">Service Note</p>
