@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Complaint extends Model implements Auditable
+class Solution extends Model implements Auditable
 {
     use HasFactory;
 
@@ -15,25 +15,17 @@ class Complaint extends Model implements Auditable
 
     public $timestamps = false;
 
-    protected $table = 'complaint';
+    protected $table = 'complaint_solutions';
 
-    protected $fillable = ['customer_name', 'phone', 'address', 'cheif_complaint', 'photo_one', 'photo_two', 'photo_three', 'video_one', 'video_two', 'solve_status'];
+    protected $fillable = ['complaint_id', 'solution', 'photo_one', 'photo_two', 'photo_three', 'video_one', 'video_two'];
 
-    public function addComplaint($request)
+    public function addSolution($request)
     {
+        
 
-        $validateData = $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'description' => 'required',
-        ]);
-
-        $complaint = new Complaint();
-        $complaint->customer_name = $request->name;
-        $complaint->phone = $request->phone;
-        $complaint->address = $request->address;
-        $complaint->cheif_complaint = $request->description;
+        $solution = new Solution();
+        $solution->complaint_id = $request->id;
+        $solution->solution = $request->description;
 
         if ($request->hasFile('photo1')) {
             $extension = $request->file('photo1')->extension();
@@ -42,7 +34,7 @@ class Complaint extends Model implements Auditable
             $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('photo1')->getRealPath()), 'public');
             $linkpath = "https://sks.sgp1.digitaloceanspaces.com/complaints/photos/";
             $pathOne = $linkpath . $filename;
-            $complaint->photo_one = $pathOne;
+            $solution->photo_one = $pathOne;
         }
 
         if ($request->hasFile('photo2')) {
@@ -52,7 +44,7 @@ class Complaint extends Model implements Auditable
             $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('photo2')->getRealPath()), 'public');
             $linkpath = "https://sks.sgp1.digitaloceanspaces.com/complaints/photos/";
             $pathOne = $linkpath . $filename;
-            $complaint->photo_two = $pathOne;
+            $solution->photo_two = $pathOne;
         }
 
         if ($request->hasFile('photo3')) {
@@ -62,7 +54,7 @@ class Complaint extends Model implements Auditable
             $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('photo3')->getRealPath()), 'public');
             $linkpath = "https://sks.sgp1.digitaloceanspaces.com/complaints/photos/";
             $pathOne = $linkpath . $filename;
-            $complaint->photo_three = $pathOne;
+            $solution->photo_three = $pathOne;
         }
 
         if ($request->hasFile('video1')) {
@@ -72,7 +64,7 @@ class Complaint extends Model implements Auditable
             $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('video1')->getRealPath()), 'public');
             $linkpath = "https://sks.sgp1.digitaloceanspaces.com/complaints/videos/";
             $pathOne = $linkpath . $filename;
-            $complaint->video_one = $pathOne;
+            $solution->video_one = $pathOne;
         }
 
         if ($request->hasFile('video2')) {
@@ -82,34 +74,21 @@ class Complaint extends Model implements Auditable
             $file = Storage::disk('spaces')->put($path3, file_get_contents($request->file('video2')->getRealPath()), 'public');
             $linkpath = "https://sks.sgp1.digitaloceanspaces.com/complaints/videos/";
             $pathOne = $linkpath . $filename;
-            $complaint->video_two = $pathOne;
+            $solution->video_two = $pathOne;
         }
 
-        $complaint->save();
+        $solution->save();
+        $updateSolveClass = new Complaint();
+        $updateSolve = $updateSolveClass->solveornot($request->id);
     }
 
-    public function getComplaints()
+    public function getSolutionDetails($id)
     {
-        return $complaintData = Complaint::orderBy('id', 'desc')->paginate(18);
+        return $getSolution = Solution::where('complaint_id',$id)->first();
     }
 
-    public function getComplaintDetils($id)
+    public function deleteSolution($id)
     {
-        return $complaintData = Complaint::where('id', $id)->first();
-    }
-
-    public function solveornot($id)
-    {
-        $solveornot = Complaint::find($id);
-        if ($solveornot) {
-            $solveornot->update([
-                $solveornot->solve_status = 1,
-            ]);
-        }
-    }
-
-    public function delComplaint($id)
-    {
-        $delComplaint = Complaint::where('id',$id)->delete();
+        $delSolution = Solution::where('complaint_id',$id)->delete();
     }
 }

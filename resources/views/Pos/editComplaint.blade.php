@@ -26,7 +26,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
  
 
-    <title>Add Complaints</title>
+    <title>Add Service notes and Solution images & videos</title>
  </head>
  <body>
     <nav
@@ -68,37 +68,43 @@
 </nav>
 
 
-    <p class=" text-2xl mt-20 ml-10">Add Complaint</p>
-    <form action="/complaint" method="post" enctype="multipart/form-data">
-        @csrf
-        <div class="mt-3 rounded-lg shadow-lg p-5">
-            <div class="flex w-full justify-around items-center space-x-3 p-5">
-                <div class="mb-6 w-full ">
-                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Customer Name
-                    </label>
-                    <input type="text" name="name" id="name"
-                        class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Name">
-                </div>
-                <div class="mb-6 w-full ">
-                    <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-                        Phone
-                    </label>
-                    <input type="text" name="phone" id="phone"
-                        class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Phone">
-                </div>
-                <div class="mb-6 w-full">
-                    <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address
-                    </label>
-                    <input name="address" id="address"
-                        class="bg-gray-50 border w-full border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                </div>
-            </div>
+    <p class=" text-2xl mt-20 ml-10">Complaint Details</p>
+    <div class="flex justify-between">
+        <div class=" flex-col flex ml-10 font-semibold mt-5 text-lg">
            
+            <span> Cusotmer Name : {{ $ComplaintDetails->customer_name }} </span>
+            <span> Phone Number : {{ $ComplaintDetails->phone }}</span>
+            <span> Address : {{ $ComplaintDetails->address }}</span>
+            {{--  --}}
+        </div>
+        <div class=" flex-col flex mr-10 font-semibold mt-5 text-lg">
+            <div>
+                <span>Date : {{ $ComplaintDetails->created_at }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="ml-5 mr-5 mt-5 bg-gray-200 px-5 py-1 shadow-lg rounded-lg">
+       <p class="font-semibold mt-5 text-lg">Cheif Complaint</p>
+        <p class="mt-3">{{ $ComplaintDetails->cheif_complaint }}</p>
+    </div>
+    <div class=" text-2xl mt-10 ml-5 font-bold">Complaint Images</div>
+    <div class=" flex justify-around mx-5 mt-5">
+        <img class="w-96 bg-gray-200 shadow-2xl rounded-lg" src="{{ $ComplaintDetails->photo_one }}" alt="">
+        <img class=" w-96 shadow-2xl rounded-xl" src="{{ $ComplaintDetails->photo_two }}" alt="">
+        <img class=" w-96 shadow-2xl rounded-xl" src="{{ $ComplaintDetails->photo_three }}" alt="">
+    </div>
+    <div class=" text-2xl mt-10 ml-5 font-bold">Complaint Videos</div>
+    <div class=" flex justify-between mx-5 mt-5">
+        <video  controls class="w-5/12 shadow-2xl  rounded-xl"  src="{{ $ComplaintDetails->video_one }}"></video>
+        <video  controls class="w-5/12 shadow-2xl rounded-xl" src="{{ $ComplaintDetails->video_two }}"></video>
+    </div>
+    <div class=" text-2xl mt-10 ml-5 font-semibold">Add Service notes and Solution images & videos</div>
+
+    <form action="/solution" method="post" enctype="multipart/form-data">
+        @csrf
+            <input type="hidden" name="id" value="{{ $ComplaintDetails->id }}">
             <div class="mt-50 p-5 mb-5  flex flex-col">
-                <label for="description">Cheif Complaint</label>
+                <label for="description text-lg">Service Note and Solution</label>
                 <textarea name="description" class=" rounded-lg " name="description" id="" cols="100" rows="2"></textarea>
                 @error('description')
                     <p class=" text-red-500">{{ $message }}</p>

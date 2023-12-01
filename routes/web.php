@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CashsaleController;
 use App\Http\Controllers\CashThbController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ComplaintsController;
 use App\Http\Controllers\CreditsaleController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DailyCihController;
@@ -25,6 +26,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\salereturnController;
 use App\Http\Controllers\SerialController;
+use App\Http\Controllers\SolutionController;
 use App\Http\Controllers\StockAdjustController;
 use App\Http\Controllers\SubcontrollerController;
 use App\Http\Controllers\TakeoutController;
@@ -148,5 +150,7 @@ Route::middleware('loginCheck')->group(function () {
     Route::get('todaypaid', [CreditsaleController::class, 'todaypaid']);
 
     Route::resource('complaint', ComplaintsController::class);
+
+    Route::resource('solution', SolutionController::class);
 
 });

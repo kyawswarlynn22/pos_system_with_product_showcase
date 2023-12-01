@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Complaint;
+use App\Models\Solution;
 use Illuminate\Http\Request;
 
 class ComplaintsController extends Controller
@@ -11,6 +13,11 @@ class ComplaintsController extends Controller
      */
     public function index()
     {
+        $getComplaintListClass = new Complaint();
+        $getComplaintList = $getComplaintListClass->getComplaints();
+        return view('Pos.complaintLists', [
+            'Complaint' => $getComplaintList,
+        ]);
     }
 
     /**
@@ -26,7 +33,9 @@ class ComplaintsController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $addComplaintClass = new Complaint();
+        $addComplaint = $addComplaintClass->addComplaint($request);
+        return redirect('/complaint/create')->withSuccess('Added Succefully');
     }
 
     /**
@@ -34,7 +43,11 @@ class ComplaintsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $getSolutionClass = new Solution();
+        $getSolution = $getSolutionClass->getSolutionDetails($id);
+        return view('Pos.solutionDetails', [
+            'Solution' => $getSolution,
+        ]);
     }
 
     /**
@@ -42,7 +55,11 @@ class ComplaintsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $getComplaintListClass = new Complaint();
+        $getComplaintList = $getComplaintListClass->getComplaintDetils($id);
+        return view('Pos.editComplaint', [
+            'ComplaintDetails' => $getComplaintList,
+        ]);
     }
 
     /**
@@ -58,6 +75,10 @@ class ComplaintsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $delComplaintClass = new Complaint();
+        $delSolutionClass = new Solution();
+        $delComplaint = $delComplaintClass->delComplaint($id);
+        $delSolution = $delSolutionClass->deleteSolution($id);
+        return redirect('/complaint');
     }
 }
