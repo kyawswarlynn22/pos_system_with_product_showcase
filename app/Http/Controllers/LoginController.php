@@ -85,8 +85,13 @@ class LoginController extends Controller
                 return redirect('/dashboard')
                     ->withSuccess('Login Successfully');
             }
-            if ($userRole == 1) {
+            if ($userRole == 1 && $request->loginto == 0 ) {
                 return redirect('/customer/create')
+                    ->withSuccess('Login Successfully');
+            }
+
+            if ($userRole == 1  && $request->loginto == 1 ) {
+                return redirect('/complaint/create')
                     ->withSuccess('Login Successfully');
             }
         }

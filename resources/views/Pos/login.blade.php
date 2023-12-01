@@ -36,8 +36,14 @@
                                 class="rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
                                 type="Password" name="password" placeholder="*********" />
                         </div>
+                        <div class="mb-4 text-lg">
+                            <select   class="rounded-lg border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md" name="loginto" id="">
+                                <option value="0">Pos</option>
+                                <option value="1">Complaints and Service</option>
+                            </select>
+                        </div>
                     </div>
-
+                   
                     <div class=" flex  justify-center text-lg text-black">
                         <button type="submit"
                             class="rounded-xl bg-yellow-400 bg-opacity-50 px-5 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Login</button>

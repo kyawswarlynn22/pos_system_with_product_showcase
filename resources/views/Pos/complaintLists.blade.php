@@ -1,8 +1,17 @@
 
+
 @php
     $userRole = Session::get('userRole');
+
 @endphp
 
+@if ($userRole == 0)
+    @include('layout.sidebarandnav')
+@endif
+
+@section('title', 'Complaint List');
+
+@if ($userRole == 1)
 <!DOCTYPE html>
  <html lang="en">
  <head>
@@ -32,14 +41,27 @@
     <nav
     class=" bg-green-700  dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-       
-        <div class=" text-white font-medium" id="clock"></div>
-        <div class="flex md:order-2">
+        <div class="text-center">
             <a href="/complaint/create">
                 <button type="button"
                     class="text-white ml-2 bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     <div class="flex justify-center items-center">
                         <p>Add Complaint</p>
+                    </div>
+                </button>
+            </a>
+        </div>
+        <div class=" text-white font-medium" id="clock"></div>
+        <div class="flex md:order-2">
+            <a href="/signout">
+                <button type="button"
+                    class="text-white ml-2 bg-green-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <div class="flex justify-center items-center">
+                        <p class="mx-1"> <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="#ffffff"
+                                d="m17 8l-1.4 1.4l1.6 1.6H9v2h8.2l-1.6 1.6L17 16l4-4l-4-4M5 5h7V3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h7v-2H5V5Z" />
+                        </svg></p>
+                        <p>Logout</p>
                     </div>
                 </button>
             </a>
@@ -63,7 +85,7 @@
         </div>
     </div>
 </nav>
-
+@endif
     <p class=" text-2xl mt-20 ml-5">Complaint List</p>
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-5">
@@ -132,7 +154,7 @@
                                <button class="bg-sky-400 text-white px-1 py-1 rounded-lg">View Solution</button>
                             </a>
                         @endif
-                                <a href="/complaint/{{ $item->id }}/edit"
+                                <a href="/complaint/{{ $item->id }}/edit">
                                     <button class="bg-sky-400 text-white px-1 py-1 rounded-lg">Add Solution</button>
                                     
                                 </a>
@@ -157,6 +179,7 @@
         </div>
     </div>
 
-
+    @if ($userRole == 1)
 </body>
 </html>
+@endif
