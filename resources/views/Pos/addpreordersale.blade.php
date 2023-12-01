@@ -132,6 +132,37 @@
                         <span class="ml-3">Serial</span>
                     </a>
                 </li>
+                @if ($userRole == 0)
+                <li>
+                    <button type="button"
+                        class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
+                        aria-controls="complaint" data-collapse-toggle="complaint">
+                        <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                            <path fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" d="m30.348 11.35l-3.6-3.6h-20.2v35.8h29.6v-18.7"/>
+                            <path fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" d="m30.948 10.55l-13 18.2l-1.5 12.6l11.5-5.3l13.3-18.4a.978.978 0 0 0-.2-1.4l-8.4-6a1.268 1.268 0 0 0-1.7.3Z"/>
+                            <path fill="none" stroke="#6b7280" stroke-linecap="round" stroke-linejoin="round" d="M16.948 36.85a4.4 4.4 0 0 1 3.5 2.6m-2.5-10.7l10 7.3m1.2-22.9l10 7.4m-11.4-5.6l10.1 7.4m-26.6-1.8v-9.5c0-1.4 2.5-1.3 2.5 0v10.7c0 2.5-4.7 2.5-4.7 0V7.45c0-4 5.6-4 5.9 0"/>
+                        </svg>
+                        <span class="flex-1 ml-3 text-left whitespace-nowrap">Complaint</span>
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
+                        </svg>
+                    </button>
+                    <ul id="complaint" class="hidden py-2 space-y-2">
+                        <li>
+                            <a href="/complaint/create"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Add
+                                Complaint</a>
+                        </li>
+                        <li>
+                            <a href="/complaint"
+                                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">Complaint
+                                List</a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
                 <li>
                     <button type="button"
                         class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700"
