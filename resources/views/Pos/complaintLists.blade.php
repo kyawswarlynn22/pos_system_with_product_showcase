@@ -167,7 +167,7 @@
                         </td>
                     </tr>
                 @empty
-                    <div class=" text-red-500 text-xl font-bold ">No Credit Sale List</div>
+                    <div class=" text-red-500 text-xl font-bold ">No Complaint </div>
                 @endforelse
             </tbody> 
         </table>
