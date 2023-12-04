@@ -16,13 +16,17 @@ class WarehousePurchaseController extends Controller
     {
         $getPurchaseDataClass = new WarehousePurDetail();
         $getPurchaseData = $getPurchaseDataClass->getPurchaseData();
+        $getPurchaseDataPending = $getPurchaseDataClass->getPurchaseDataPendig();
 
         $getPurchaseDataClassList = new WarehousePurchase();
         $getPurchaseDataList = $getPurchaseDataClassList->getPurchaseData();
+        $getPurchaseDataListPending = $getPurchaseDataClassList->getPurchaseDataPending();
 
         return view('Pos.warehousePurchaseList', [
             'purchaseData' => $getPurchaseData,
+            'purchaseDataPending' => $getPurchaseDataPending,
             'purchaseList' => $getPurchaseDataList,
+            'purchaseListPending' => $getPurchaseDataListPending,
         ]);
     }
 
