@@ -70,7 +70,7 @@ class WarehousePurchaseController extends Controller
         $purchaseDetailClass = new WarehousePurchase();
         $purchaseDetail = $purchaseDetailClass->getPurchaseDetail($id);
 
-        
+
 
         return view('Pos.warehousePurchaseDetails', [
             'purchaseDetail' => $purchasedProducts,
@@ -109,7 +109,7 @@ class WarehousePurchaseController extends Controller
 
         $stockUpdate = $stockUpdateClass->updateSotckCount($id);
         $getPurchaseDataList = $updatePurchasedDetailClass->getPurchaseData();
-        
+
         $getPurchaseDataClass = new WarehousePurDetail();
         $getPurchaseData = $getPurchaseDataClass->getPurchaseData();
         $getPurchaseDataPending = $getPurchaseDataClass->getPurchaseDataPendig();
