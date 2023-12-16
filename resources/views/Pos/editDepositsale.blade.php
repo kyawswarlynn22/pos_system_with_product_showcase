@@ -121,7 +121,7 @@
                     </tbody>
                 </table>
                 <div class="flex justify-end">
-                    <button id="delBut" type="button" class=" bg-red-500 px-2 py-1 rounded-md my-5">Delete Row</button>
+                    <button id="delBut" type="button" class=" bg-red-500 hidden px-2 py-1 rounded-md my-5">Delete Row</button>
                 </div>
 
                 <div class=" flex  flex-col justify-end items-end">
