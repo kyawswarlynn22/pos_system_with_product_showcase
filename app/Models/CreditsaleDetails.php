@@ -56,7 +56,7 @@ class CreditsaleDetails extends Model implements Auditable
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
         $price = $request->input('price', []);
-        $serial = $request->input('serial', []);
+        // $serial = $request->input('serial', []);
 
 
         for ($product = 0; $product < count($products); $product++) {
@@ -100,7 +100,7 @@ class CreditsaleDetails extends Model implements Auditable
                 $cashsaleDetails = new CreditsaleDetails();
                 $cashsaleDetails->credit_sale_id = $id;
                 $cashsaleDetails->products_id  = $products[$product];
-                $cashsaleDetails->serial_no  = $serial[$product];
+                // $cashsaleDetails->serial_no  = $serial[$product];
                 $cashsaleDetails->quantity = $quantity[$product];
                 $cashsaleDetails->price = $price[$product];
                 $cashsaleDetails->save();

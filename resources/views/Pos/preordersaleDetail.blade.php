@@ -36,9 +36,9 @@
                             <th scope="col" class="px-6 py-3">
                                 Quantity
                             </th>
-                            <th scope="col" class="px-6 py-3">
+                            {{-- <th scope="col" class="px-6 py-3">
                                 Serial No
-                            </th>
+                            </th> --}}
                             <th scope="col" class="px-6 text-right  py-3">
                                 Subtotal
                             </th>
@@ -66,11 +66,11 @@
                                         class="outline-none border-transparent border-gray-300 rounded-lg iquantity"
                                         value="{{ $item->quantity }}">
                                 </td>
-                                <td>
+                                {{-- <td>
                                     <input type="text"  name="serial[]"
                                         class="outline-none border-grey-400 border-gray-300 rounded-lg "
                                         >
-                                </td>
+                                </td> --}}
                                 <td>
                                     <input type="text" readonly
                                         class="outline-none w-full text-right float-right border-transparent rounded-lg itotal"

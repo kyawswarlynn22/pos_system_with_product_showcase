@@ -28,7 +28,7 @@ class Creditsale extends Model implements Auditable
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
         $price = $request->input('price', []);
-        $serial = $request->input('serial', []);
+        // $serial = $request->input('serial', []);
 
         $takeout = new Creditsale();
         $takeout->customers_id = $request->customer;
@@ -45,7 +45,7 @@ class Creditsale extends Model implements Auditable
                 $creditDetails = new CreditsaleDetails();
                 $creditDetails->credit_sale_id = $lastId;
                 $creditDetails->products_id  = $products[$product];
-                $creditDetails->serial_no  = $serial[$product];
+                // $creditDetails->serial_no  = $serial[$product];
                 $creditDetails->quantity = $quantity[$product];
                 $creditDetails->price = $price[$product];
                 $creditDetails->save();

@@ -48,7 +48,7 @@ class DepositSale extends Model  implements Auditable
     {
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
-        $serial = $request->input('serial', []);
+        // $serial = $request->input('serial', []);
         $price = $request->input('price', []);
 
         for ($product = 0; $product < count($products); $product++) {
@@ -56,22 +56,25 @@ class DepositSale extends Model  implements Auditable
                 $cashsaleDetails = new RetailSaleDetails();
 
                 $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
-                if ($checkstock->count() !== 0) {
-                    return back()->with('fail', 'Stock not enough');
+                if ($request->status == 1) {
+                    if ($checkstock->count() !== 0) {
+                        return back()->with('fail', 'Stock not enough');
+                    }
                 }
+               
             }
         }
 
-        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
-        $existsInDeposit = DepositSaleDetails::where('serial_no', $serial)->exists();
+        // $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
+        // $existsInDeposit = DepositSaleDetails::where('serial_no', $serial)->exists();
 
-        if ($existsInCash) {
-            return redirect()->back()->with('fail', 'Serial No already exists');
-        }
+        // if ($existsInCash) {
+        //     return redirect()->back()->with('fail', 'Serial No already exists');
+        // }
 
-        if ($existsInDeposit) {
-            return redirect()->back()->with('fail', 'Serial No already exists');
-        }
+        // if ($existsInDeposit) {
+        //     return redirect()->back()->with('fail', 'Serial No already exists');
+        // }
 
 
         $depositsale = new DepositSale();
@@ -92,7 +95,7 @@ class DepositSale extends Model  implements Auditable
                 $depositsaleDetails = new DepositSaleDetails();
                 $depositsaleDetails->deposit_sales_id  = $lastId;
                 $depositsaleDetails->products_id   = $products[$product];
-                $depositsaleDetails->serial_no = $serial[$product];
+                // $depositsaleDetails->serial_no = $serial[$product];
                 $depositsaleDetails->quantity = $quantity[$product];
                 $depositsaleDetails->price = $price[$product];
                 $depositsaleDetails->save();
@@ -120,15 +123,15 @@ class DepositSale extends Model  implements Auditable
     {
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
-        $serial = $request->input('serial', []);
+        // $serial = $request->input('serial', []);
         $price = $request->input('price', []);
 
         for ($product = 0; $product < count($products); $product++) {
             if ($products[$product] != '') {
                 $cashsaleDetails = new RetailSaleDetails();
-                if ($serial[$product] === null) {
-                    return back()->with('fail', 'Add Serial Number');
-                }
+                // if ($serial[$product] === null) {
+                //     return back()->with('fail', 'Add Serial Number');
+                // }
 
                 $checkstock = Product::where('id', $products[$product])->where('quantity', '<', $quantity[$product])->get();
                 if ($checkstock->count() !== 0) {
@@ -168,23 +171,23 @@ class DepositSale extends Model  implements Auditable
 
 
 
-        $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
-        $existsInDeposit = DepositSaleDetails::whereIn('serial_no', $serial)->exists();
+        // $existsInCash = RetailSaleDetails::whereIn('serial_no', $serial)->exists();
+        // $existsInDeposit = DepositSaleDetails::whereIn('serial_no', $serial)->exists();
 
-        if ($existsInCash) {
-            return back()->with('fail', 'Serial No already exists');
-        }
+        // if ($existsInCash) {
+        //     return back()->with('fail', 'Serial No already exists');
+        // }
 
-        if ($existsInDeposit) {
-            return back()->with('fail', 'Serial No already exists');
-        }
+        // if ($existsInDeposit) {
+        //     return back()->with('fail', 'Serial No already exists');
+        // }
 
         for ($product = 0; $product < count($products); $product++) {
             if ($products[$product] != '') {
                 $depositSaleDetails = new DepositSaleDetails();
                 $depositSaleDetails->deposit_sales_id  = $id;
                 $depositSaleDetails->products_id   = $products[$product];
-                $depositSaleDetails->serial_no = $serial[$product];
+                // $depositSaleDetails->serial_no = $serial[$product];
                 $depositSaleDetails->quantity = $quantity[$product];
                 $depositSaleDetails->price = $price[$product];
                 $depositSaleDetails->save();

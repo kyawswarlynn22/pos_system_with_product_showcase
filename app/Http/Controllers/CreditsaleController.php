@@ -51,7 +51,7 @@ class CreditsaleController extends Controller
     {
         $products = $request->input('productsid', []);
         $quantity = $request->input('quantities', []);
-        $serial = $request->input('serial', []);
+        // $serial = $request->input('serial', []);
         for ($product = 0; $product < count($products); $product++) {
             if ($products[$product] != '') {
                 $takeoutDetails = new TakeoutDetails();

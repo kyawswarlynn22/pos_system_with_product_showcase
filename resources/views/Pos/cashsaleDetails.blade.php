@@ -79,9 +79,9 @@
                         <th scope="col" class="px-6 py-3">
                             Quantity
                         </th>
-                        <th scope="col" class="px-6 py-3">
+                        {{-- <th scope="col" class="px-6 py-3">
                             Serial No
-                        </th>
+                        </th> --}}
                         <th scope="col" class="px-6 py-3">
                             Total
                         </th>
@@ -101,9 +101,9 @@
                             <td class="px-6 py-4 iquantity">
                                 {{ $item->p_quantity }}
                             </td>
-                            <td class="px-6 py-4 ">
+                            {{-- <td class="px-6 py-4 ">
                                 {{ $item->serial_no }}
-                            </td>
+                            </td> --}}
                             <td id="itotal" class="px-6 py-4 itot">
                             </td>
                         </tr>

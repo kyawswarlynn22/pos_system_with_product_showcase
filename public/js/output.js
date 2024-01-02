@@ -138,10 +138,10 @@ $(document).ready(function () {
                         itemQuantity +
                         '" />' +
                         "</td>" +
-                        "<td>" +
-                        '<input type="text" name="serial[]" class="outline-none w-full text-right float-right border-gray-300 rounded-lg" value=""' +
-                        +'" />' +
-                        "</td>" +
+                        // "<td>" +
+                        // '<input type="text" name="serial[]" class="outline-none w-full text-right float-right border-gray-300 rounded-lg" value=""' +
+                        // +'" />' +
+                        // "</td>" +
                         "<td>" +
                         '<input type="text" name="" readonly class="outline-none w-full text-right float-right border-transparent rounded-lg itotal" value="' +
                         +'" />' +
